@@ -45,36 +45,36 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So, 
     }
 
     @Override
-    public void save(V model) {
+    public int save(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
-        mapper.insertSelective(po);
+        return mapper.insertSelective(po);
     }
 
     @Override
-    public void save(List<V> models) {
+    public int save(List<V> models) {
         Preconditions.checkArgument(models != null && !models.isEmpty());
         List<T> ts = orikaMapper.convertList(models, poClazz);
-        mapper.insertList(ts);
+        return mapper.insertList(ts);
     }
 
     @Override
-    public void deleteById(PK id) {
+    public int deleteById(PK id) {
         Preconditions.checkArgument(id != null);
-        mapper.deleteByPrimaryKey(id);
+        return mapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public void deleteByIds(String ids) {
+    public int deleteByIds(String ids) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(ids));
-        mapper.deleteByIds(ids);
+        return mapper.deleteByIds(ids);
     }
 
     @Override
-    public void update(V model) {
+    public int update(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
-        mapper.updateByPrimaryKeySelective(po);
+        return mapper.updateByPrimaryKeySelective(po);
     }
 
     @Override
@@ -94,4 +94,5 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So, 
     public List<V> findAll() {
         return orikaMapper.convertList(mapper.selectAll(), voClazz);
     }
+
 }

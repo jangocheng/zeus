@@ -9,49 +9,68 @@
 package com.f6car.base.common;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author qixiaobo
+ */
+//非线程安全
 
 public class So implements java.io.Serializable, Pagable, Sortable {
 
     private static final long serialVersionUID = -828171499994153332L;
 
+    private int currentPage;
+    private int pageSize;
+    private boolean enableCount;
+    private List<Sort> sorts;
+
+
     @Override
     public int getCurrentPage() {
-        return 0;
+        return currentPage;
     }
 
     @Override
     public void setCurrentPage(int currentPage) {
-
+        this.currentPage = currentPage;
     }
 
     @Override
     public int getPageSize() {
-        return 0;
+        return pageSize;
     }
 
     @Override
-    public void setPageSize(int pagesize) {
-
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     @Override
     public boolean isEnableCount() {
-        return false;
+        return enableCount;
     }
 
     @Override
-    public void setEnableCount(boolean enable) {
-
+    public void setEnableCount(boolean enableCount) {
+        this.enableCount = enableCount;
     }
 
     @Override
     public List<Sort> getSorts() {
-        return null;
+        return sorts;
+    }
+
+    public void setSorts(List<Sort> sorts) {
+        this.sorts = sorts;
     }
 
     @Override
     public void addSort(Sort sort) {
-
+        if (sorts != null) {
+            sorts = new ArrayList<>();
+        }
+        sorts.add(sort);
     }
 }

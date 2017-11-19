@@ -10,6 +10,9 @@ package com.f6car.base.so.user;
 
 import com.f6car.base.common.So;
 
+/**
+ * @author qixiaobo
+ */
 public class UserSo extends So {
 
     private static final long serialVersionUID = 4899767487930810683L;

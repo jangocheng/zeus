@@ -12,14 +12,16 @@ package com.f6car.base.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.HandlerMethod;
@@ -45,18 +47,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
 
-    //使用阿里 FastJson 作为JSON MessageConverter
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
-        FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
-                SerializerFeature.WriteNullStringAsEmpty,
-                SerializerFeature.WriteNullNumberAsZero);
-        converter.setFastJsonConfig(config);
-        converter.setDefaultCharset(Charset.forName("UTF-8"));
-        converters.add(converter);
-    }
+    static final List<String> POSSIBLE_IP_HEADER = Lists.newArrayList("x-forwarded-for", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR");
 
 
     //统一异常处理
@@ -118,28 +109,43 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         }
     }
 
+    static final Splitter COMMA_SPLITTER = Splitter.on(Constants.COMMA);
+
+    //使用阿里 FastJson 作为JSON MessageConverter
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+        FastJsonConfig config = new FastJsonConfig();
+        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.WriteNullNumberAsZero);
+        converter.setFastJsonConfig(config);
+        converter.setDefaultCharset(Charset.forName("UTF-8"));
+        converters.add(converter);
+    }
+
     private String getIpAddress(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
+        String ip = null;
+        for (String header : POSSIBLE_IP_HEADER) {
+            ip = request.getHeader(header);
+            if (Strings.isNullOrEmpty(ip) || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
+                ip = null;
+            } else {
+                break;
+            }
         }
-        if (ip == null || ip.length() == 0 || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
+        if (ip == null) {
             ip = request.getRemoteAddr();
         }
         // 如果是多级代理，那么取第一个ip为客户端ip
         if (ip != null && ip.indexOf(Constants.COMMA) != -1) {
-            ip = ip.substring(0, ip.indexOf(Constants.COMMA)).trim();
+            List<String> ipList = COMMA_SPLITTER.trimResults().omitEmptyStrings().splitToList(ip);
+            if (!ipList.isEmpty()) {
+                ip = ipList.get(0);
+            }
         }
 
         return ip;
     }
+
 }

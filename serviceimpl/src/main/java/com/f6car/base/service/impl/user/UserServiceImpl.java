@@ -14,7 +14,9 @@ import com.f6car.base.service.user.UserService;
 import com.f6car.base.so.user.UserSo;
 import com.f6car.base.vo.user.UserVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserServiceImpl extends AbstractService<User, UserVo, UserSo, Long> implements UserService {
 }

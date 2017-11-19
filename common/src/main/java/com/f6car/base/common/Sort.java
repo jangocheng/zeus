@@ -18,8 +18,8 @@ public class Sort implements Serializable {
     private static final long serialVersionUID = 7739709965769082011L;
     private static final String DEFAULT_PREFIX = "p";
     private static final String SQL_DOT = ".";
-    private String orderField;//排序字段
-    private OrderType orderType;//排序类型
+    private String orderField;
+    private OrderType orderType = OrderType.ASC;
     private boolean enablePrefix = true;
 
     private Sort() {
@@ -80,11 +80,6 @@ public class Sort implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Sort{");
-        sb.append("orderField='").append(orderField).append('\'');
-        sb.append(", orderType=").append(orderType);
-        sb.append(", enablePrefix=").append(enablePrefix);
-        sb.append('}');
-        return sb.toString();
+        return getOrderField() + " " + orderType;
     }
 }

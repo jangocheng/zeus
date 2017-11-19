@@ -9,6 +9,8 @@
 package com.f6car.base.common;
 
 
+import com.github.pagehelper.Page;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,15 +18,15 @@ import java.util.List;
  * Service 层 基础接口，其他Service 接口 请继承该接口
  */
 public interface Service<V extends Vo, S extends So, PK extends Serializable> {
-    void save(V model);//持久化
+    int save(V model);//持久化
 
-    void save(List<V> models);//批量持久化
+    int save(List<V> models);//批量持久化
 
-    void deleteById(PK id);//通过主鍵刪除
+    int deleteById(PK id);//通过主鍵刪除
 
-    void deleteByIds(String ids);//批量刪除 eg：ids -> “1,2,3,4”
+    int deleteByIds(String ids);//批量刪除 eg：ids -> “1,2,3,4”
 
-    void update(V model);//更新
+    int update(V model);//更新
 
     V findById(PK id);//通过ID查找
 
@@ -32,4 +34,6 @@ public interface Service<V extends Vo, S extends So, PK extends Serializable> {
     List<V> findByIds(String ids);//通过多个ID查找//eg：ids -> “1,2,3,4”
 
     List<V> findAll();//获取所有
+
+    Page<V> findBySo(S so);
 }

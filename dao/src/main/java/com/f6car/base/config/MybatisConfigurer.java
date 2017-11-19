@@ -8,6 +8,7 @@
 
 package com.f6car.base.config;
 
+import com.f6car.base.core.SoInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -50,7 +51,7 @@ public class MybatisConfigurer {
         pageHelper.setProperties(properties);
 
         //添加插件
-        factory.setPlugins(new Interceptor[]{pageHelper});
+        factory.setPlugins(new Interceptor[]{new SoInterceptor(), pageHelper});
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
