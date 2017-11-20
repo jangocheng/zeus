@@ -11,6 +11,9 @@ package com.f6car.base.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+/**
+ * @author qixiaobo
+ */
 @Configuration
 @ImportResource("classpath:application-dubbo.xml")
 public class DubboConfigurer {
