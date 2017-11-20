@@ -10,8 +10,10 @@ package com.f6car.base.po.user;
 
 import com.f6car.base.common.Po;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "tb_user")
 public class TbUser extends Po {
@@ -20,7 +22,7 @@ public class TbUser extends Po {
      */
     @Id
     @Column(name = "pk_id")
-    private Long pkId;
+    private String pkId;
 
     /**
      * 用户名
@@ -45,17 +47,17 @@ public class TbUser extends Po {
      * 角色ID
      */
     @Column(name = "id_role")
-    private Long idRole;
+    private String idRole;
 
     /**
      * 创建人
      */
-    private Long creator;
+    private String creator;
 
     /**
      * 修改人
      */
-    private Long modifier;
+    private String modifier;
 
     /**
      * 修改日期
@@ -71,13 +73,13 @@ public class TbUser extends Po {
      * 组织
      */
     @Column(name = "id_own_org")
-    private Long idOwnOrg;
+    private String idOwnOrg;
 
     /**
      * 员工ID
      */
     @Column(name = "id_employee")
-    private Long idEmployee;
+    private String idEmployee;
 
     @Column(name = "is_del")
     private Byte isDel;
@@ -113,7 +115,7 @@ public class TbUser extends Po {
      *
      * @return pk_id - 主键
      */
-    public Long getPkId() {
+    public String getPkId() {
         return pkId;
     }
 
@@ -122,7 +124,7 @@ public class TbUser extends Po {
      *
      * @param pkId 主键
      */
-    public void setPkId(Long pkId) {
+    public void setPkId(String pkId) {
         this.pkId = pkId;
     }
 
@@ -199,7 +201,7 @@ public class TbUser extends Po {
      *
      * @return id_role - 角色ID
      */
-    public Long getIdRole() {
+    public String getIdRole() {
         return idRole;
     }
 
@@ -208,7 +210,7 @@ public class TbUser extends Po {
      *
      * @param idRole 角色ID
      */
-    public void setIdRole(Long idRole) {
+    public void setIdRole(String idRole) {
         this.idRole = idRole;
     }
 
@@ -217,7 +219,7 @@ public class TbUser extends Po {
      *
      * @return creator - 创建人
      */
-    public Long getCreator() {
+    public String getCreator() {
         return creator;
     }
 
@@ -226,7 +228,7 @@ public class TbUser extends Po {
      *
      * @param creator 创建人
      */
-    public void setCreator(Long creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
@@ -235,7 +237,7 @@ public class TbUser extends Po {
      *
      * @return modifier - 修改人
      */
-    public Long getModifier() {
+    public String getModifier() {
         return modifier;
     }
 
@@ -244,7 +246,7 @@ public class TbUser extends Po {
      *
      * @param modifier 修改人
      */
-    public void setModifier(Long modifier) {
+    public void setModifier(String modifier) {
         this.modifier = modifier;
     }
 
@@ -289,7 +291,7 @@ public class TbUser extends Po {
      *
      * @return id_own_org - 组织
      */
-    public Long getIdOwnOrg() {
+    public String getIdOwnOrg() {
         return idOwnOrg;
     }
 
@@ -298,7 +300,7 @@ public class TbUser extends Po {
      *
      * @param idOwnOrg 组织
      */
-    public void setIdOwnOrg(Long idOwnOrg) {
+    public void setIdOwnOrg(String idOwnOrg) {
         this.idOwnOrg = idOwnOrg;
     }
 
@@ -307,7 +309,7 @@ public class TbUser extends Po {
      *
      * @return id_employee - 员工ID
      */
-    public Long getIdEmployee() {
+    public String getIdEmployee() {
         return idEmployee;
     }
 
@@ -316,7 +318,7 @@ public class TbUser extends Po {
      *
      * @param idEmployee 员工ID
      */
-    public void setIdEmployee(Long idEmployee) {
+    public void setIdEmployee(String idEmployee) {
         this.idEmployee = idEmployee;
     }
 

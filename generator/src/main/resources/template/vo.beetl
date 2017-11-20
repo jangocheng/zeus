@@ -1,6 +1,7 @@
 package com.f6car.base.vo${subPackage!};
 
 import com.f6car.base.common.Vo;
+import java.util.Date;
 
 /**
  * Created by ${author} on ${date}.
@@ -8,4 +9,34 @@ import com.f6car.base.common.Vo;
 public class ${modelNameUpperCamel}Vo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
+
+     <%
+        for(field in fields){
+        %>
+    private ${ field.type.shortName}   ${field.name};
+
+        <%}%>
+
+    <%
+    for(field in fields){
+    %>
+     <%
+                var firstChar = strutil.subStringTo(field.name,0,1);
+                var firstChar_upper =  strutil.toUpperCase(firstChar);
+                var fieldNameWithUpper = strutil.replace (field.name,firstChar,firstChar_upper);
+            %>
+    public void set${fieldNameWithUpper}(${ field.type.shortName} ${field.name}) {
+            this.${field.name} = ${field.name};
+       }
+
+    public ${ field.type.shortName} get${fieldNameWithUpper}() {
+          return ${field.name};
+      }
+
+
+    <%}%>
+
+
+
+
 }

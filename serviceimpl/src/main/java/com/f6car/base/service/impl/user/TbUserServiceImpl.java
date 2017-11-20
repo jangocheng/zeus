@@ -8,12 +8,12 @@
 
 package com.f6car.base.service.impl.user;
 
+import com.f6car.base.core.AbstractService;
 import com.f6car.base.dao.user.TbUserMapper;
 import com.f6car.base.po.user.TbUser;
-import com.f6car.base.vo.user.TbUserVo;
-import com.f6car.base.so.user.TbUserSo;
 import com.f6car.base.service.user.TbUserService;
-import com.f6car.base.core.AbstractService;
+import com.f6car.base.so.user.TbUserSo;
+import com.f6car.base.vo.user.TbUserVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

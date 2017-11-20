@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by CodeGenerator on 2017-11-20.
+ * Created by qixiaobo on 2017-11-20.
  */
 @RestController
 @RequestMapping("/tb/user")

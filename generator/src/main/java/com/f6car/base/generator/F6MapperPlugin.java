@@ -13,6 +13,8 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import tk.mybatis.mapper.generator.MapperPlugin;
 
+import static com.f6car.base.generator.CodeGenerator.PO_FIELDS;
+
 /**
  * @author qixiaobo
  */
@@ -22,6 +24,7 @@ public class F6MapperPlugin extends MapperPlugin {
         //PK
         topLevelClass.addImportedType(Po.class.getName());
         topLevelClass.setSuperClass("Po");
+        PO_FIELDS.set(topLevelClass.getFields());
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
     }
 

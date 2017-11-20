@@ -9,13 +9,17 @@
 package com.f6car.base.generator;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.joda.time.DateTime;
 import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.springframework.util.StringUtils;
@@ -23,10 +27,7 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.f6car.base.constant.Constants.*;
 
@@ -34,26 +35,25 @@ import static com.f6car.base.constant.Constants.*;
  * @author qixiaobo
  */
 public class CodeGenerator {
-    //JDBC配置，请修改为你项目的实际配置
     private static final String JDBC_URL = "jdbc:mysql://192.168.1.7:3306/f6dms_20160522";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    private static final String PROJECT_PATH = System.getProperty("user.dir");//项目在硬盘上的基础路径
-    private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/template";//模板位置
-
-    private static final String JAVA_PATH = "/src/main/java"; //java文件路径
-    private static final String RESOURCES_PATH = "/src/main/resources";//资源文件路径
-
-    private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);//生成的Service存放路径
-    private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);//生成的Service实现存放路径
-    private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);//生成的Controller存放路径
+    public static final ThreadLocal<List<Field>> PO_FIELDS = new ThreadLocal<>();
+    private static final String PROJECT_PATH = System.getProperty("user.dir");
+    private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/template";
+    private static final String JAVA_PATH = "/src/main/java";
+    private static final String RESOURCES_PATH = "/src/main/resources";
+    private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);
+    private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);
     private static final String PACKAGE_PATH_SO = packageConvertPath(SO_PACKAGE);
     private static final String PACKAGE_PATH_VO = packageConvertPath(VO_PACKAGE);
-    private static final String AUTHOR = "CodeGenerator";//@author
-    private static final String DATE = new DateTime().toString("yyyy-MM-dd");//@date
+    private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);
+    private static final String AUTHOR = "qixiaobo";
     private static final Splitter TABLE_NAME_SPLITTER = Splitter.on(UNDER_LINE).trimResults().omitEmptyStrings();
+    private static final String DATE = new DateTime().toString("yyyy-MM-dd");
+    private static final List<String> VO_EXCLUED_FIELD_NAMES = Lists.newArrayList("creator", "modifier", "modifiedtime", "creationtime");
     private static GroupTemplate gt;
 
     static {
@@ -118,7 +118,9 @@ public class CodeGenerator {
         jdbcConnectionConfiguration.setPassword(JDBC_PASSWORD);
         jdbcConnectionConfiguration.setDriverClass(JDBC_DIVER_CLASS_NAME);
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
-
+        JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
+        javaTypeResolverConfiguration.setConfigurationType(F6JavaTypeResolverDefaultImpl.class.getName());
+        context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
         PluginConfiguration pluginConfiguration = new PluginConfiguration();
         pluginConfiguration.setConfigurationType(F6MapperPlugin.class.getName());
         pluginConfiguration.addProperty("mappers", MAPPER_INTERFACE_REFERENCE);
@@ -207,10 +209,27 @@ public class CodeGenerator {
 
         generateByTemplate(gt, "/service.beetl", servicePackageDir + modelNameUpperCamel + "Service.java", data);
         generateByTemplate(gt, "/service-impl.beetl", serviceImplPackageDir + modelNameUpperCamel + "ServiceImpl.java", data);
+        data.put("fields", getVoFields());
         generateByTemplate(gt, "/so.beetl", soPackageDir + modelNameUpperCamel + "So.java", data);
         generateByTemplate(gt, "/vo.beetl", voPackageDir + modelNameUpperCamel + "Vo.java", data);
 
 
+    }
+
+    private static Collection<Field> getVoFields() {
+        if (PO_FIELDS.get().isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return Collections2.filter(PO_FIELDS.get(), new Predicate<Field>() {
+                @Override
+                public boolean apply(Field input) {
+                    if (VO_EXCLUED_FIELD_NAMES.contains(input.getName())) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+        }
     }
 
     private static void generateByTemplate(GroupTemplate groupTemplate, String templateFile, String filename, Map data) throws IOException {

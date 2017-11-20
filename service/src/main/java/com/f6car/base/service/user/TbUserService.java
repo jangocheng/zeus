@@ -8,10 +8,9 @@
 
 package com.f6car.base.service.user;
 
-import com.f6car.base.vo.user.TbUserVo;
-import com.f6car.base.so.user.TbUserSo;
-
 import com.f6car.base.common.Service;
+import com.f6car.base.so.user.TbUserSo;
+import com.f6car.base.vo.user.TbUserVo;
 
 
 /**
