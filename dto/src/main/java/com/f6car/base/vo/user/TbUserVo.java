@@ -156,7 +156,7 @@ public class TbUserVo extends Vo {
     public void setLimitMac(Byte limitMac) {
         this.limitMac = limitMac;
     }
-      
+
 
 
 
