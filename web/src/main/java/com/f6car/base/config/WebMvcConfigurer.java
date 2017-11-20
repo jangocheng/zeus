@@ -9,10 +9,12 @@
 package com.f6car.base.config;
 
 
+import com.air.tqb.realm.KissoShiroInterceptor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
@@ -30,7 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -89,14 +93,16 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //解决跨域问题
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        //registry.addMapping("/**");
+        registry.addMapping("/**");
     }
 
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
+        registry.addInterceptor(new SSOSpringInterceptor());
+        registry.addInterceptor(new KissoShiroInterceptor());
     }
+
 
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");
@@ -123,6 +129,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         converter.setDefaultCharset(Charset.forName("UTF-8"));
         converters.add(converter);
     }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
+        beanNameViewResolver.setOrder(1);
+        registry.viewResolver(beanNameViewResolver);
+        super.configureViewResolvers(registry);
+    }
+
 
     private String getIpAddress(HttpServletRequest request) {
         String ip = null;

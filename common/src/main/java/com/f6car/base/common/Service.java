@@ -9,8 +9,6 @@
 package com.f6car.base.common;
 
 
-import com.github.pagehelper.Page;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,5 +33,4 @@ public interface Service<V extends Vo, S extends So, PK extends Serializable> {
 
     List<V> findAll();//获取所有
 
-    Page<V> findBySo(S so);
 }
