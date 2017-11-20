@@ -6,11 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.common;
+package com.f6car.base.service;
+
+import com.f6car.base.core.Service;
+import com.f6car.base.model.TbUser;
+
 
 /**
- * @author qixiaobo
+ * Created by CodeGenerator on 2017-11-20.
  */
-public class Po implements java.io.Serializable {
-    private static final long serialVersionUID = 5350639685728778721L;
+public interface TbUserService extends Service<TbUser> {
+
 }

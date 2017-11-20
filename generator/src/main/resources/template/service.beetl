@@ -1,0 +1,13 @@
+package ${basePackage}.service${subPackage!};
+import ${basePackage}.vo${subPackage!}.${modelNameUpperCamel}Vo;
+import ${basePackage}.so${subPackage!}.${modelNameUpperCamel}So;
+
+import ${basePackage}.common.Service;
+
+
+/**
+ * Created by ${author} on ${date}.
+ */
+public interface ${modelNameUpperCamel}Service extends Service<${modelNameUpperCamel}Vo,${modelNameUpperCamel}So> {
+
+}

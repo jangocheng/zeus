@@ -8,9 +8,15 @@
 
 package com.f6car.base.service.user;
 
-import com.f6car.base.common.Service;
-import com.f6car.base.so.user.UserSo;
-import com.f6car.base.vo.user.UserVo;
+import com.f6car.base.vo.user.TbUserVo;
+import com.f6car.base.so.user.TbUserSo;
 
-public interface UserService extends Service<UserVo,UserSo,Long> {
+import com.f6car.base.common.Service;
+
+
+/**
+ * Created by CodeGenerator on 2017-11-20.
+ */
+public interface TbUserService extends Service<TbUserVo, TbUserSo> {
+
 }

@@ -34,7 +34,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", DefaultFilter.anon.toString());
-        filterChainDefinitionMap.put("/**", DefaultFilter.authc.toString());
+        filterChainDefinitionMap.put("/**", DefaultFilter.anon.toString());
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 

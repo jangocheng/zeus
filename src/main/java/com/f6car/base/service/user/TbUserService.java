@@ -6,10 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.dao.user;
+package com.f6car.base.service;
 
-import com.f6car.base.core.Mapper;
-import com.f6car.base.po.user.User;
+import com.f6car.base.core.Service;
+import com.f6car.base.model.TbUser;
 
-public interface UseMapper extends Mapper<User> {
+
+/**
+ * Created by CodeGenerator on 2017-11-20.
+ */
+public interface TbUserService extends Service<TbUser> {
+
 }

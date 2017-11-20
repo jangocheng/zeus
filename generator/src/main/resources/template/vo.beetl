@@ -1,0 +1,11 @@
+package com.f6car.base.vo${subPackage!};
+
+import com.f6car.base.common.Vo;
+
+/**
+ * Created by ${author} on ${date}.
+ */
+public class ${modelNameUpperCamel}Vo extends Vo {
+
+    private static final long serialVersionUID = -6920934492324729614L;
+}

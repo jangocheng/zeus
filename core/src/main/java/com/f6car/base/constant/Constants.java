@@ -14,7 +14,7 @@ package com.f6car.base.constant;
 public class Constants {
     public static final String BASE_PACKAGE = "com.f6car.base";
     //Model所在包
-    public static final String MODEL_PACKAGE = BASE_PACKAGE + ".model";
+    public static final String MODEL_PACKAGE = BASE_PACKAGE + ".po";
     //Mapper所在包
     public static final String MAPPER_PACKAGE = BASE_PACKAGE + ".dao";
 
@@ -23,12 +23,19 @@ public class Constants {
     //ServiceImpl所在包
     public static final String SERVICE_IMPL_PACKAGE = SERVICE_PACKAGE + ".impl";
     //Controller所在包
-    public static final String CONTROLLER_PACKAGE = BASE_PACKAGE + ".web";
+    public static final String CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";
 
+    //vo所在包
+    public static final String VO_PACKAGE = BASE_PACKAGE + ".vo";
+
+    //so所在包
+    public static final String SO_PACKAGE = BASE_PACKAGE + ".so";
 
     //Mapper插件基础接口的完全限定名
     public static final String MAPPER_INTERFACE_REFERENCE = BASE_PACKAGE + ".core.Mapper";
 
     public static final String IP_UNKNOWN = "unknown";
     public static final String COMMA = ",";
+    public static final String STRIKE = "-";
+    public static final String UNDER_LINE = "_";
 }
