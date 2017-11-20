@@ -48,7 +48,7 @@ public class TbUserController {
     }
 
     @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         PageHelper.startPage(page, size);
         List<TbUserVo> list = tbUserService.findAll();
         PageInfo pageInfo = new PageInfo(list);

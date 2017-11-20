@@ -14,7 +14,7 @@ import com.f6car.base.vo.user.TbUserVo;
 
 
 /**
- * Created by CodeGenerator on 2017-11-20.
+ * Created by qixiaobo on 2017-11-20.
  */
 public interface TbUserService extends Service<TbUserVo, TbUserSo> {
 
