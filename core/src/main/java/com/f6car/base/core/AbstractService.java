@@ -103,4 +103,11 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So> 
         return orikaMapper.convertList(mapper.selectAll(), voClazz);
     }
 
+    @Override
+    public int selectCount(V v) {
+        Preconditions.checkArgument(v != null);
+        return mapper.selectCount(orikaMapper.convert(v, poClazz));
+    }
+
+
 }

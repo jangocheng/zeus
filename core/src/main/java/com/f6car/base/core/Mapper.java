@@ -10,8 +10,8 @@ package com.f6car.base.core;
 
 import com.f6car.base.common.Po;
 import tk.mybatis.mapper.common.BaseMapper;
-import tk.mybatis.mapper.common.ConditionMapper;
 import tk.mybatis.mapper.common.IdsMapper;
+import tk.mybatis.mapper.common.base.select.SelectCountMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;
 
 /**
@@ -22,7 +22,7 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
 public interface Mapper<T extends Po>
         extends
         BaseMapper<T>,
-        ConditionMapper<T>,
+        SelectCountMapper<T>,
         IdsMapper<T>,
         InsertListMapper<T> {
 }

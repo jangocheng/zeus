@@ -35,4 +35,6 @@ public interface Service<V extends Vo, S extends So> {
 
     List<V> findAll();//获取所有
 
+    int selectCount(V v);
+
 }
