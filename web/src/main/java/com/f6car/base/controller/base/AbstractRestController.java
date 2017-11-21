@@ -30,7 +30,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
     @PostMapping()
     @ApiOperation(value = "新建实体", notes = "")
     public Result add(@RequestBody V vo) {
-        service.save(vo);
+        service.saveSelective(vo);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -45,7 +45,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
     @PutMapping
     @ApiOperation(value = "更新实体", notes = "")
     public Result update(@RequestBody V vo) {
-        service.update(vo);
+        service.updateByPrimaryKeySelective(vo);
         return ResultGenerator.genSuccessResult();
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
  * Service 层 基础接口，其他Service 接口 请继承该接口
  */
 public interface Service<V extends Vo, S extends So> {
-    int save(V model);//持久化
+    int saveSelective(V model);//持久化
 
     int save(List<V> models);//批量持久化
 
@@ -24,7 +24,9 @@ public interface Service<V extends Vo, S extends So> {
 
     int deleteByIds(String ids);//批量刪除 eg：ids -> “1,2,3,4”
 
-    int update(V model);//更新
+    int updateByPrimaryKeySelective(V model);//更新
+
+    int updateByPrimaryKey(V model);//更新
 
     V findById(Serializable id);//通过ID查找
 

@@ -46,7 +46,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So> 
     }
 
     @Override
-    public int save(V model) {
+    public int saveSelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
         return mapper.insertSelective(po);
@@ -72,10 +72,17 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So> 
     }
 
     @Override
-    public int update(V model) {
+    public int updateByPrimaryKeySelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
         return mapper.updateByPrimaryKeySelective(po);
+    }
+
+    @Override
+    public int updateByPrimaryKey(V model) {
+        Preconditions.checkArgument(model != null);
+        T po = orikaMapper.convert(model, poClazz);
+        return mapper.updateByPrimaryKey(po);
     }
 
     @Override
