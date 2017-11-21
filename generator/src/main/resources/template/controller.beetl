@@ -2,7 +2,9 @@ package ${basePackage}.controller${subPackage!};
 import ${basePackage}.common.Result;
 import ${basePackage}.common.ResultGenerator;
 import ${basePackage}.vo${subPackage!}.${modelNameUpperCamel}Vo;
+import ${basePackage}.so${subPackage!}.${modelNameUpperCamel}So;
 import ${basePackage}.service${subPackage!}.${modelNameUpperCamel}Service;
+import ${basePackage}.controller.base.AbstractRestController;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -16,39 +18,9 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller {
+public class ${modelNameUpperCamel}Controller extends AbstractRestController<${modelNameUpperCamel}Vo, ${modelNameUpperCamel}So> {
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    @PutMapping
-    public Result add(@RequestBody  ${modelNameUpperCamel}Vo ${modelNameLowerCamel}Vo) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel}Vo);
-        return ResultGenerator.genSuccessResult();
-    }
 
-     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Serializable id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @PostMapping()
-    public Result update(@RequestBody ${modelNameUpperCamel}Vo ${modelNameLowerCamel}Vo) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel}Vo);
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
-        PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}Vo> list = ${modelNameLowerCamel}Service.findAll();
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
-    }
-
-    @GetMapping("/{id}")
-    public Result detail(@PathVariable Serializable id) {
-        ${modelNameUpperCamel}Vo ${modelNameLowerCamel}Vo = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel}Vo);
-    }
 }

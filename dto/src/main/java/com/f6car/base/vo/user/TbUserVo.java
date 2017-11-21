@@ -11,7 +11,7 @@ package com.f6car.base.vo.user;
 import com.f6car.base.common.Vo;
 
 /**
- * Created by qixiaobo on 2017-11-20.
+ * Created by qixiaobo on 2017-11-21.
  */
 public class TbUserVo extends Vo {
 

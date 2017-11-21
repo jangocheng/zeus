@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- *
- * @author qixiaobo
- * @date 2017-11-20
+ * Created by qixiaobo on 2017-11-21.
  */
 @RestController
 @RequestMapping("/tb/user")
