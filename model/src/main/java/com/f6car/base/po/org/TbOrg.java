@@ -9,12 +9,10 @@
 package com.f6car.base.po.org;
 
 import com.f6car.base.common.Po;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.*;
 
 @Table(name = "tb_org")
 public class TbOrg extends Po {
@@ -23,7 +21,7 @@ public class TbOrg extends Po {
      */
     @Id
     @Column(name = "pk_id")
-    private String pkId;
+    private BigInteger pkId;
 
     /**
      * 机构代码
@@ -106,18 +104,18 @@ public class TbOrg extends Po {
     /**
      * 创建人
      */
-    private String creator;
+    private BigInteger creator;
 
     /**
      * 修改人
      */
-    private String modifier;
+    private BigInteger modifier;
 
     /**
      * 父机构ID
      */
     @Column(name = "id_parent")
-    private String idParent;
+    private BigInteger idParent;
 
     /**
      * 是否删除
@@ -251,7 +249,7 @@ public class TbOrg extends Po {
      *
      * @return pk_id - 主键
      */
-    public String getPkId() {
+    public BigInteger getPkId() {
         return pkId;
     }
 
@@ -260,7 +258,7 @@ public class TbOrg extends Po {
      *
      * @param pkId 主键
      */
-    public void setPkId(String pkId) {
+    public void setPkId(BigInteger pkId) {
         this.pkId = pkId;
     }
 
@@ -539,7 +537,7 @@ public class TbOrg extends Po {
      *
      * @return creator - 创建人
      */
-    public String getCreator() {
+    public BigInteger getCreator() {
         return creator;
     }
 
@@ -548,7 +546,7 @@ public class TbOrg extends Po {
      *
      * @param creator 创建人
      */
-    public void setCreator(String creator) {
+    public void setCreator(BigInteger creator) {
         this.creator = creator;
     }
 
@@ -557,7 +555,7 @@ public class TbOrg extends Po {
      *
      * @return modifier - 修改人
      */
-    public String getModifier() {
+    public BigInteger getModifier() {
         return modifier;
     }
 
@@ -566,7 +564,7 @@ public class TbOrg extends Po {
      *
      * @param modifier 修改人
      */
-    public void setModifier(String modifier) {
+    public void setModifier(BigInteger modifier) {
         this.modifier = modifier;
     }
 
@@ -575,7 +573,7 @@ public class TbOrg extends Po {
      *
      * @return id_parent - 父机构ID
      */
-    public String getIdParent() {
+    public BigInteger getIdParent() {
         return idParent;
     }
 
@@ -584,7 +582,7 @@ public class TbOrg extends Po {
      *
      * @param idParent 父机构ID
      */
-    public void setIdParent(String idParent) {
+    public void setIdParent(BigInteger idParent) {
         this.idParent = idParent;
     }
 

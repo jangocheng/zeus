@@ -10,6 +10,11 @@ package com.f6car.base.vo.user;
 
 import com.f6car.base.common.Vo;
 
+import java.util.Date;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+
 
 /**
  * Created by qixiaobo on 2017-11-21.
@@ -18,7 +23,7 @@ public class TbUserVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
-    private String pkId;
+    private BigInteger pkId;
 
     private String username;
 
@@ -28,11 +33,11 @@ public class TbUserVo extends Vo {
 
     private Byte isAdmin;
 
-    private String idRole;
+    private BigInteger idRole;
 
-    private String idOwnOrg;
+    private BigInteger idOwnOrg;
 
-    private String idEmployee;
+    private BigInteger idEmployee;
 
     private Byte isDel;
 
@@ -47,11 +52,11 @@ public class TbUserVo extends Vo {
     private Byte limitMac;
 
 
-    public void setPkId(String pkId) {
+    public void setPkId(BigInteger pkId) {
         this.pkId = pkId;
     }
 
-    public String getPkId() {
+    public BigInteger getPkId() {
         return pkId;
     }
 
@@ -92,29 +97,29 @@ public class TbUserVo extends Vo {
     }
 
 
-    public void setIdRole(String idRole) {
+    public void setIdRole(BigInteger idRole) {
         this.idRole = idRole;
     }
 
-    public String getIdRole() {
+    public BigInteger getIdRole() {
         return idRole;
     }
 
 
-    public void setIdOwnOrg(String idOwnOrg) {
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
         this.idOwnOrg = idOwnOrg;
     }
 
-    public String getIdOwnOrg() {
+    public BigInteger getIdOwnOrg() {
         return idOwnOrg;
     }
 
 
-    public void setIdEmployee(String idEmployee) {
+    public void setIdEmployee(BigInteger idEmployee) {
         this.idEmployee = idEmployee;
     }
 
-    public String getIdEmployee() {
+    public BigInteger getIdEmployee() {
         return idEmployee;
     }
 

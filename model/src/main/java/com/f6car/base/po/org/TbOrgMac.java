@@ -10,10 +10,9 @@ package com.f6car.base.po.org;
 
 import com.f6car.base.common.Po;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.math.BigInteger;
 import java.util.Date;
+import javax.persistence.*;
 
 @Table(name = "tb_org_mac")
 public class TbOrgMac extends Po {
@@ -22,7 +21,7 @@ public class TbOrgMac extends Po {
      */
     @Id
     @Column(name = "pk_id")
-    private String pkId;
+    private BigInteger pkId;
 
     /**
      * mac地址
@@ -34,12 +33,12 @@ public class TbOrgMac extends Po {
      * 组织
      */
     @Column(name = "id_own_org")
-    private String idOwnOrg;
+    private BigInteger idOwnOrg;
 
     /**
      * 创建人
      */
-    private String creator;
+    private BigInteger creator;
 
     /**
      * 创建日期
@@ -49,7 +48,7 @@ public class TbOrgMac extends Po {
     /**
      * 修改人
      */
-    private String modifier;
+    private BigInteger modifier;
 
     /**
      * 修改日期
@@ -61,7 +60,7 @@ public class TbOrgMac extends Po {
      *
      * @return pk_id - 主键id
      */
-    public String getPkId() {
+    public BigInteger getPkId() {
         return pkId;
     }
 
@@ -70,7 +69,7 @@ public class TbOrgMac extends Po {
      *
      * @param pkId 主键id
      */
-    public void setPkId(String pkId) {
+    public void setPkId(BigInteger pkId) {
         this.pkId = pkId;
     }
 
@@ -97,7 +96,7 @@ public class TbOrgMac extends Po {
      *
      * @return id_own_org - 组织
      */
-    public String getIdOwnOrg() {
+    public BigInteger getIdOwnOrg() {
         return idOwnOrg;
     }
 
@@ -106,7 +105,7 @@ public class TbOrgMac extends Po {
      *
      * @param idOwnOrg 组织
      */
-    public void setIdOwnOrg(String idOwnOrg) {
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
         this.idOwnOrg = idOwnOrg;
     }
 
@@ -115,7 +114,7 @@ public class TbOrgMac extends Po {
      *
      * @return creator - 创建人
      */
-    public String getCreator() {
+    public BigInteger getCreator() {
         return creator;
     }
 
@@ -124,7 +123,7 @@ public class TbOrgMac extends Po {
      *
      * @param creator 创建人
      */
-    public void setCreator(String creator) {
+    public void setCreator(BigInteger creator) {
         this.creator = creator;
     }
 
@@ -151,7 +150,7 @@ public class TbOrgMac extends Po {
      *
      * @return modifier - 修改人
      */
-    public String getModifier() {
+    public BigInteger getModifier() {
         return modifier;
     }
 
@@ -160,7 +159,7 @@ public class TbOrgMac extends Po {
      *
      * @param modifier 修改人
      */
-    public void setModifier(String modifier) {
+    public void setModifier(BigInteger modifier) {
         this.modifier = modifier;
     }
 

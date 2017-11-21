@@ -7,10 +7,10 @@
  */
 
 package com.f6car.base.service.org;
+import com.f6car.base.vo.org.TbOrgVo;
+import com.f6car.base.so.org.TbOrgSo;
 
 import com.f6car.base.common.Service;
-import com.f6car.base.so.org.TbOrgSo;
-import com.f6car.base.vo.org.TbOrgVo;
 
 
 /**

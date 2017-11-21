@@ -10,6 +10,7 @@ package com.f6car.base.po.menu;
 
 import com.f6car.base.common.Po;
 
+import java.math.BigInteger;
 import javax.persistence.*;
 
 @Table(name = "tb_menu")
@@ -19,7 +20,7 @@ public class TbMenu extends Po {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private BigInteger id;
 
     /**
      * url
@@ -50,7 +51,7 @@ public class TbMenu extends Po {
      * 父节点
      */
     @Column(name = "p_id")
-    private String pId;
+    private BigInteger pId;
 
     /**
      * 逻辑删除，0表示不删除
@@ -79,7 +80,7 @@ public class TbMenu extends Po {
      *
      * @return id - 主键
      */
-    public String getId() {
+    public BigInteger getId() {
         return id;
     }
 
@@ -88,7 +89,7 @@ public class TbMenu extends Po {
      *
      * @param id 主键
      */
-    public void setId(String id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -187,7 +188,7 @@ public class TbMenu extends Po {
      *
      * @return p_id - 父节点
      */
-    public String getpId() {
+    public BigInteger getpId() {
         return pId;
     }
 
@@ -196,7 +197,7 @@ public class TbMenu extends Po {
      *
      * @param pId 父节点
      */
-    public void setpId(String pId) {
+    public void setpId(BigInteger pId) {
         this.pId = pId;
     }
 

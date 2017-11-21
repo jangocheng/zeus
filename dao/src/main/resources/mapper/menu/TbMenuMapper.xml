@@ -25,4 +25,10 @@
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
         <result column="active_url" jdbcType="VARCHAR" property="activeUrl"/>
     </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        id, url, name, remark, ico, model, p_id, is_delete, sort, permission, active_url
+    </sql>
 </mapper>

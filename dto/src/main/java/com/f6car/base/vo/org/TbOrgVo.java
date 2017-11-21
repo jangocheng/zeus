@@ -9,9 +9,10 @@
 package com.f6car.base.vo.org;
 
 import com.f6car.base.common.Vo;
-
-import java.math.BigDecimal;
 import java.util.Date;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 
 
 /**
@@ -21,7 +22,7 @@ public class TbOrgVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
-    private String pkId;
+    private BigInteger pkId;
 
     private String code;
 
@@ -49,7 +50,7 @@ public class TbOrgVo extends Vo {
 
     private String email;
 
-    private String idParent;
+    private BigInteger idParent;
 
     private Byte isDel;
 
@@ -105,341 +106,387 @@ public class TbOrgVo extends Vo {
 
     private Integer uuidCountLimit;
 
-    public String getPkId() {
+
+    public void setPkId(BigInteger pkId) {
+        this.pkId = pkId;
+    }
+
+    public BigInteger getPkId() {
         return pkId;
     }
 
-    public void setPkId(String pkId) {
-        this.pkId = pkId;
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setContaCts(String contacts) {
+        this.contacts = contacts;
     }
 
     public String getContaCts() {
         return contacts;
     }
 
-    public void setContaCts(String contacts) {
-        this.contacts = contacts;
+
+    public void setContaCtNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getContaCtNumber() {
         return contactNumber;
     }
 
-    public void setContaCtNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+
+    public void setContaCtMobile(String contactMobile) {
+        this.contactMobile = contactMobile;
     }
 
     public String getContaCtMobile() {
         return contactMobile;
     }
 
-    public void setContaCtMobile(String contactMobile) {
-        this.contactMobile = contactMobile;
+
+    public void setFax(String fax) {
+        this.fax = fax;
     }
 
     public String getFax() {
         return fax;
     }
 
-    public void setFax(String fax) {
-        this.fax = fax;
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+
+    public void setAreA(String area) {
+        this.area = area;
     }
 
     public String getAreA() {
         return area;
     }
 
-    public void setAreA(String area) {
-        this.area = area;
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+
+    public void setDetailADDress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 
     public String getDetailADDress() {
         return detailAddress;
     }
 
-    public void setDetailADDress(String detailAddress) {
-        this.detailAddress = detailAddress;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+
+    public void setIdParent(BigInteger idParent) {
+        this.idParent = idParent;
     }
 
-    public String getIdParent() {
+    public BigInteger getIdParent() {
         return idParent;
     }
 
-    public void setIdParent(String idParent) {
-        this.idParent = idParent;
+
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Byte isDel) {
-        this.isDel = isDel;
+
+    public void setEntityCodE(String entityCode) {
+        this.entityCode = entityCode;
     }
 
     public String getEntityCodE() {
         return entityCode;
     }
 
-    public void setEntityCodE(String entityCode) {
-        this.entityCode = entityCode;
+
+    public void setBussiness(String bussiness) {
+        this.bussiness = bussiness;
     }
 
     public String getBussiness() {
         return bussiness;
     }
 
-    public void setBussiness(String bussiness) {
-        this.bussiness = bussiness;
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getLogo() {
         return logo;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+
+    public void setStoreLogo(String storeLogo) {
+        this.storeLogo = storeLogo;
     }
 
     public String getStoreLogo() {
         return storeLogo;
     }
 
-    public void setStoreLogo(String storeLogo) {
-        this.storeLogo = storeLogo;
+
+    public void setApplicAtionLogo(String applicationLogo) {
+        this.applicationLogo = applicationLogo;
     }
 
     public String getApplicAtionLogo() {
         return applicationLogo;
     }
 
-    public void setApplicAtionLogo(String applicationLogo) {
-        this.applicationLogo = applicationLogo;
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
     }
 
     public String getResponsible() {
         return responsible;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+
+    public void setEndDatE(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Date getEndDatE() {
         return endDate;
     }
 
-    public void setEndDatE(Date endDate) {
-        this.endDate = endDate;
+
+    public void setQQ(String qq) {
+        this.qq = qq;
     }
 
     public String getQQ() {
         return qq;
     }
 
-    public void setQQ(String qq) {
-        this.qq = qq;
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
     }
 
     public String getBankAccount() {
         return bankAccount;
     }
 
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+
+    public void setIdCustomerCarzone(String idCustomerCarzone) {
+        this.idCustomerCarzone = idCustomerCarzone;
     }
 
     public String getIdCustomerCarzone() {
         return idCustomerCarzone;
     }
 
-    public void setIdCustomerCarzone(String idCustomerCarzone) {
-        this.idCustomerCarzone = idCustomerCarzone;
+
+    public void setIdDepartmentCarzone(String idDepartmentCarzone) {
+        this.idDepartmentCarzone = idDepartmentCarzone;
     }
 
     public String getIdDepartmentCarzone() {
         return idDepartmentCarzone;
     }
 
-    public void setIdDepartmentCarzone(String idDepartmentCarzone) {
-        this.idDepartmentCarzone = idDepartmentCarzone;
+
+    public void setIsTaskModeEnable(Byte isTaskModeEnable) {
+        this.isTaskModeEnable = isTaskModeEnable;
     }
 
     public Byte getIsTaskModeEnable() {
         return isTaskModeEnable;
     }
 
-    public void setIsTaskModeEnable(Byte isTaskModeEnable) {
-        this.isTaskModeEnable = isTaskModeEnable;
+
+    public void setPositionX(BigDecimal positionX) {
+        this.positionX = positionX;
     }
 
     public BigDecimal getPositionX() {
         return positionX;
     }
 
-    public void setPositionX(BigDecimal positionX) {
-        this.positionX = positionX;
+
+    public void setPositionY(BigDecimal positionY) {
+        this.positionY = positionY;
     }
 
     public BigDecimal getPositionY() {
         return positionY;
     }
 
-    public void setPositionY(BigDecimal positionY) {
-        this.positionY = positionY;
+
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
     }
 
     public Date getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Date openTime) {
-        this.openTime = openTime;
+
+    public void setCloseTime(Date closeTime) {
+        this.closeTime = closeTime;
     }
 
     public Date getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Date closeTime) {
-        this.closeTime = closeTime;
+
+    public void setAbbreviAtion(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 
     public String getAbbreviAtion() {
         return abbreviation;
     }
 
-    public void setAbbreviAtion(String abbreviation) {
-        this.abbreviation = abbreviation;
+
+    public void setFromFlag(Integer fromFlag) {
+        this.fromFlag = fromFlag;
     }
 
     public Integer getFromFlag() {
         return fromFlag;
     }
 
-    public void setFromFlag(Integer fromFlag) {
-        this.fromFlag = fromFlag;
+
+    public void setEnablESuppliErExport(Byte enableSupplierExport) {
+        this.enableSupplierExport = enableSupplierExport;
     }
 
     public Byte getEnablESuppliErExport() {
         return enableSupplierExport;
     }
 
-    public void setEnablESuppliErExport(Byte enableSupplierExport) {
-        this.enableSupplierExport = enableSupplierExport;
+
+    public void setIsCloudItemSearchable(Byte isCloudItemSearchable) {
+        this.isCloudItemSearchable = isCloudItemSearchable;
     }
 
     public Byte getIsCloudItemSearchable() {
         return isCloudItemSearchable;
     }
 
-    public void setIsCloudItemSearchable(Byte isCloudItemSearchable) {
-        this.isCloudItemSearchable = isCloudItemSearchable;
+
+    public void setIsCloudPartSearchable(Byte isCloudPartSearchable) {
+        this.isCloudPartSearchable = isCloudPartSearchable;
     }
 
     public Byte getIsCloudPartSearchable() {
         return isCloudPartSearchable;
     }
 
-    public void setIsCloudPartSearchable(Byte isCloudPartSearchable) {
-        this.isCloudPartSearchable = isCloudPartSearchable;
+
+    public void setNeedScaNLogiN(Byte needScanLogin) {
+        this.needScanLogin = needScanLogin;
     }
 
     public Byte getNeedScaNLogiN() {
         return needScanLogin;
     }
 
-    public void setNeedScaNLogiN(Byte needScanLogin) {
-        this.needScanLogin = needScanLogin;
+
+    public void setNeedCheckUuid(Byte needCheckUuid) {
+        this.needCheckUuid = needCheckUuid;
     }
 
     public Byte getNeedCheckUuid() {
         return needCheckUuid;
     }
 
-    public void setNeedCheckUuid(Byte needCheckUuid) {
-        this.needCheckUuid = needCheckUuid;
+
+    public void setUUidCoUntLimit(Integer uuidCountLimit) {
+        this.uuidCountLimit = uuidCountLimit;
     }
 
     public Integer getUUidCoUntLimit() {
         return uuidCountLimit;
     }
 
-    public void setUUidCoUntLimit(Integer uuidCountLimit) {
-        this.uuidCountLimit = uuidCountLimit;
-    }
+
+
+
 
 
 }

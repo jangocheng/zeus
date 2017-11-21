@@ -3,6 +3,8 @@ package com.f6car.base.vo${subPackage!};
 import com.f6car.base.common.Vo;
 import java.util.Date;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+
 
 
 /**

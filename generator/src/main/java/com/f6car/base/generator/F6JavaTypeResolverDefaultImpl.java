@@ -11,6 +11,7 @@ package com.f6car.base.generator;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl;
 
+import java.math.BigInteger;
 import java.sql.Types;
 
 public class F6JavaTypeResolverDefaultImpl extends JavaTypeResolverDefaultImpl {
@@ -18,6 +19,6 @@ public class F6JavaTypeResolverDefaultImpl extends JavaTypeResolverDefaultImpl {
         super();
         //bigint unsigned!
         typeMap.put(Types.BIGINT, new JdbcTypeInformation("BIGINT",
-                new FullyQualifiedJavaType(String.class.getName())));
+                new FullyQualifiedJavaType(BigInteger.class.getName())));
     }
 }

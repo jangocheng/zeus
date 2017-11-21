@@ -1,6 +1,16 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.po.user;
 
 import com.f6car.base.common.Po;
+
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -11,7 +21,7 @@ public class TbUser extends Po {
      */
     @Id
     @Column(name = "pk_id")
-    private String pkId;
+    private BigInteger pkId;
 
     /**
      * 用户名
@@ -36,17 +46,17 @@ public class TbUser extends Po {
      * 角色ID
      */
     @Column(name = "id_role")
-    private String idRole;
+    private BigInteger idRole;
 
     /**
      * 创建人
      */
-    private String creator;
+    private BigInteger creator;
 
     /**
      * 修改人
      */
-    private String modifier;
+    private BigInteger modifier;
 
     /**
      * 修改日期
@@ -62,13 +72,13 @@ public class TbUser extends Po {
      * 组织
      */
     @Column(name = "id_own_org")
-    private String idOwnOrg;
+    private BigInteger idOwnOrg;
 
     /**
      * 员工ID
      */
     @Column(name = "id_employee")
-    private String idEmployee;
+    private BigInteger idEmployee;
 
     @Column(name = "is_del")
     private Byte isDel;
@@ -104,7 +114,7 @@ public class TbUser extends Po {
      *
      * @return pk_id - 主键
      */
-    public String getPkId() {
+    public BigInteger getPkId() {
         return pkId;
     }
 
@@ -113,7 +123,7 @@ public class TbUser extends Po {
      *
      * @param pkId 主键
      */
-    public void setPkId(String pkId) {
+    public void setPkId(BigInteger pkId) {
         this.pkId = pkId;
     }
 
@@ -190,7 +200,7 @@ public class TbUser extends Po {
      *
      * @return id_role - 角色ID
      */
-    public String getIdRole() {
+    public BigInteger getIdRole() {
         return idRole;
     }
 
@@ -199,7 +209,7 @@ public class TbUser extends Po {
      *
      * @param idRole 角色ID
      */
-    public void setIdRole(String idRole) {
+    public void setIdRole(BigInteger idRole) {
         this.idRole = idRole;
     }
 
@@ -208,7 +218,7 @@ public class TbUser extends Po {
      *
      * @return creator - 创建人
      */
-    public String getCreator() {
+    public BigInteger getCreator() {
         return creator;
     }
 
@@ -217,7 +227,7 @@ public class TbUser extends Po {
      *
      * @param creator 创建人
      */
-    public void setCreator(String creator) {
+    public void setCreator(BigInteger creator) {
         this.creator = creator;
     }
 
@@ -226,7 +236,7 @@ public class TbUser extends Po {
      *
      * @return modifier - 修改人
      */
-    public String getModifier() {
+    public BigInteger getModifier() {
         return modifier;
     }
 
@@ -235,7 +245,7 @@ public class TbUser extends Po {
      *
      * @param modifier 修改人
      */
-    public void setModifier(String modifier) {
+    public void setModifier(BigInteger modifier) {
         this.modifier = modifier;
     }
 
@@ -280,7 +290,7 @@ public class TbUser extends Po {
      *
      * @return id_own_org - 组织
      */
-    public String getIdOwnOrg() {
+    public BigInteger getIdOwnOrg() {
         return idOwnOrg;
     }
 
@@ -289,7 +299,7 @@ public class TbUser extends Po {
      *
      * @param idOwnOrg 组织
      */
-    public void setIdOwnOrg(String idOwnOrg) {
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
         this.idOwnOrg = idOwnOrg;
     }
 
@@ -298,7 +308,7 @@ public class TbUser extends Po {
      *
      * @return id_employee - 员工ID
      */
-    public String getIdEmployee() {
+    public BigInteger getIdEmployee() {
         return idEmployee;
     }
 
@@ -307,7 +317,7 @@ public class TbUser extends Po {
      *
      * @param idEmployee 员工ID
      */
-    public void setIdEmployee(String idEmployee) {
+    public void setIdEmployee(BigInteger idEmployee) {
         this.idEmployee = idEmployee;
     }
 

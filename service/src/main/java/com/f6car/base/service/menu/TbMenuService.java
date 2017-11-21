@@ -7,10 +7,10 @@
  */
 
 package com.f6car.base.service.menu;
+import com.f6car.base.vo.menu.TbMenuVo;
+import com.f6car.base.so.menu.TbMenuSo;
 
 import com.f6car.base.common.Service;
-import com.f6car.base.so.menu.TbMenuSo;
-import com.f6car.base.vo.menu.TbMenuVo;
 
 
 /**

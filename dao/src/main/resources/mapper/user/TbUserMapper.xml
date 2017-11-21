@@ -24,4 +24,12 @@
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="limit_mac" jdbcType="TINYINT" property="limitMac" />
   </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    pk_id, username, cell_phone, password, is_admin, id_role, creator, modifier, modifiedtime, 
+    creationtime, id_own_org, id_employee, is_del, is_guide_open, id_wxb_user, id_wxb_station, 
+    openid, limit_mac
+  </sql>
 </mapper>
