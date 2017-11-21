@@ -8,10 +8,7 @@
 
 package com.f6car.base.generator;
 
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Predicate;
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
+import com.google.common.base.*;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import org.beetl.core.GroupTemplate;
@@ -54,6 +51,7 @@ public class CodeGenerator {
     private static final Splitter TABLE_NAME_SPLITTER = Splitter.on(UNDER_LINE).trimResults().omitEmptyStrings();
     private static final String DATE = new DateTime().toString("yyyy-MM-dd");
     private static final List<String> VO_EXCLUED_FIELD_NAMES = Lists.newArrayList("creator", "modifier", "modifiedtime", "creationtime");
+    private static final Joiner PATH_JOINER = Joiner.on("/");
     private static GroupTemplate gt;
 
     static {
@@ -250,7 +248,17 @@ public class CodeGenerator {
         data.put("date", DATE);
         data.put("author", AUTHOR);
         String modelNameUpperCamel = StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
-        data.put("baseRequestMapping", modelNameConvertMappingPath(modelNameUpperCamel));
+        List<String> strings = TABLE_NAME_SPLITTER.splitToList(tableName.toLowerCase());
+        if (strings.size() >= 2) {
+            if (strings.get(0).length() <= 2) {
+                strings = Lists.newArrayList(strings);
+                strings.remove(0);
+            }
+            data.put("baseRequestMapping", PATH_JOINER.join(strings));
+        }
+        if (!data.containsKey("baseRequestMapping")) {
+            data.put("baseRequestMapping", modelNameConvertMappingPath(modelNameUpperCamel));
+        }
         data.put("modelNameUpperCamel", modelNameUpperCamel);
         data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
         data.put("basePackage", BASE_PACKAGE);
@@ -261,6 +269,7 @@ public class CodeGenerator {
         }
 
         generateByTemplate(gt, "/controller.beetl", controllerPackageDir + modelNameUpperCamel + "Controller.java", data);
+        PO_FIELDS.remove();
     }
 
     private static String tableNameConvertLowerCamel(String tableName) {
@@ -273,7 +282,7 @@ public class CodeGenerator {
     }
 
     private static String tableNameConvertMappingPath(String tableName) {
-        tableName = tableName.toLowerCase();//兼容使用大写的表名
+        tableName = tableName.toLowerCase();
         return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
     }
 

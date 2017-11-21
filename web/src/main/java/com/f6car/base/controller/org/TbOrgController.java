@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * Created by qixiaobo on 2017-11-21.
  */
 @RestController
-@RequestMapping("/tb/org")
+@RequestMapping("org")
 public class TbOrgController extends AbstractRestController<TbOrgVo, TbOrgSo> {
     @Resource
     private TbOrgService tbOrgService;

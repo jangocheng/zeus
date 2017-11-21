@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * Created by qixiaobo on 2017-11-21.
  */
 @RestController
-@RequestMapping("/tb/menu")
+@RequestMapping("menu")
 public class TbMenuController extends AbstractRestController<TbMenuVo, TbMenuSo> {
     @Resource
     private TbMenuService tbMenuService;

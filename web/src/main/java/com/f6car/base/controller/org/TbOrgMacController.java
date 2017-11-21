@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * Created by qixiaobo on 2017-11-21.
  */
 @RestController
-@RequestMapping("/tb/org/mac")
+@RequestMapping("org/mac")
 public class TbOrgMacController extends AbstractRestController<TbOrgMacVo, TbOrgMacSo> {
     @Resource
     private TbOrgMacService tbOrgMacService;

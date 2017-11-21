@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * Created by qixiaobo on 2017-11-21.
  */
 @RestController
-@RequestMapping("/tb/user")
+@RequestMapping("user")
 public class TbUserController extends AbstractRestController<TbUserVo, TbUserSo> {
     @Resource
     private TbUserService tbUserService;
