@@ -9,10 +9,12 @@
 package com.f6car.base.config;
 
 
+import com.air.tqb.realm.KissoShiroInterceptor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
@@ -103,8 +105,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new SSOSpringInterceptor());
-//        registry.addInterceptor(new KissoShiroInterceptor());
+        registry.addInterceptor(new SSOSpringInterceptor());
+        registry.addInterceptor(new KissoShiroInterceptor());
     }
 
 

@@ -23,6 +23,7 @@ public class SSO {
     private String cookieDomain;
     private String loginUrl;
     private String logoutUrl;
+    private boolean cookieBrowser;
 
     public String getSecretkey() {
         return secretkey;
@@ -64,6 +65,14 @@ public class SSO {
         this.logoutUrl = logoutUrl;
     }
 
+    public boolean isCookieBrowser() {
+        return cookieBrowser;
+    }
+
+    public void setCookieBrowser(boolean cookieBrowser) {
+        this.cookieBrowser = cookieBrowser;
+    }
+
     @PostConstruct
     public void init() {
 
@@ -77,6 +86,7 @@ public class SSO {
         ssoConfig.setSecretkey(secretkey);
         ssoConfig.setCookieDomain(cookieDomain);
         ssoConfig.setCookieName(cookieName);
+        ssoConfig.setCookieBrowser(cookieBrowser);
         return ssoConfig;
     }
 }
