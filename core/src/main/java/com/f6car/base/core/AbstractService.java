@@ -16,6 +16,7 @@ import com.f6car.base.common.Vo;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 public abstract class AbstractService<T extends Po, V extends Vo, S extends So> implements Service<V, S> {
 
-    @Resource
+    @Autowired
     protected Mapper<T> mapper;
     @Resource
     protected OrikaMapper orikaMapper;

@@ -2,6 +2,8 @@ package com.f6car.base.vo${subPackage!};
 
 import com.f6car.base.common.Vo;
 import java.util.Date;
+import java.math.BigDecimal;
+
 
 /**
  * Created by ${author} on ${date}.

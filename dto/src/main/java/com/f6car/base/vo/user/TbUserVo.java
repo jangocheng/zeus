@@ -10,6 +10,7 @@ package com.f6car.base.vo.user;
 
 import com.f6car.base.common.Vo;
 
+
 /**
  * Created by qixiaobo on 2017-11-21.
  */
@@ -45,116 +46,130 @@ public class TbUserVo extends Vo {
 
     private Byte limitMac;
 
+
+    public void setPkId(String pkId) {
+        this.pkId = pkId;
+    }
+
     public String getPkId() {
         return pkId;
     }
 
-    public void setPkId(String pkId) {
-        this.pkId = pkId;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 
     public String getCellPhone() {
         return cellPhone;
     }
 
-    public void setCellPhone(String cellPhone) {
-        this.cellPhone = cellPhone;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public void setIsAdmIn(Byte isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public Byte getIsAdmIn() {
         return isAdmin;
     }
 
-    public void setIsAdmIn(Byte isAdmin) {
-        this.isAdmin = isAdmin;
+
+    public void setIdRole(String idRole) {
+        this.idRole = idRole;
     }
 
     public String getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(String idRole) {
-        this.idRole = idRole;
+
+    public void setIdOwnOrg(String idOwnOrg) {
+        this.idOwnOrg = idOwnOrg;
     }
 
     public String getIdOwnOrg() {
         return idOwnOrg;
     }
 
-    public void setIdOwnOrg(String idOwnOrg) {
-        this.idOwnOrg = idOwnOrg;
+
+    public void setIdEmployee(String idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public String getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(String idEmployee) {
-        this.idEmployee = idEmployee;
+
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Byte isDel) {
-        this.isDel = isDel;
+
+    public void setIsGuIdeOpen(Byte isGuideOpen) {
+        this.isGuideOpen = isGuideOpen;
     }
 
     public Byte getIsGuIdeOpen() {
         return isGuideOpen;
     }
 
-    public void setIsGuIdeOpen(Byte isGuideOpen) {
-        this.isGuideOpen = isGuideOpen;
+
+    public void setIdWxbUser(String idWxbUser) {
+        this.idWxbUser = idWxbUser;
     }
 
     public String getIdWxbUser() {
         return idWxbUser;
     }
 
-    public void setIdWxbUser(String idWxbUser) {
-        this.idWxbUser = idWxbUser;
+
+    public void setIdWxbStatIon(String idWxbStation) {
+        this.idWxbStation = idWxbStation;
     }
 
     public String getIdWxbStatIon() {
         return idWxbStation;
     }
 
-    public void setIdWxbStatIon(String idWxbStation) {
-        this.idWxbStation = idWxbStation;
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public String getOpenid() {
         return openid;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+
+    public void setLimitMac(Byte limitMac) {
+        this.limitMac = limitMac;
     }
 
     public Byte getLimitMac() {
         return limitMac;
-    }
-
-    public void setLimitMac(Byte limitMac) {
-        this.limitMac = limitMac;
     }
 
 

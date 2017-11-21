@@ -68,7 +68,7 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        genCode("tb_user");
+        genCode("tb_user", "tb_org", "tb_menu", "tb_org_mac");
     }
 
     /**

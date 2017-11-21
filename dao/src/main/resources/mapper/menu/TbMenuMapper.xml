@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.f6car.base.dao.menu.TbMenuMapper">
+    <resultMap id="BaseResultMap" type="com.f6car.base.po.menu.TbMenu">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="ico" jdbcType="VARCHAR" property="ico"/>
+        <result column="model" jdbcType="VARCHAR" property="model"/>
+        <result column="p_id" jdbcType="BIGINT" property="pId"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="active_url" jdbcType="VARCHAR" property="activeUrl"/>
+    </resultMap>
+</mapper>

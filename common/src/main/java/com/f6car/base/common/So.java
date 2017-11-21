@@ -22,7 +22,7 @@ public class So implements java.io.Serializable, Pagable, Sortable {
     private static final long serialVersionUID = -828171499994153332L;
 
     private int currentPage;
-    private int pageSize;
+    private int pageSize = PAGESIZE.s.pageSize;
     private boolean enableCount;
     private List<Sort> sorts;
 
@@ -72,5 +72,18 @@ public class So implements java.io.Serializable, Pagable, Sortable {
             sorts = new ArrayList<>();
         }
         sorts.add(sort);
+    }
+
+    public static enum PAGESIZE {
+        xs(5), s(10), m(20), l(30), xl(50), xxl(100), xxxl(1000);
+        private int pageSize;
+
+        PAGESIZE(int pageSize) {
+            this.pageSize = pageSize;
+        }
+
+        public int getPageSize() {
+            return pageSize;
+        }
     }
 }

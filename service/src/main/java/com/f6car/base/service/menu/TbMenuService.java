@@ -6,15 +6,16 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.service;
+package com.f6car.base.service.menu;
 
-import com.f6car.base.core.Service;
-import com.f6car.base.model.TbUser;
+import com.f6car.base.common.Service;
+import com.f6car.base.so.menu.TbMenuSo;
+import com.f6car.base.vo.menu.TbMenuVo;
 
 
 /**
- * Created by CodeGenerator on 2017-11-20.
+ * Created by qixiaobo on 2017-11-21.
  */
-public interface TbUserService extends Service<TbUser> {
+public interface TbMenuService extends Service<TbMenuVo, TbMenuSo> {
 
 }

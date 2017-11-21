@@ -12,19 +12,18 @@ import com.f6car.base.common.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author qixiaobo
  */
-@RestController
 public abstract class AbstractRestController<V extends Vo, S extends So> {
 
-    @Resource
+    @Autowired
     private Service<V, S> service;
 
 
@@ -52,8 +51,8 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
 
     @GetMapping
     @ApiOperation(value = "获取实体列表", notes = "")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
-        PageHelper.startPage(page, size);
+    public Result list(S so) {
+        PageHelper.startPage(so.getCurrentPage(), so.getPageSize());
         List<V> list = service.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
@@ -65,4 +64,26 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
         V vo = service.findById(id);
         return ResultGenerator.genSuccessResult(vo);
     }
+
+    @DeleteMapping("/batch")
+    @ApiOperation(value = "批量删除实体", notes = "")
+    public Result batchDelete(@RequestParam String ids) {
+        service.deleteByIds(ids);
+        return ResultGenerator.genSuccessResult();
+    }
+
+    @GetMapping("/batch")
+    @ApiOperation(value = "批量获取实体", notes = "")
+    public Result batchDetail(@RequestParam String ids) {
+        List<V> vos = service.findByIds(ids);
+        return ResultGenerator.genSuccessResult(vos);
+    }
+
+    @PostMapping("/batch")
+    @ApiOperation(value = "批量新建实体", notes = "")
+    public Result add(@RequestBody List<V> vos) {
+        service.save(vos);
+        return ResultGenerator.genSuccessResult();
+    }
+
 }
