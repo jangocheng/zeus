@@ -82,11 +82,11 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
                 throw new RuntimeException();
         }
         if (workbook != null) {
-            workbook.write(outputMessage.getBody());
             if (excelExportParam.getFileName() != null) {
                 String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
-                headers.add("content-disposition", "attachment;filename=" + codedFileName);
+                headers.setContentDispositionFormData("attachment", codedFileName);
             }
+            workbook.write(outputMessage.getBody());
         }
 
 
