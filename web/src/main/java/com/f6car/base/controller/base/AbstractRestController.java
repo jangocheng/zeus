@@ -86,4 +86,13 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
         return ResultGenerator.genSuccessResult();
     }
 
+
+    @GetMapping("/count")
+    @ApiOperation(value = "获取实体数目", notes = "")
+    public Result count(@RequestBody V v) {
+        int count = service.selectCount(v);
+        return ResultGenerator.genSuccessResult(count);
+    }
+
+
 }

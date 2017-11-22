@@ -32,9 +32,9 @@ import static com.f6car.base.constant.Constants.*;
  * @author qixiaobo
  */
 public class CodeGenerator {
-    private static final String JDBC_URL = "jdbc:mysql://106.14.46.56:3306/f6dms_trial";
-    private static final String JDBC_USERNAME = "trial";
-    private static final String JDBC_PASSWORD = "trial";
+    private static final String JDBC_URL = "jdbc:mysql://192.168.1.7:3306/f6dms_20160522";
+    private static final String JDBC_USERNAME = "root";
+    private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
     public static final ThreadLocal<List<Field>> PO_FIELDS = new ThreadLocal<>();
