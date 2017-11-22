@@ -76,7 +76,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
         param.setClazz(voClazz);
         param.setExcelExport(ExcelExport.NormalExcel);
         param.setExportParams(ep);
-        param.setFileName("文件");
+        param.setFileName("文件.xls");
         F6Static.setExcelExportParam(param);
     }
 

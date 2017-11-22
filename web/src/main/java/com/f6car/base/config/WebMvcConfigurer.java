@@ -17,6 +17,8 @@ import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
+import com.f6car.base.web.converter.ExcelHttpMessageConverter;
+import com.f6car.base.web.interceptor.CleanInterceptor;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -42,7 +44,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import static com.f6car.base.config.ExcelHttpMessageConverter.EXCEL_MEDIA_TYPE;
+import static com.f6car.base.web.converter.ExcelHttpMessageConverter.EXCEL_MEDIA_TYPE;
 
 /**
  * @author qixiaobo
@@ -73,7 +75,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
-                if (e instanceof ServiceException) {//业务失败的异常，如“账号或密码错误”
+                if (e instanceof ServiceException) {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
                     logger.info(e.getMessage());
                 } else if (e instanceof NoHandlerFoundException) {
@@ -111,6 +113,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new CleanInterceptor());
 //        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
 //        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
 //        InterceptorRegistration kissoInterceptor = registry.addInterceptor(new KissoShiroInterceptor());
@@ -172,12 +175,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.favorPathExtension(true).useJaf(false)
-                .favorParameter(true).parameterName("mediaType")
-                .ignoreAcceptHeader(true).
-                defaultContentType(MediaType.APPLICATION_JSON).
-                mediaType("xml", MediaType.APPLICATION_XML).
-                mediaType("json", MediaType.APPLICATION_JSON)
+        configurer.favorPathExtension(true)
+                .useJaf(false)
+                .favorParameter(true)
+                .parameterName("format")
+                .ignoreAcceptHeader(true)
+                .defaultContentType(MediaType.APPLICATION_JSON)
+                .mediaType("json", MediaType.APPLICATION_JSON)
                 .mediaType("xls", EXCEL_MEDIA_TYPE);
     }
 

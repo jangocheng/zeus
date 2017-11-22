@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.config;
+package com.f6car.base.web.converter;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import com.f6car.base.common.Result;
@@ -29,13 +29,14 @@ import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 import static com.f6car.base.core.F6Static.getExcelExportParam;
 
 /**
  * @author qixiaobo
  */
-public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Object>//
+public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Object>
         implements GenericHttpMessageConverter<Object> {
     public static final MediaType EXCEL_MEDIA_TYPE = new MediaType("application", "vnd.ms-excel");
 
@@ -58,32 +59,36 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         HttpHeaders headers = outputMessage.getHeaders();
         Collection data = getActualData((Result) o);
         ExcelExportParam excelExportParam = getExcelExportParam();
+        Workbook workbook;
         switch (excelExportParam.getExcelExport()) {
             case NormalExcel:
-                Workbook workbook = ExcelExportUtil.exportExcel(
+                workbook = ExcelExportUtil.exportExcel(
                         excelExportParam.getExportParams(),
                         (Class<?>) excelExportParam.getClazz(),
                         (Collection<?>) data);
-                workbook.write(outputMessage.getBody());
+                break;
+            case MapExcel:
+                workbook = ExcelExportUtil.exportExcel(
+                        excelExportParam.getExportParams(),
+                        excelExportParam.getExcelExportEntities(),
+                        (Collection<? extends Map<?, ?>>) data);
                 break;
             case BigExcel:
-
-            case MapExcel:
-                //TODO
             case MapExcelGraph:
-
             case PDFTemplate:
-
             case TemplateExcel:
-
             case TemplateWord:
             default:
                 throw new RuntimeException();
         }
-        if (excelExportParam.getFileName() != null) {
-            String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
-            headers.add("content-disposition", "attachment;filename=" + codedFileName);
+        if (workbook != null) {
+            workbook.write(outputMessage.getBody());
+            if (excelExportParam.getFileName() != null) {
+                String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
+                headers.add("content-disposition", "attachment;filename=" + codedFileName);
+            }
         }
+
 
     }
 
