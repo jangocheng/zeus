@@ -9,19 +9,33 @@
 package com.f6car.base.generator;
 
 import com.f6car.base.common.Po;
+import com.google.common.base.Preconditions;
+import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.internal.util.StringUtility;
+import tk.mybatis.mapper.MapperException;
 import tk.mybatis.mapper.generator.MapperPlugin;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+
+import static com.f6car.base.generator.CodeGenerator.PK_TYPE;
 import static com.f6car.base.generator.CodeGenerator.PO_FIELDS;
 
 /**
  * @author qixiaobo
  */
 public class F6MapperPlugin extends MapperPlugin {
+    private Set<String> mappers = new HashSet<String>();
+
+
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         //PK
@@ -29,6 +43,46 @@ public class F6MapperPlugin extends MapperPlugin {
         topLevelClass.setSuperClass("Po");
         PO_FIELDS.set(topLevelClass.getFields());
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+        String mappers = properties.getProperty("mappers");
+        if (StringUtility.stringHasValue(mappers)) {
+            for (String mapper : mappers.split(",")) {
+                this.mappers.add(mapper);
+            }
+        } else {
+            throw new MapperException("Mapper插件缺少必要的mappers属性!");
+        }
+        super.setProperties(properties);
+    }
+
+    /**
+     * 生成的Mapper接口
+     *
+     * @param interfaze
+     * @param topLevelClass
+     * @param introspectedTable
+     * @return
+     */
+    @Override
+    public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        //获取实体类
+        FullyQualifiedJavaType entityType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+        //import接口
+        for (String mapper : mappers) {
+            List<IntrospectedColumn> primaryKeyColumns = introspectedTable.getPrimaryKeyColumns();
+            Preconditions.checkArgument(primaryKeyColumns.size() == 1);
+            FullyQualifiedJavaType pkType = primaryKeyColumns.get(0).getFullyQualifiedJavaType();
+            interfaze.addImportedType(new FullyQualifiedJavaType(mapper));
+            interfaze.addImportedType(pkType);
+            interfaze.addSuperInterface(new FullyQualifiedJavaType(mapper + "<" + entityType.getShortName() + "," + pkType.getShortName() + ">"));
+            PK_TYPE.set(pkType);
+        }
+        //import实体类
+        interfaze.addImportedType(entityType);
+        return true;
     }
 
     @Override

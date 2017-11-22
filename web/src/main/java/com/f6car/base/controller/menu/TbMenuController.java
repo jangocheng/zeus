@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
+
 
 /**
- * Created by qixiaobo on 2017-11-22.
- */
+* Created by qixiaobo on 2017-11-22.
+*/
 @RestController
 @RequestMapping("menu")
-public class TbMenuController extends AbstractRestController<TbMenuVo, TbMenuSo> {
+public class TbMenuController extends AbstractRestController<TbMenuVo, TbMenuSo, BigInteger> {
     @Resource
     private TbMenuService tbMenuService;
 

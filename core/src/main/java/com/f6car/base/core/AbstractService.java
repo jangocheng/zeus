@@ -27,10 +27,10 @@ import java.util.List;
  *
  * @author qixiaobo
  */
-public abstract class AbstractService<T extends Po, V extends Vo, S extends So> implements Service<V, S> {
+public abstract class AbstractService<T extends Po, V extends Vo, S extends So,PK extends Serializable> implements Service<V, S,PK> {
 
     @Autowired
-    protected Mapper<T> mapper;
+    protected Mapper<T,PK> mapper;
     @Resource
     protected OrikaMapper orikaMapper;
     protected Class<V> voClazz;
@@ -60,7 +60,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So> 
     }
 
     @Override
-    public int deleteById(Serializable id) {
+    public int deleteById(PK id) {
         Preconditions.checkArgument(id != null);
         return mapper.deleteByPrimaryKey(id);
     }
@@ -86,7 +86,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So> 
     }
 
     @Override
-    public V findById(Serializable id) {
+    public V findById(PK id) {
         Preconditions.checkArgument(id != null);
         return orikaMapper.convert(mapper.selectByPrimaryKey(id), voClazz);
     }

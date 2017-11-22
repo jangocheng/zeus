@@ -18,14 +18,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
 
 
 /**
  * Created by qixiaobo on 2017-11-22.
  */
-@Service
-@Transactional(rollbackFor = Exception.class)
-public class TbMenuServiceImpl extends AbstractService<TbMenu, TbMenuVo, TbMenuSo> implements TbMenuService {
+ @Service
+ @Transactional(rollbackFor = Exception.class)
+public class TbMenuServiceImpl extends AbstractService<TbMenu,TbMenuVo,TbMenuSo,BigInteger> implements TbMenuService {
     @Resource
     private TbMenuMapper tbMenuMapper;
 }

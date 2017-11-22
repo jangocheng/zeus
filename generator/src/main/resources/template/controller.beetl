@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
+import ${pk.packageName}.${pk.shortName};
+
 
 /**
 * Created by ${author} on ${date}.
 */
 @RestController
 @RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller extends AbstractRestController<${modelNameUpperCamel}Vo, ${modelNameUpperCamel}So> {
+public class ${modelNameUpperCamel}Controller extends AbstractRestController<${modelNameUpperCamel}Vo, ${modelNameUpperCamel}So, ${pk.shortName}> {
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 

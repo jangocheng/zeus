@@ -21,10 +21,10 @@ import java.util.List;
 /**
  * @author qixiaobo
  */
-public abstract class AbstractRestController<V extends Vo, S extends So> {
+public abstract class AbstractRestController<V extends Vo, S extends So,PK extends Serializable> {
 
     @Autowired
-    private Service<V, S> service;
+    private Service<V, S,PK> service;
 
 
     @PostMapping()
@@ -36,7 +36,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除实体", notes = "")
-    public Result delete(@PathVariable Serializable id) {
+    public Result delete(@PathVariable PK id) {
         service.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -60,7 +60,8 @@ public abstract class AbstractRestController<V extends Vo, S extends So> {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "获取单个实体", notes = "")
-    public Result detail(@PathVariable Serializable id) {
+    public Result detail(@PathVariable PK id) {
+
         V vo = service.findById(id);
         return ResultGenerator.genSuccessResult(vo);
     }

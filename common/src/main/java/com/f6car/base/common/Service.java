@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * Service 层 基础接口，其他Service 接口 请继承该接口
  */
-public interface Service<V extends Vo, S extends So> {
+public interface Service<V extends Vo, S extends So,PK extends Serializable> {
     int saveSelective(V model);//持久化
 
     int save(List<V> models);//批量持久化
 
-    int deleteById(Serializable id);//通过主鍵刪除
+    int deleteById(PK id);//通过主鍵刪除
 
     int deleteByIds(String ids);//批量刪除 eg：ids -> “1,2,3,4”
 
@@ -28,7 +28,7 @@ public interface Service<V extends Vo, S extends So> {
 
     int updateByPrimaryKey(V model);//更新
 
-    V findById(Serializable id);//通过ID查找
+    V findById(PK id);//通过ID查找
 
 
     List<V> findByIds(String ids);//通过多个ID查找//eg：ids -> “1,2,3,4”

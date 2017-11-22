@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
+
 
 /**
- * Created by qixiaobo on 2017-11-22.
- */
+* Created by qixiaobo on 2017-11-22.
+*/
 @RestController
 @RequestMapping("org")
-public class TbOrgController extends AbstractRestController<TbOrgVo, TbOrgSo> {
+public class TbOrgController extends AbstractRestController<TbOrgVo, TbOrgSo, BigInteger> {
     @Resource
     private TbOrgService tbOrgService;
 

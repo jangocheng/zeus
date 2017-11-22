@@ -17,6 +17,7 @@ import org.beetl.core.resource.ClasspathResourceLoader;
 import org.joda.time.DateTime;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.springframework.util.StringUtils;
@@ -38,6 +39,7 @@ public class CodeGenerator {
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
     public static final ThreadLocal<List<Field>> PO_FIELDS = new ThreadLocal<>();
+    public static final ThreadLocal<FullyQualifiedJavaType> PK_TYPE = new ThreadLocal<>();
     private static final String PROJECT_PATH = System.getProperty("user.dir");
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/template";
     private static final String JAVA_PATH = "/src/main/java";
@@ -192,6 +194,7 @@ public class CodeGenerator {
         data.put("modelNameUpperCamel", modelNameUpperCamel);
         data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
         data.put("basePackage", BASE_PACKAGE);
+        data.put("pk",PK_TYPE.get());
         String servicePackageDir = PROJECT_PATH + Module.service.moduleDir + JAVA_PATH + PACKAGE_PATH_SERVICE;
         String serviceImplPackageDir = PROJECT_PATH + Module.serviceimpl.moduleDir + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL;
         String soPackageDir = PROJECT_PATH + Module.dto.moduleDir + JAVA_PATH + PACKAGE_PATH_SO;
@@ -247,6 +250,7 @@ public class CodeGenerator {
         Map<String, Object> data = new HashMap<>();
         data.put("date", DATE);
         data.put("author", AUTHOR);
+        data.put("pk",PK_TYPE.get());
         String modelNameUpperCamel = StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
         List<String> strings = TABLE_NAME_SPLITTER.splitToList(tableName.toLowerCase());
         if (strings.size() >= 2) {

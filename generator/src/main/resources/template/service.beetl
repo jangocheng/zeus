@@ -1,6 +1,7 @@
 package ${basePackage}.service${subPackage!};
 import ${basePackage}.vo${subPackage!}.${modelNameUpperCamel}Vo;
 import ${basePackage}.so${subPackage!}.${modelNameUpperCamel}So;
+import ${pk.packageName}.${pk.shortName};
 
 import ${basePackage}.common.Service;
 
@@ -8,6 +9,6 @@ import ${basePackage}.common.Service;
 /**
  * Created by ${author} on ${date}.
  */
-public interface ${modelNameUpperCamel}Service extends Service<${modelNameUpperCamel}Vo,${modelNameUpperCamel}So> {
+public interface ${modelNameUpperCamel}Service extends Service<${modelNameUpperCamel}Vo,${modelNameUpperCamel}So,${pk.shortName}> {
 
 }
