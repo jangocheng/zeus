@@ -1,9 +1,18 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.vo.menu;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.f6car.base.common.Vo;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import java.math.BigInteger;
+
 
 
 
@@ -14,26 +23,37 @@ public class TbMenuVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
+    @Excel(name = "id", orderNum = "10")
     private BigInteger   id;
 
+    @Excel(name = "url", orderNum = "20")
     private String   url;
 
+    @Excel(name = "name", orderNum = "30")
     private String   name;
 
+    @Excel(name = "remark", orderNum = "40")
     private String   remark;
 
+    @Excel(name = "ico", orderNum = "50")
     private String   ico;
 
+    @Excel(name = "model", orderNum = "60")
     private String   model;
 
+    @Excel(name = "pId", orderNum = "70")
     private BigInteger   pId;
 
+    @Excel(name = "isDelete", orderNum = "80")
     private Integer   isDelete;
 
+    @Excel(name = "sort", orderNum = "90")
     private Integer   sort;
 
+    @Excel(name = "permission", orderNum = "100")
     private String   permission;
 
+    @Excel(name = "activeUrl", orderNum = "110")
     private String   activeUrl;
 
 
@@ -63,14 +83,13 @@ public class TbMenuVo extends Vo {
           return name;
       }
 
-
-    public void setRemaRk(String remark) {
-            this.remark = remark;
-       }
-
-    public String getRemaRk() {
+    public String getRemark() {
           return remark;
       }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
 
     public void setIco(String ico) {

@@ -1,9 +1,20 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.vo.org;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.f6car.base.common.Vo;
-import java.util.Date;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
+
 
 
 
@@ -14,88 +25,130 @@ public class TbOrgVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
+    @Excel(name = "pkId", orderNum = "10")
     private BigInteger   pkId;
 
+    @Excel(name = "code", orderNum = "20")
     private String   code;
 
+    @Excel(name = "name", orderNum = "30")
     private String   name;
 
+    @Excel(name = "contacts", orderNum = "40")
     private String   contacts;
 
+    @Excel(name = "contactNumber", orderNum = "50")
     private String   contactNumber;
 
+    @Excel(name = "contactMobile", orderNum = "60")
     private String   contactMobile;
 
+    @Excel(name = "fax", orderNum = "70")
     private String   fax;
 
+    @Excel(name = "province", orderNum = "80")
     private String   province;
 
+    @Excel(name = "city", orderNum = "90")
     private String   city;
 
+    @Excel(name = "area", orderNum = "100")
     private String   area;
 
+    @Excel(name = "street", orderNum = "110")
     private String   street;
 
+    @Excel(name = "address", orderNum = "120")
     private String   address;
 
+    @Excel(name = "detailAddress", orderNum = "130")
     private String   detailAddress;
 
+    @Excel(name = "email", orderNum = "140")
     private String   email;
 
+    @Excel(name = "idParent", orderNum = "150")
     private BigInteger   idParent;
 
+    @Excel(name = "isDel", orderNum = "160")
     private Byte   isDel;
 
+    @Excel(name = "entityCode", orderNum = "170")
     private String   entityCode;
 
+    @Excel(name = "bussiness", orderNum = "180")
     private String   bussiness;
 
+    @Excel(name = "logo", orderNum = "190")
     private String   logo;
 
+    @Excel(name = "storeLogo", orderNum = "200")
     private String   storeLogo;
 
+    @Excel(name = "applicationLogo", orderNum = "210")
     private String   applicationLogo;
 
+    @Excel(name = "responsible", orderNum = "220")
     private String   responsible;
 
+    @Excel(name = "zipCode", orderNum = "230")
     private String   zipCode;
 
+    @Excel(name = "endDate", orderNum = "240")
     private Date   endDate;
 
+    @Excel(name = "qq", orderNum = "250")
     private String   qq;
 
+    @Excel(name = "bankAccount", orderNum = "260")
     private String   bankAccount;
 
+    @Excel(name = "accountNumber", orderNum = "270")
     private String   accountNumber;
 
+    @Excel(name = "idCustomerCarzone", orderNum = "280")
     private String   idCustomerCarzone;
 
+    @Excel(name = "idDepartmentCarzone", orderNum = "290")
     private String   idDepartmentCarzone;
 
+    @Excel(name = "isTaskModeEnable", orderNum = "300")
     private Byte   isTaskModeEnable;
 
+    @Excel(name = "positionX", orderNum = "310")
     private BigDecimal   positionX;
 
+    @Excel(name = "positionY", orderNum = "320")
     private BigDecimal   positionY;
 
+    @Excel(name = "openTime", orderNum = "330")
     private Date   openTime;
 
+    @Excel(name = "closeTime", orderNum = "340")
     private Date   closeTime;
 
+    @Excel(name = "abbreviation", orderNum = "350")
     private String   abbreviation;
 
+    @Excel(name = "fromFlag", orderNum = "360")
     private Integer   fromFlag;
 
+    @Excel(name = "enableSupplierExport", orderNum = "370")
     private Byte   enableSupplierExport;
 
+    @Excel(name = "isCloudItemSearchable", orderNum = "380")
     private Byte   isCloudItemSearchable;
 
+    @Excel(name = "isCloudPartSearchable", orderNum = "390")
     private Byte   isCloudPartSearchable;
 
+    @Excel(name = "needScanLogin", orderNum = "400")
     private Byte   needScanLogin;
 
+    @Excel(name = "needCheckUuid", orderNum = "410")
     private Byte   needCheckUuid;
 
+    @Excel(name = "uuidCountLimit", orderNum = "420")
     private Integer   uuidCountLimit;
 
 
@@ -125,32 +178,29 @@ public class TbOrgVo extends Vo {
           return name;
       }
 
-
-    public void setContaCts(String contacts) {
-            this.contacts = contacts;
-       }
-
-    public String getContaCts() {
+    public String getContacts() {
           return contacts;
       }
 
-
-    public void setContaCtNumber(String contactNumber) {
-            this.contactNumber = contactNumber;
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
        }
 
-    public String getContaCtNumber() {
+    public String getContactNumber() {
           return contactNumber;
       }
 
-
-    public void setContaCtMobile(String contactMobile) {
-            this.contactMobile = contactMobile;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
        }
 
-    public String getContaCtMobile() {
+    public String getContactMobile() {
           return contactMobile;
       }
+
+    public void setContactMobile(String contactMobile) {
+        this.contactMobile = contactMobile;
+    }
 
 
     public void setFax(String fax) {
@@ -179,14 +229,13 @@ public class TbOrgVo extends Vo {
           return city;
       }
 
-
-    public void setAreA(String area) {
-            this.area = area;
-       }
-
-    public String getAreA() {
+    public String getArea() {
           return area;
       }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
 
     public void setStreet(String street) {
@@ -206,14 +255,13 @@ public class TbOrgVo extends Vo {
           return address;
       }
 
-
-    public void setDetailADDress(String detailAddress) {
-            this.detailAddress = detailAddress;
-       }
-
-    public String getDetailADDress() {
+    public String getDetailAddress() {
           return detailAddress;
       }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
 
 
     public void setEmail(String email) {
@@ -242,14 +290,13 @@ public class TbOrgVo extends Vo {
           return isDel;
       }
 
-
-    public void setEntityCodE(String entityCode) {
-            this.entityCode = entityCode;
-       }
-
-    public String getEntityCodE() {
+    public String getEntityCode() {
           return entityCode;
       }
+
+    public void setEntityCode(String entityCode) {
+        this.entityCode = entityCode;
+    }
 
 
     public void setBussiness(String bussiness) {
@@ -278,14 +325,13 @@ public class TbOrgVo extends Vo {
           return storeLogo;
       }
 
-
-    public void setApplicAtionLogo(String applicationLogo) {
-            this.applicationLogo = applicationLogo;
-       }
-
-    public String getApplicAtionLogo() {
+    public String getApplicationLogo() {
           return applicationLogo;
       }
+
+    public void setApplicationLogo(String applicationLogo) {
+        this.applicationLogo = applicationLogo;
+    }
 
 
     public void setResponsible(String responsible) {
@@ -305,23 +351,21 @@ public class TbOrgVo extends Vo {
           return zipCode;
       }
 
-
-    public void setEndDatE(Date endDate) {
-            this.endDate = endDate;
-       }
-
-    public Date getEndDatE() {
+    public Date getEndDate() {
           return endDate;
       }
 
-
-    public void setQQ(String qq) {
-            this.qq = qq;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
        }
 
-    public String getQQ() {
+    public String getQq() {
           return qq;
       }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
 
 
     public void setBankAccount(String bankAccount) {
@@ -404,14 +448,13 @@ public class TbOrgVo extends Vo {
           return closeTime;
       }
 
-
-    public void setAbbreviAtion(String abbreviation) {
-            this.abbreviation = abbreviation;
-       }
-
-    public String getAbbreviAtion() {
+    public String getAbbreviation() {
           return abbreviation;
       }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
 
     public void setFromFlag(Integer fromFlag) {
@@ -422,14 +465,13 @@ public class TbOrgVo extends Vo {
           return fromFlag;
       }
 
-
-    public void setEnablESuppliErExport(Byte enableSupplierExport) {
-            this.enableSupplierExport = enableSupplierExport;
-       }
-
-    public Byte getEnablESuppliErExport() {
+    public Byte getEnableSupplierExport() {
           return enableSupplierExport;
       }
+
+    public void setEnableSupplierExport(Byte enableSupplierExport) {
+        this.enableSupplierExport = enableSupplierExport;
+    }
 
 
     public void setIsCloudItemSearchable(Byte isCloudItemSearchable) {
@@ -449,14 +491,13 @@ public class TbOrgVo extends Vo {
           return isCloudPartSearchable;
       }
 
-
-    public void setNeedScaNLogiN(Byte needScanLogin) {
-            this.needScanLogin = needScanLogin;
-       }
-
-    public Byte getNeedScaNLogiN() {
+    public Byte getNeedScanLogin() {
           return needScanLogin;
       }
+
+    public void setNeedScanLogin(Byte needScanLogin) {
+        this.needScanLogin = needScanLogin;
+    }
 
 
     public void setNeedCheckUuid(Byte needCheckUuid) {
@@ -467,14 +508,13 @@ public class TbOrgVo extends Vo {
           return needCheckUuid;
       }
 
-
-    public void setUUidCoUntLimit(Integer uuidCountLimit) {
-            this.uuidCountLimit = uuidCountLimit;
-       }
-
-    public Integer getUUidCoUntLimit() {
+    public Integer getUuidCountLimit() {
           return uuidCountLimit;
       }
+
+    public void setUuidCountLimit(Integer uuidCountLimit) {
+        this.uuidCountLimit = uuidCountLimit;
+    }
 
 
 

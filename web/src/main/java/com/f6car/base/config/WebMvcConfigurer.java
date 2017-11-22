@@ -21,14 +21,19 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +42,14 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import static com.f6car.base.config.ExcelHttpMessageConverter.EXCEL_MEDIA_TYPE;
+
 /**
  * @author qixiaobo
  */
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
 
@@ -127,6 +135,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //使用阿里 FastJson 作为JSON MessageConverter
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(createExcelHttpMessageConverter());
+        converters.add(createFastJsonHttpMessageConverter());
+    }
+
+    private FastJsonHttpMessageConverter createFastJsonHttpMessageConverter() {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
@@ -134,15 +147,38 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
                 SerializerFeature.WriteNullNumberAsZero);
         converter.setFastJsonConfig(config);
         converter.setDefaultCharset(Charset.forName("UTF-8"));
-        converters.add(converter);
+        return converter;
+    }
+
+    private HttpMessageConverter<Object> createExcelHttpMessageConverter() {
+        ExcelHttpMessageConverter excelHttpMessageConverter = new ExcelHttpMessageConverter();
+        return excelHttpMessageConverter;
+    }
+
+
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(
+            ContentNegotiationManager manager) {
+        // Define the view resolvers
+        ViewResolver beanNameViewResolver = new BeanNameViewResolver();
+        List<ViewResolver> resolvers = Lists.newArrayList(beanNameViewResolver);
+
+
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setViewResolvers(resolvers);
+        resolver.setContentNegotiationManager(manager);
+        return resolver;
     }
 
     @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
-        beanNameViewResolver.setOrder(1);
-        registry.viewResolver(beanNameViewResolver);
-        super.configureViewResolvers(registry);
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(true).useJaf(false)
+                .favorParameter(true).parameterName("mediaType")
+                .ignoreAcceptHeader(true).
+                defaultContentType(MediaType.APPLICATION_JSON).
+                mediaType("xml", MediaType.APPLICATION_XML).
+                mediaType("json", MediaType.APPLICATION_JSON)
+                .mediaType("xls", EXCEL_MEDIA_TYPE);
     }
 
 

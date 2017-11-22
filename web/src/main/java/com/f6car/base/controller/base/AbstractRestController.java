@@ -8,9 +8,14 @@
 
 package com.f6car.base.controller.base;
 
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.f6car.base.common.*;
+import com.f6car.base.core.ExcelExport;
+import com.f6car.base.core.ExcelExportParam;
+import com.f6car.base.core.F6Static;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.reflect.TypeToken;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +26,17 @@ import java.util.List;
 /**
  * @author qixiaobo
  */
-public abstract class AbstractRestController<V extends Vo, S extends So,PK extends Serializable> {
+public abstract class AbstractRestController<V extends Vo, S extends So, PK extends Serializable> {
 
+    protected Class<V> voClazz;
     @Autowired
-    private Service<V, S,PK> service;
+    private Service<V, S, PK> service;
 
+    public AbstractRestController() {
+        TypeToken<V> voType = new TypeToken<V>(getClass()) {
+        };
+        voClazz = (Class<V>) voType.getRawType();
+    }
 
     @PostMapping()
     @ApiOperation(value = "新建实体", notes = "")
@@ -55,7 +66,18 @@ public abstract class AbstractRestController<V extends Vo, S extends So,PK exten
         PageHelper.startPage(so.getCurrentPage(), so.getPageSize());
         List<V> list = service.findAll();
         PageInfo pageInfo = new PageInfo(list);
+        excelExportParam();
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    protected void excelExportParam() {
+        ExportParams ep = new ExportParams(null, "数据");
+        ExcelExportParam<V> param = new ExcelExportParam<>();
+        param.setClazz(voClazz);
+        param.setExcelExport(ExcelExport.NormalExcel);
+        param.setExportParams(ep);
+        param.setFileName("文件");
+        F6Static.setExcelExportParam(param);
     }
 
     @GetMapping("/{id}")

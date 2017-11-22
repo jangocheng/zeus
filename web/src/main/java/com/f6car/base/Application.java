@@ -10,11 +10,13 @@ package com.f6car.base;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author qixiaobo
  */
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.f6car.base", "cn.afterturn.easypoi.view"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class);

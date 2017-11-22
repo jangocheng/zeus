@@ -1,9 +1,18 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.vo.user;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.f6car.base.common.Vo;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import java.math.BigInteger;
+
 
 
 
@@ -14,32 +23,46 @@ public class TbUserVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
+    @Excel(name = "pkId", orderNum = "10")
     private BigInteger   pkId;
 
+    @Excel(name = "username", orderNum = "20")
     private String   username;
 
+    @Excel(name = "cellPhone", orderNum = "30")
     private String   cellPhone;
 
+    @Excel(name = "password", orderNum = "40")
     private String   password;
 
+    @Excel(name = "isAdmin", orderNum = "50")
     private Byte   isAdmin;
 
+    @Excel(name = "idRole", orderNum = "60")
     private BigInteger   idRole;
 
+    @Excel(name = "idOwnOrg", orderNum = "70")
     private BigInteger   idOwnOrg;
 
+    @Excel(name = "idEmployee", orderNum = "80")
     private BigInteger   idEmployee;
 
+    @Excel(name = "isDel", orderNum = "90")
     private Byte   isDel;
 
+    @Excel(name = "isGuideOpen", orderNum = "100")
     private Byte   isGuideOpen;
 
+    @Excel(name = "idWxbUser", orderNum = "110")
     private String   idWxbUser;
 
+    @Excel(name = "idWxbStation", orderNum = "120")
     private String   idWxbStation;
 
+    @Excel(name = "openid", orderNum = "130")
     private String   openid;
 
+    @Excel(name = "limitMac", orderNum = "140")
     private Byte   limitMac;
 
 
@@ -78,14 +101,13 @@ public class TbUserVo extends Vo {
           return password;
       }
 
-
-    public void setIsAdmIn(Byte isAdmin) {
-            this.isAdmin = isAdmin;
-       }
-
-    public Byte getIsAdmIn() {
+    public Byte getIsAdmin() {
           return isAdmin;
       }
+
+    public void setIsAdmin(Byte isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
 
     public void setIdRole(BigInteger idRole) {
@@ -123,14 +145,13 @@ public class TbUserVo extends Vo {
           return isDel;
       }
 
-
-    public void setIsGuIdeOpen(Byte isGuideOpen) {
-            this.isGuideOpen = isGuideOpen;
-       }
-
-    public Byte getIsGuIdeOpen() {
+    public Byte getIsGuideOpen() {
           return isGuideOpen;
       }
+
+    public void setIsGuideOpen(Byte isGuideOpen) {
+        this.isGuideOpen = isGuideOpen;
+    }
 
 
     public void setIdWxbUser(String idWxbUser) {
@@ -141,14 +162,13 @@ public class TbUserVo extends Vo {
           return idWxbUser;
       }
 
-
-    public void setIdWxbStatIon(String idWxbStation) {
-            this.idWxbStation = idWxbStation;
-       }
-
-    public String getIdWxbStatIon() {
+    public String getIdWxbStation() {
           return idWxbStation;
       }
+
+    public void setIdWxbStation(String idWxbStation) {
+        this.idWxbStation = idWxbStation;
+    }
 
 
     public void setOpenid(String openid) {

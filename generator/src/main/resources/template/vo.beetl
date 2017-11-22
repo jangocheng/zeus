@@ -4,6 +4,8 @@ import com.f6car.base.common.Vo;
 import java.util.Date;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 
 
 
@@ -17,6 +19,7 @@ public class ${modelNameUpperCamel}Vo extends Vo {
      <%
         for(field in fields){
         %>
+    @Excel(name = "${field.name}",orderNum="${fieldLP.index}0")
     private ${ field.type.shortName}   ${field.name};
 
         <%}%>
@@ -26,16 +29,17 @@ public class ${modelNameUpperCamel}Vo extends Vo {
     %>
      <%
                 var firstChar = strutil.subStringTo(field.name,0,1);
+                var leftChar = strutil.subString(field.name,1);
                 var firstChar_upper =  strutil.toUpperCase(firstChar);
-                var fieldNameWithUpper = strutil.replace (field.name,firstChar,firstChar_upper);
+                var fieldNameWithUpper =firstChar_upper+ leftChar;
             %>
     public void set${fieldNameWithUpper}(${ field.type.shortName} ${field.name}) {
             this.${field.name} = ${field.name};
-       }
+    }
 
     public ${ field.type.shortName} get${fieldNameWithUpper}() {
           return ${field.name};
-      }
+    }
 
 
     <%}%>

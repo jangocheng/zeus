@@ -25,5 +25,9 @@
         <artifactId>common</artifactId>
         <version>${project.version}</version>
     </dependency>
+    <dependency>
+        <groupId>cn.afterturn</groupId>
+        <artifactId>easypoi-annotation</artifactId>
+    </dependency>
 </dependencies>
 </project>
