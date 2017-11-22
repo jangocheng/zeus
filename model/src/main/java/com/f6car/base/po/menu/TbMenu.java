@@ -10,8 +10,8 @@ package com.f6car.base.po.menu;
 
 import com.f6car.base.common.Po;
 
-import java.math.BigInteger;
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Table(name = "tb_menu")
 public class TbMenu extends Po {

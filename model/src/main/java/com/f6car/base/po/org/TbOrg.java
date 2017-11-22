@@ -9,10 +9,13 @@
 package com.f6car.base.po.org;
 
 import com.f6car.base.common.Po;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "tb_org")
 public class TbOrg extends Po {

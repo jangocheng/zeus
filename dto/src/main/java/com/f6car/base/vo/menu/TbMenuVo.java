@@ -10,14 +10,12 @@ package com.f6car.base.vo.menu;
 
 import com.f6car.base.common.Vo;
 
-import java.util.Date;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
 
 /**
- * Created by qixiaobo on 2017-11-21.
+ * Created by qixiaobo on 2017-11-22.
  */
 public class TbMenuVo extends Vo {
 
@@ -45,103 +43,92 @@ public class TbMenuVo extends Vo {
 
     private String activeUrl;
 
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
     public BigInteger getId() {
         return id;
     }
 
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
     public String getUrl() {
         return url;
     }
 
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getName() {
         return name;
     }
 
-
-    public void setRemaRk(String remark) {
-        this.remark = remark;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRemaRk() {
         return remark;
     }
 
-
-    public void setIco(String ico) {
-        this.ico = ico;
+    public void setRemaRk(String remark) {
+        this.remark = remark;
     }
 
     public String getIco() {
         return ico;
     }
 
-
-    public void setModel(String model) {
-        this.model = model;
+    public void setIco(String ico) {
+        this.ico = ico;
     }
 
     public String getModel() {
         return model;
     }
 
-
-    public void setPId(BigInteger pId) {
-        this.pId = pId;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public BigInteger getPId() {
         return pId;
     }
 
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
+    public void setPId(BigInteger pId) {
+        this.pId = pId;
     }
 
     public Integer getIsDelete() {
         return isDelete;
     }
 
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 
     public Integer getSort() {
         return sort;
     }
 
-
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getPermission() {
         return permission;
     }
 
-
-    public void setActiveUrl(String activeUrl) {
-        this.activeUrl = activeUrl;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     public String getActiveUrl() {
         return activeUrl;
+    }
+
+    public void setActiveUrl(String activeUrl) {
+        this.activeUrl = activeUrl;
     }
 
 

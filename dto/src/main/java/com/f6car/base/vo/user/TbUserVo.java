@@ -10,14 +10,12 @@ package com.f6car.base.vo.user;
 
 import com.f6car.base.common.Vo;
 
-import java.util.Date;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
 
 /**
- * Created by qixiaobo on 2017-11-21.
+ * Created by qixiaobo on 2017-11-22.
  */
 public class TbUserVo extends Vo {
 
@@ -51,130 +49,116 @@ public class TbUserVo extends Vo {
 
     private Byte limitMac;
 
-
-    public void setPkId(BigInteger pkId) {
-        this.pkId = pkId;
-    }
-
     public BigInteger getPkId() {
         return pkId;
     }
 
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPkId(BigInteger pkId) {
+        this.pkId = pkId;
     }
 
     public String getUsername() {
         return username;
     }
 
-
-    public void setCellPhone(String cellPhone) {
-        this.cellPhone = cellPhone;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCellPhone() {
         return cellPhone;
     }
 
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 
     public String getPassword() {
         return password;
     }
 
-
-    public void setIsAdmIn(Byte isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Byte getIsAdmIn() {
         return isAdmin;
     }
 
-
-    public void setIdRole(BigInteger idRole) {
-        this.idRole = idRole;
+    public void setIsAdmIn(Byte isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public BigInteger getIdRole() {
         return idRole;
     }
 
-
-    public void setIdOwnOrg(BigInteger idOwnOrg) {
-        this.idOwnOrg = idOwnOrg;
+    public void setIdRole(BigInteger idRole) {
+        this.idRole = idRole;
     }
 
     public BigInteger getIdOwnOrg() {
         return idOwnOrg;
     }
 
-
-    public void setIdEmployee(BigInteger idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
+        this.idOwnOrg = idOwnOrg;
     }
 
     public BigInteger getIdEmployee() {
         return idEmployee;
     }
 
-
-    public void setIsDel(Byte isDel) {
-        this.isDel = isDel;
+    public void setIdEmployee(BigInteger idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public Byte getIsDel() {
         return isDel;
     }
 
-
-    public void setIsGuIdeOpen(Byte isGuideOpen) {
-        this.isGuideOpen = isGuideOpen;
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     public Byte getIsGuIdeOpen() {
         return isGuideOpen;
     }
 
-
-    public void setIdWxbUser(String idWxbUser) {
-        this.idWxbUser = idWxbUser;
+    public void setIsGuIdeOpen(Byte isGuideOpen) {
+        this.isGuideOpen = isGuideOpen;
     }
 
     public String getIdWxbUser() {
         return idWxbUser;
     }
 
-
-    public void setIdWxbStatIon(String idWxbStation) {
-        this.idWxbStation = idWxbStation;
+    public void setIdWxbUser(String idWxbUser) {
+        this.idWxbUser = idWxbUser;
     }
 
     public String getIdWxbStatIon() {
         return idWxbStation;
     }
 
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public void setIdWxbStatIon(String idWxbStation) {
+        this.idWxbStation = idWxbStation;
     }
 
     public String getOpenid() {
         return openid;
     }
 
-
-    public void setLimitMac(Byte limitMac) {
-        this.limitMac = limitMac;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public Byte getLimitMac() {
         return limitMac;
+    }
+
+    public void setLimitMac(Byte limitMac) {
+        this.limitMac = limitMac;
     }
 
 

@@ -10,14 +10,12 @@ package com.f6car.base.vo.org;
 
 import com.f6car.base.common.Vo;
 
-import java.util.Date;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
 
 /**
- * Created by qixiaobo on 2017-11-21.
+ * Created by qixiaobo on 2017-11-22.
  */
 public class TbOrgMacVo extends Vo {
 
@@ -29,31 +27,28 @@ public class TbOrgMacVo extends Vo {
 
     private BigInteger idOwnOrg;
 
-
-    public void setPkId(BigInteger pkId) {
-        this.pkId = pkId;
-    }
-
     public BigInteger getPkId() {
         return pkId;
     }
 
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
+    public void setPkId(BigInteger pkId) {
+        this.pkId = pkId;
     }
 
     public String getMacAddress() {
         return macAddress;
     }
 
-
-    public void setIdOwnOrg(BigInteger idOwnOrg) {
-        this.idOwnOrg = idOwnOrg;
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 
     public BigInteger getIdOwnOrg() {
         return idOwnOrg;
+    }
+
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
+        this.idOwnOrg = idOwnOrg;
     }
 
 

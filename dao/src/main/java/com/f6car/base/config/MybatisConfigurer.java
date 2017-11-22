@@ -8,9 +8,11 @@
 
 package com.f6car.base.config;
 
+import com.f6car.base.core.MybatisTransactionTimeoutInterceptor;
 import com.f6car.base.core.SoInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -51,11 +53,15 @@ public class MybatisConfigurer {
         pageHelper.setProperties(properties);
 
         //添加插件
-        factory.setPlugins(new Interceptor[]{new SoInterceptor(), pageHelper});
+        factory.setPlugins(new Interceptor[]{new MybatisTransactionTimeoutInterceptor(), new SoInterceptor(), pageHelper});
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         factory.setMapperLocations(resolver.getResources("classpath*:mapper/**/*.xml"));
+        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+        config.setDefaultStatementTimeout(5);
+        config.setDefaultExecutorType(ExecutorType.REUSE);
+        factory.setConfiguration(config);
         return factory.getObject();
     }
 

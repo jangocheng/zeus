@@ -105,8 +105,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SSOSpringInterceptor());
-        registry.addInterceptor(new KissoShiroInterceptor());
+        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
+        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        InterceptorRegistration kissoInterceptor = registry.addInterceptor(new KissoShiroInterceptor());
+        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+
     }
 
 
@@ -143,8 +146,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         registry.viewResolver(beanNameViewResolver);
         super.configureViewResolvers(registry);
     }
-
-
 
 
 }
