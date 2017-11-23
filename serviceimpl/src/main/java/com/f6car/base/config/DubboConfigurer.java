@@ -8,15 +8,72 @@
 
 package com.f6car.base.config;
 
+import com.air.tqb.shiro.api.RpcRealm;
+import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ProtocolConfig;
+import com.alibaba.dubbo.config.ProviderConfig;
+import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.spring.ReferenceBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author qixiaobo
  */
 @Configuration
-@ImportResource("classpath:application-dubbo.xml")
+
 public class DubboConfigurer {
+
+    @Bean
+    public Dubbo dubbo() {
+        return new Dubbo();
+    }
+
+    @Bean
+    public RegistryConfig registry(Dubbo dubbo) {
+        RegistryConfig registryConfig = new RegistryConfig();
+        registryConfig.setAddress(dubbo.getZookeeperUrl());
+        registryConfig.setProtocol("zookeeper");
+        registryConfig.setDefault(false);
+        registryConfig.setGroup(dubbo.getGroup());
+        return registryConfig;
+    }
+
+    @Bean
+    public ApplicationConfig applicationConfig(Dubbo dubbo) {
+        ApplicationConfig applicationConfig = new ApplicationConfig();
+        applicationConfig.setName(dubbo.getApplication());
+        return applicationConfig;
+    }
+
+
+    @Bean
+    public ProtocolConfig protocol(Dubbo dubbo) {
+        ProtocolConfig protocolConfig = new ProtocolConfig();
+        protocolConfig.setPort(dubbo.getPort());
+        protocolConfig.setSerialization(dubbo.getSerialization());
+        return protocolConfig;
+    }
+
+
+    @Bean
+    public ProviderConfig provider(Dubbo dubbo) {
+        ProviderConfig providerConfig = new ProviderConfig();
+        providerConfig.setTimeout(dubbo.getTimeOut());
+        providerConfig.setOwner(dubbo.getOwner());
+        return providerConfig;
+    }
+
+    @Bean
+    public ReferenceBean<RpcRealm> rpcRealm(RegistryConfig registryConfig, ApplicationConfig applicationConfig) {
+        ReferenceBean<RpcRealm> ref = new ReferenceBean<>();
+        ref.setInterface(RpcRealm.class);
+        ref.setRegistry(registryConfig);
+        ref.setApplication(applicationConfig);
+        ref.setCheck(false);
+        return ref;
+    }
+
 
 }
 
