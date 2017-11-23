@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<configuration>
+
+    <springProperty scope="context" name="myAppName" source="spring.application.name"
+                    defaultValue="zeus"/>
+    <springProperty scope="context" name="email.username" source="logging.email.username"
+                    defaultValue="f6@f6car.com"/>
+    <springProperty scope="context" name="email.password" source="logging.email.password"
+                    defaultValue="F6868win"/>
+    <springProperty scope="context" name="email.from" source="logging.email.from"
+                    defaultValue="f6@f6car.com"/>
+    <springProperty scope="context" name="email.to" source="logging.email.to"
+                    defaultValue="qixiaobo@f6car.com"/>
+    <springProperty scope="context" name="email.subject" source="logging.email.subject"
+                    defaultValue="ZEUS-NOTICE-DEV-%m{30}"/>
+    <springProperty scope="context" name="email.smtp.host" source="logging.email.smtp.host"
+                    defaultValue="smtp.exmail.qq.com"/>
+    <springProperty scope="context" name="email.pattern" source="logging.email.pattern"
+                    defaultValue="%d [%level] [%thread] %logger{15}:%line %msg%n"/>
+    <springProperty scope="context" name="email.filter" source="logging.email.ThresholdFilter"
+                    defaultValue="ERROR"/>
+    <appender name="MAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+        <To>${email.to}</To>
+        <username>${email.username}</username>
+        <subject>${email.subject}</subject>
+        <from>${email.from}</from>
+        <Name>${smtp.host}</Name>
+        <password>${email.password}</password>
+        <SMTPHost>${email.smtp.host}</SMTPHost>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${email.pattern}</pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${email.filter}</level>
+        </filter>
+    </appender>
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/zeus-error.log</File>
+        <encoder>
+            <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/zeus-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <appender name="error-queue" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="ERROR"/>
+    </appender>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="com.f6car" level="INFO">
+        <!--<appender-ref ref="MAIL"/>-->
+        <appender-ref ref="error-queue"/>
+    </logger>
+    <!--开发环境. 多个使用逗号隔开. -->
+
+
+</configuration>

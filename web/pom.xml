@@ -92,6 +92,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.4</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -100,15 +113,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-        </plugins>
-    </build>
-
-    <properties>
-        <start-calss>com.f6car.base.Application</start-calss>
-    </properties>
-
-    <build>
-        <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
@@ -117,4 +121,8 @@
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <start-calss>com.f6car.base.Application</start-calss>
+    </properties>
 </project>
