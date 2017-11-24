@@ -17,6 +17,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -27,6 +28,7 @@ import java.util.List;
  *
  * @author qixiaobo
  */
+@Transactional(timeout = 1, rollbackFor = Exception.class)
 public abstract class AbstractService<T extends Po, V extends Vo, S extends So,PK extends Serializable> implements Service<V, S,PK> {
 
     @Autowired
@@ -46,6 +48,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class)
     public int saveSelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
@@ -53,6 +56,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 2, rollbackFor = Exception.class)
     public int save(List<V> models) {
         Preconditions.checkArgument(models != null && !models.isEmpty());
         List<T> ts = orikaMapper.convertList(models, poClazz);
@@ -60,18 +64,21 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class)
     public int deleteById(PK id) {
         Preconditions.checkArgument(id != null);
         return mapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @Transactional(timeout = 2, rollbackFor = Exception.class)
     public int deleteByIds(String ids) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(ids));
         return mapper.deleteByIds(ids);
     }
 
     @Override
+    @Transactional(timeout = 2, rollbackFor = Exception.class)
     public int updateByPrimaryKeySelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
@@ -79,6 +86,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class)
     public int updateByPrimaryKey(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
@@ -86,6 +94,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class, readOnly = true)
     public V findById(PK id) {
         Preconditions.checkArgument(id != null);
         return orikaMapper.convert(mapper.selectByPrimaryKey(id), voClazz);
@@ -93,17 +102,20 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
 
     @Override
+    @Transactional(timeout = 2, rollbackFor = Exception.class, readOnly = true)
     public List<V> findByIds(String ids) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(ids));
         return orikaMapper.convertList(mapper.selectByIds(ids), voClazz);
     }
 
     @Override
+    @Transactional(timeout = 2, rollbackFor = Exception.class, readOnly = true)
     public List<V> findAll() {
         return orikaMapper.convertList(mapper.selectAll(), voClazz);
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class, readOnly = true)
     public int selectCount(V v) {
         Preconditions.checkArgument(v != null);
         return mapper.selectCount(orikaMapper.convert(v, poClazz));
