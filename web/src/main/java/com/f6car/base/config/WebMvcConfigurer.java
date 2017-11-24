@@ -65,8 +65,18 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        List<ResourceHandler> resourceHandlerList = resourceHandlerConfig().getResourceHandlerList();
+        for (ResourceHandler resourceHandler : resourceHandlerList) {
+            registry.addResourceHandler(resourceHandler.getPattern())
+                    .addResourceLocations(resourceHandler.getLocation());
+        }
+
     }
 
+    @Bean
+    public ResourceHandlerConfig resourceHandlerConfig() {
+        return new ResourceHandlerConfig();
+    }
 
     //统一异常处理
     @Override
