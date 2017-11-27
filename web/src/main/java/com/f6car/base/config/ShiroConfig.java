@@ -15,8 +15,10 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,12 +57,19 @@ public class ShiroConfig {
     public SecurityManager securityManager(CustomRpcRealm realm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(realm);
+        securityManager.setCacheManager(j2cacheManager());
         return securityManager;
     }
 
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean
+    @DependsOn({"ehCacheManager", "j2CacheIniter"})
+    public J2CacheManager j2cacheManager() {
+        return new J2CacheManager();
     }
 
 }
