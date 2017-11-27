@@ -33,12 +33,9 @@ public class SoInterceptor implements Interceptor {
         Object paramter = invocation.getArgs()[1];
         if (paramter instanceof So) {
             So so = (So) paramter;
-            Page<Object> page = PageHelper.startPage(so.getCurrentPage(), so.getPageSize());
+            Page<Object> page = PageHelper.startPage(so.getCurrentPage(), so.getPageSize(), so.isEnableCount());
             if (!so.getSorts().isEmpty()) {
                 page.setOrderBy(SORT_JOINER.join(so.getSorts()));
-            }
-            if (so.isEnableCount()) {
-                page.setCount(true);
             }
             try {
                 return invocation.proceed();

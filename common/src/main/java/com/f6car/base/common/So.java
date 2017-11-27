@@ -21,9 +21,9 @@ public class So implements java.io.Serializable, Pagable, Sortable {
 
     private static final long serialVersionUID = -828171499994153332L;
 
-    private int currentPage;
+    private int currentPage = 1;
     private int pageSize = PAGESIZE.s.pageSize;
-    private boolean enableCount;
+    private boolean enableCount = true;
     private List<Sort> sorts;
 
 
