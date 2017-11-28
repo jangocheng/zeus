@@ -67,6 +67,10 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.f6car.erp</groupId>
+            <artifactId>biz-service</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

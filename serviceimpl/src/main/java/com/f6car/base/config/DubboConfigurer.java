@@ -8,6 +8,7 @@
 
 package com.f6car.base.config;
 
+import com.air.tqb.service.user.UserService;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
@@ -68,6 +69,17 @@ public class DubboConfigurer {
     public ReferenceBean<RpcRealm> rpcRealm(RegistryConfig registryConfig, ApplicationConfig applicationConfig) {
         ReferenceBean<RpcRealm> ref = new ReferenceBean<>();
         ref.setInterface(RpcRealm.class);
+        ref.setRegistry(registryConfig);
+        ref.setApplication(applicationConfig);
+        ref.setCheck(false);
+        return ref;
+    }
+
+
+    @Bean
+    public ReferenceBean<UserService> userService(RegistryConfig registryConfig, ApplicationConfig applicationConfig) {
+        ReferenceBean<UserService> ref = new ReferenceBean<>();
+        ref.setInterface(UserService.class);
         ref.setRegistry(registryConfig);
         ref.setApplication(applicationConfig);
         ref.setCheck(false);

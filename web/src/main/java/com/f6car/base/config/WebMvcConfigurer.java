@@ -9,10 +9,13 @@
 package com.f6car.base.config;
 
 
+import com.air.tqb.realm.KissoShiroInterceptor;
+import com.air.tqb.realm.LoginCallback;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
@@ -23,6 +26,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -42,6 +46,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.f6car.base.web.converter.ExcelHttpMessageConverter.EXCEL_MEDIA_TYPE;
@@ -57,6 +62,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     static final List<String> POSSIBLE_IP_HEADER = Lists.newArrayList("x-forwarded-for", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR");
 
+    @Autowired(required = false)
+    private List<LoginCallback> callbackList = new ArrayList<>();
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -124,10 +131,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CleanInterceptor());
-//        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
-//        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
-//        InterceptorRegistration kissoInterceptor = registry.addInterceptor(new KissoShiroInterceptor());
-//        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
+        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
+        kissoShiroInterceptor.setLoginCallbackList(callbackList);
+        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
+        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
 
     }
 

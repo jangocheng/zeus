@@ -14,6 +14,9 @@ import com.f6car.base.common.Vo;
 
 import java.util.List;
 
+/**
+ * @author qixiaobo
+ */
 public class ExcelExportParam<V extends Vo> {
     private ExcelExport excelExport;
     private Class<V> clazz;
