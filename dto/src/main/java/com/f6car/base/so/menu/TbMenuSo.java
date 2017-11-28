@@ -3,7 +3,7 @@ package com.f6car.base.so.menu;
 import com.f6car.base.common.So;
 
 /**
- * Created by qixiaobo on 2017-11-22.
+ * Created by qixiaobo on 2017-11-28.
  */
 public class TbMenuSo extends So {
 

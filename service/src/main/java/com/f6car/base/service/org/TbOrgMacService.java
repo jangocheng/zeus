@@ -7,7 +7,7 @@ import com.f6car.base.common.Service;
 
 
 /**
- * Created by qixiaobo on 2017-11-22.
+ * Created by qixiaobo on 2017-11-28.
  */
 public interface TbOrgMacService extends Service<TbOrgMacVo,TbOrgMacSo,BigInteger> {
 

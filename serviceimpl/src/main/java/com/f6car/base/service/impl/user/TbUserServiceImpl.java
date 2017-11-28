@@ -14,10 +14,10 @@ import javax.annotation.Resource;
 
 
 /**
- * Created by qixiaobo on 2017-11-22.
+ * Created by qixiaobo on 2017-11-28.
  */
  @Service
- @Transactional(rollbackFor = Exception.class)
+ @Transactional(rollbackFor = Exception.class,timeout=1)
 public class TbUserServiceImpl extends AbstractService<TbUser,TbUserVo,TbUserSo,BigInteger> implements TbUserService {
     @Resource
     private TbUserMapper tbUserMapper;

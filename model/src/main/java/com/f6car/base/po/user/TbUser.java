@@ -4,6 +4,8 @@ import com.f6car.base.common.Po;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Table(name = "tb_user")
 public class TbUser extends Po {
@@ -12,19 +14,24 @@ public class TbUser extends Po {
      */
     @Id
     @Column(name = "pk_id")
+    @NotNull
     private BigInteger pkId;
 
     /**
      * 用户名
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String username;
 
     @Column(name = "cell_phone")
+    @NotNull
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String cellPhone;
 
     /**
      * 密码
      */
+    @Size(min = 0, max = 50 , message = "长度必须在{min}和{max}之间")
     private String password;
 
     /**
@@ -57,6 +64,7 @@ public class TbUser extends Po {
     /**
      * 创建日期
      */
+    @NotNull
     private Date creationtime;
 
     /**
@@ -78,20 +86,24 @@ public class TbUser extends Po {
      * 向导默认开关：0默认关闭，1默认打开
      */
     @Column(name = "is_guide_open")
+    @NotNull
     private Byte isGuideOpen;
 
     /**
      * 维小宝用户ID
      */
     @Column(name = "id_wxb_user")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String idWxbUser;
 
     /**
      * 维小宝店铺ID
      */
     @Column(name = "id_wxb_station")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String idWxbStation;
 
+    @Size(min = 0, max = 40 , message = "长度必须在{min}和{max}之间")
     private String openid;
 
     /**

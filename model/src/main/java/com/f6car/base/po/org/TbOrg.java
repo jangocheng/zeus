@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Table(name = "tb_org")
 public class TbOrg extends Po {
@@ -13,84 +15,100 @@ public class TbOrg extends Po {
      */
     @Id
     @Column(name = "pk_id")
+    @NotNull
     private BigInteger pkId;
 
     /**
      * 机构代码
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String code;
 
     /**
      * 机构名称
      */
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String name;
 
     /**
      * 联系人
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String contacts;
 
     /**
      * 联系电话
      */
     @Column(name = "contact_number")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String contactNumber;
 
     /**
      * 手机
      */
     @Column(name = "contact_mobile")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String contactMobile;
 
     /**
      * 传真
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String fax;
 
     /**
      * 省
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String province;
 
     /**
      * 市
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String city;
 
     /**
      * 区
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String area;
 
     /**
      * 街道
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String street;
 
     /**
      * 地址
      */
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String address;
 
     /**
      * 详细地址：省+市+区+街道+地址
      */
     @Column(name = "detail_address")
+    @Size(min = 0, max = 500 , message = "长度必须在{min}和{max}之间")
     private String detailAddress;
 
     /**
      * 邮箱
      */
+    @Size(min = 0, max = 50 , message = "长度必须在{min}和{max}之间")
     private String email;
 
     /**
      * 创建日期
      */
+    @NotNull
     private Date creationtime;
 
     /**
      * 修改日期
      */
+    @NotNull
     private Date modifiedtime;
 
     /**
@@ -119,56 +137,69 @@ public class TbOrg extends Po {
      * DB硬件码
      */
     @Column(name = "entity_code")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String entityCode;
 
+    @Size(min = 0, max = 50 , message = "长度必须在{min}和{max}之间")
     private String bussiness;
 
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String logo;
 
     /**
      * 门店logo
      */
     @Column(name = "store_logo")
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String storeLogo;
 
     /**
      * erp左上角图片路径
      */
     @Column(name = "application_logo")
+    @Size(min = 0, max = 200 , message = "长度必须在{min}和{max}之间")
     private String applicationLogo;
 
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String responsible;
 
     @Column(name = "zip_code")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String zipCode;
 
     /**
      * 截止有效期
      */
     @Column(name = "end_date")
+    @NotNull
     private Date endDate;
 
     /**
      * qq号码
      */
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String qq;
 
     /**
      * 开户银行
      */
     @Column(name = "bank_account")
+    @Size(min = 0, max = 50 , message = "长度必须在{min}和{max}之间")
     private String bankAccount;
 
     /**
      * 账号
      */
     @Column(name = "account_number")
+    @Size(min = 0, max = 50 , message = "长度必须在{min}和{max}之间")
     private String accountNumber;
 
     @Column(name = "id_customer_carzone")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String idCustomerCarzone;
 
     @Column(name = "id_department_carzone")
+    @Size(min = 0, max = 20 , message = "长度必须在{min}和{max}之间")
     private String idDepartmentCarzone;
 
     /**
@@ -192,6 +223,7 @@ public class TbOrg extends Po {
     /**
      * 门店缩写，用于连锁查询显示门店信息
      */
+    @Size(min = 0, max = 10 , message = "长度必须在{min}和{max}之间")
     private String abbreviation;
 
     /**
@@ -210,12 +242,14 @@ public class TbOrg extends Po {
      * 快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）
      */
     @Column(name = "is_cloud_item_searchable")
+    @NotNull
     private Byte isCloudItemSearchable;
 
     /**
      * 快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）
      */
     @Column(name = "is_cloud_part_searchable")
+    @NotNull
     private Byte isCloudPartSearchable;
 
     /**

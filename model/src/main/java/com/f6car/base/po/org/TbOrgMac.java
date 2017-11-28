@@ -4,6 +4,8 @@ import com.f6car.base.common.Po;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Table(name = "tb_org_mac")
 public class TbOrgMac extends Po {
@@ -12,18 +14,22 @@ public class TbOrgMac extends Po {
      */
     @Id
     @Column(name = "pk_id")
+    @NotNull
     private BigInteger pkId;
 
     /**
      * mac地址
      */
     @Column(name = "mac_address")
+    @NotNull
+    @Size(min = 0, max = 500 , message = "长度必须在{min}和{max}之间")
     private String macAddress;
 
     /**
      * 组织
      */
     @Column(name = "id_own_org")
+    @NotNull
     private BigInteger idOwnOrg;
 
     /**

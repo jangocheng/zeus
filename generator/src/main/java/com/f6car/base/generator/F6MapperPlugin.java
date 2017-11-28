@@ -12,10 +12,7 @@ import com.f6car.base.common.Po;
 import com.google.common.base.Preconditions;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.util.StringUtility;
 import tk.mybatis.mapper.MapperException;
@@ -34,6 +31,7 @@ import static com.f6car.base.generator.CodeGenerator.PO_FIELDS;
  */
 public class F6MapperPlugin extends MapperPlugin {
     private Set<String> mappers = new HashSet<String>();
+    private boolean validate = true;
 
 
     @Override
@@ -55,7 +53,32 @@ public class F6MapperPlugin extends MapperPlugin {
         } else {
             throw new MapperException("Mapper插件缺少必要的mappers属性!");
         }
+        String validateStr = properties.getProperty("validate");
+        if (StringUtility.stringHasValue(validateStr)) {
+            validate = Boolean.parseBoolean(validateStr);
+        }
         super.setProperties(properties);
+    }
+
+    @Override
+    public boolean modelFieldGenerated(Field field,
+                                       TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
+                                       IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+
+        if (!introspectedColumn.isNullable() && !introspectedColumn.isIdentity()) {
+            //非主键增加
+            topLevelClass.addImportedType("javax.validation.constraints.NotNull");
+            field.addAnnotation("@NotNull");
+        }
+
+        if (introspectedColumn.isStringColumn()) {
+            topLevelClass.addImportedType("javax.validation.constraints.Size");
+            field.addAnnotation("@Size(min = 0, max = " + introspectedColumn.getLength() + " , message = \"长度必须在{min}和{max}之间\")");
+        }
+        return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
+                introspectedTable, modelClassType);
+
+
     }
 
     /**

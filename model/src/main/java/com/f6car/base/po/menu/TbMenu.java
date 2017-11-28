@@ -3,6 +3,8 @@ package com.f6car.base.po.menu;
 import com.f6car.base.common.Po;
 import java.math.BigInteger;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Table(name = "tb_menu")
 public class TbMenu extends Po {
@@ -16,26 +18,32 @@ public class TbMenu extends Po {
     /**
      * url
      */
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String url;
 
     /**
      * 名称
      */
+    @NotNull
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String name;
 
     /**
      * 角色备注
      */
+    @Size(min = 0, max = 500 , message = "长度必须在{min}和{max}之间")
     private String remark;
 
     /**
      * 图标
      */
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String ico;
 
     /**
      * 所属模块
      */
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String model;
 
     /**
@@ -58,12 +66,15 @@ public class TbMenu extends Po {
     /**
      * 符合Shiro格式的权限字符串，例如[maintain:*]
      */
+    @NotNull
+    @Size(min = 0, max = 250 , message = "长度必须在{min}和{max}之间")
     private String permission;
 
     /**
      * 选中url
      */
     @Column(name = "active_url")
+    @Size(min = 0, max = 100 , message = "长度必须在{min}和{max}之间")
     private String activeUrl;
 
     /**
