@@ -279,16 +279,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>org.nutz</groupId>
-                <artifactId>j2cache-shiro</artifactId>
-                <version>1.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.nutz</groupId>
-                <artifactId>j2cache-spring</artifactId>
-                <version>1.0.1</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
