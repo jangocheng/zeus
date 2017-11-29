@@ -8,11 +8,12 @@
 
 package com.f6car.base.vo.org;
 
-import com.f6car.base.common.Vo;
-import java.util.Date;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.f6car.base.common.Vo;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigInteger;
 
 
 
@@ -33,14 +34,17 @@ public class TbOrgMacVo extends Vo {
    /**
      * mac地址
     */
-    @Excel(name = "mac地址",orderNum="20")
-    private String   macAddress;
+   @NotNull
+   @Size(min = 0, max = 500, message = "长度必须在{min}和{max}之间")
+   @Excel(name = "mac地址",orderNum="20")
+   private String   macAddress;
 
    /**
      * 组织
     */
-    @Excel(name = "组织",orderNum="30")
-    private BigInteger   idOwnOrg;
+   @NotNull
+   @Excel(name = "组织",orderNum="30")
+   private BigInteger   idOwnOrg;
 
 
     public void setPkId(BigInteger pkId) {

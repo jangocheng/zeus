@@ -5,6 +5,8 @@ import java.util.Date;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 
@@ -21,10 +23,23 @@ public class ${modelNameUpperCamel}Vo extends Vo {
         %>
         <%
         var comment = isEmpty(field.remarks)?field.javaProperty:field.remarks;
+
         %>
    /**
      * ${comment}
     */
+    <%
+    var notNull=!field.nullable && !field.isAutoIncrement;
+    if(notNull){
+    println("    @NotNull");
+    }
+    %>
+    <%
+        var fieldSize = field.isStringColumn;
+        if(fieldSize){
+        println('    @Size(min = 0, max = '+field.length+' , message = "长度必须在{min}和{max}之间")');
+        }
+        %>
     @Excel(name = "${comment}",orderNum="${fieldLP.index}0")
     private ${ field.fullyQualifiedJavaType.shortName}   ${field.javaProperty};
 

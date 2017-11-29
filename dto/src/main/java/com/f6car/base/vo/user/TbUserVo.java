@@ -11,6 +11,8 @@ package com.f6car.base.vo.user;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.f6car.base.common.Vo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigInteger;
 
 
@@ -26,24 +28,29 @@ public class TbUserVo extends Vo {
     /**
      * 主键
      */
+    @NotNull
     @Excel(name = "主键", orderNum = "10")
     private BigInteger   pkId;
 
     /**
      * 用户名
      */
+    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
     @Excel(name = "用户名", orderNum = "20")
     private String   username;
 
     /**
      * cellPhone
      */
+    @NotNull
+    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
     @Excel(name = "cellPhone",orderNum="30")
     private String   cellPhone;
 
     /**
      * 密码
      */
+    @Size(min = 0, max = 50, message = "长度必须在{min}和{max}之间")
     @Excel(name = "密码", orderNum = "40")
     private String   password;
 
@@ -62,13 +69,13 @@ public class TbUserVo extends Vo {
     /**
      * 组织
      */
-    @Excel(name = "组织", orderNum ="70")
+    @Excel(name = "组织", orderNum = "70")
     private BigInteger   idOwnOrg;
 
     /**
      * 员工ID
      */
-    @Excel(name = "员工ID", orderNum="80")
+    @Excel(name = "员工ID", orderNum = "80")
     private BigInteger   idEmployee;
 
     /**
@@ -80,31 +87,35 @@ public class TbUserVo extends Vo {
     /**
      * 向导默认开关：0默认关闭，1默认打开
      */
-    @Excel(name = "向导默认开关：0默认关闭，1默认打开", orderNum="100")
+    @NotNull
+    @Excel(name = "向导默认开关：0默认关闭，1默认打开", orderNum = "100")
     private Byte   isGuideOpen;
 
     /**
      * 维小宝用户ID
      */
-    @Excel(name = "维小宝用户ID", orderNum="110")
+    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
+    @Excel(name = "维小宝用户ID", orderNum = "110")
     private String   idWxbUser;
 
     /**
      * 维小宝店铺ID
      */
-    @Excel(name = "维小宝店铺ID", orderNum="120")
+    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
+    @Excel(name = "维小宝店铺ID", orderNum = "120")
     private String   idWxbStation;
 
     /**
      * openid
      */
+    @Size(min = 0, max = 40, message = "长度必须在{min}和{max}之间")
     @Excel(name = "openid",orderNum="130")
     private String openid;
 
     /**
      * 是否限定PC登录设备 0 不选中 1 选中
      */
-    @Excel(name = "是否限定PC登录设备 0 不选中 1 选中", orderNum="140")
+    @Excel(name = "是否限定PC登录设备 0 不选中 1 选中", orderNum = "140")
     private Byte   limitMac;
 
     public BigInteger getPkId() {
