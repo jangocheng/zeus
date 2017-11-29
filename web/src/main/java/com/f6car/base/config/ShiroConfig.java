@@ -11,8 +11,6 @@ package com.f6car.base.config;
 import com.air.tqb.realm.CustomRpcRealm;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.baomidou.kisso.SSOConfig;
-import com.f6car.base.web.shiro.ReturnUrlParamFilter;
-import com.google.common.collect.Maps;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -23,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,14 +36,9 @@ public class ShiroConfig {
         //拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/static/**", DefaultFilter.anon.toString());
-        filterChainDefinitionMap.put("/view/static/**", DefaultFilter.anon.toString());
-        filterChainDefinitionMap.put("/**", DefaultFilter.authc.toString());
+        filterChainDefinitionMap.put("/**", DefaultFilter.anon.toString());
         shiroFilterFactoryBean.setLoginUrl(SSOConfig.getInstance().getLoginUrl());
         shiroFilterFactoryBean.setSuccessUrl("/index");
-        Map<String, Filter> filterMap = Maps.newHashMap();
-        filterMap.put(DefaultFilter.authc.toString(), new ReturnUrlParamFilter());
-        shiroFilterFactoryBean.setFilters(filterMap);
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
