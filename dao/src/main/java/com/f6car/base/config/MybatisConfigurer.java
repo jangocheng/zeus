@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -36,6 +37,7 @@ import static com.f6car.base.constant.Constants.*;
 public class MybatisConfigurer {
 
     @Bean
+    @Primary
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
@@ -64,6 +66,7 @@ public class MybatisConfigurer {
         factory.setConfiguration(config);
         return factory.getObject();
     }
+
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
