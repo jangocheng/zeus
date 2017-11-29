@@ -10,10 +10,7 @@ package com.f6car.base.config;
 
 import com.air.tqb.service.user.UserService;
 import com.air.tqb.shiro.api.RpcRealm;
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ProtocolConfig;
-import com.alibaba.dubbo.config.ProviderConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.*;
 import com.alibaba.dubbo.config.spring.ReferenceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,27 +59,41 @@ public class DubboConfigurer {
         ProviderConfig providerConfig = new ProviderConfig();
         providerConfig.setTimeout(dubbo.getTimeOut());
         providerConfig.setOwner(dubbo.getOwner());
+        providerConfig.setGroup(dubbo.getGroup());
         return providerConfig;
     }
 
     @Bean
-    public ReferenceBean<RpcRealm> rpcRealm(RegistryConfig registryConfig, ApplicationConfig applicationConfig) {
+    public ConsumerConfig consumer(Dubbo dubbo) {
+        ConsumerConfig consumerConfig = new ConsumerConfig();
+        consumerConfig.setTimeout(dubbo.getTimeOut());
+        consumerConfig.setOwner(dubbo.getOwner());
+        consumerConfig.setGroup(dubbo.getGroup());
+        return consumerConfig;
+    }
+
+    @Bean
+    public ReferenceBean<RpcRealm> rpcRealm(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo) {
         ReferenceBean<RpcRealm> ref = new ReferenceBean<>();
         ref.setInterface(RpcRealm.class);
         ref.setRegistry(registryConfig);
         ref.setApplication(applicationConfig);
-        ref.setCheck(false);
+        ref.setConsumer(consumerConfig);
+        ref.setGroup(dubbo.getGroup());
+        ref.setCheck(true);
         return ref;
     }
 
 
     @Bean
-    public ReferenceBean<UserService> userService(RegistryConfig registryConfig, ApplicationConfig applicationConfig) {
+    public ReferenceBean<UserService> userService(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo) {
         ReferenceBean<UserService> ref = new ReferenceBean<>();
         ref.setInterface(UserService.class);
         ref.setRegistry(registryConfig);
         ref.setApplication(applicationConfig);
-        ref.setCheck(false);
+        ref.setConsumer(consumerConfig);
+        ref.setGroup(dubbo.getGroup());
+        ref.setCheck(true);
         return ref;
     }
 
