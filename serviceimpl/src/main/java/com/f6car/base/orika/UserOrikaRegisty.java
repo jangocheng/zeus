@@ -15,6 +15,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserOrikaRegisty implements OrikaRegisty {
+    /**
+     * @param factory MapperFactory
+     * @see <a href="http://orika-mapper.github.io/orika-docs/intro.html">文档</a>
+     * @see com.f6car.base.core.OrikaMapper#orikaRegistyList
+     */
     @Override
     public void register(MapperFactory factory) {
         factory.classMap(TbUser.class, com.f6car.base.po.user.TbUser.class)

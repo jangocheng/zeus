@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * @author qixiaobo
+ * @see com.f6car.base.core.OrikaRegisty
  */
 public class OrikaMapper {
     private MapperFacade mapperFacade = null;
@@ -29,6 +30,9 @@ public class OrikaMapper {
     @Autowired(required = false)
     private List<OrikaRegisty> orikaRegistyList = Lists.newArrayList();
 
+    /**
+     * 初始化Orika注册
+     */
     @PostConstruct
     private void init() {
         if (!orikaRegistyList.isEmpty()) {

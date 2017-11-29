@@ -11,5 +11,9 @@ package com.f6car.base.core;
 import ma.glasnost.orika.MapperFactory;
 
 public interface OrikaRegisty {
+    /**
+     * @param factory
+     * @see com.f6car.base.core.OrikaMapper#init()
+     */
     void register(MapperFactory factory);
 }
