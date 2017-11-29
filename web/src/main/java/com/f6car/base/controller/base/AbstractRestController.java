@@ -9,6 +9,7 @@
 package com.f6car.base.controller.base;
 
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import com.f6car.base.common.*;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
@@ -71,12 +72,12 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
     }
 
     protected void excelExportParam() {
-        ExportParams ep = new ExportParams(null, "数据");
+        ExportParams ep = new ExportParams(null, "数据", ExcelType.XSSF);
         ExcelExportParam<V> param = new ExcelExportParam<>();
         param.setClazz(voClazz);
         param.setExcelExport(ExcelExport.NormalExcel);
         param.setExportParams(ep);
-        param.setFileName("文件.xls");
+        param.setFileName("文件.xlsx");
         F6Static.setExcelExportParam(param);
     }
 

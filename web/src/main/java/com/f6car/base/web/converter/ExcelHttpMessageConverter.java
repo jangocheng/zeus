@@ -8,13 +8,16 @@
 
 package com.f6car.base.web.converter;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.excel.export.ExcelExportServer;
 import com.f6car.base.common.Result;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -62,14 +65,14 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         Workbook workbook;
         switch (excelExportParam.getExcelExport()) {
             case NormalExcel:
-                workbook = ExcelExportUtil.exportExcel(
-                        excelExportParam.getExportParams(),
+                workbook = getWorkBook(excelExportParam.getExportParams().getType());
+                new ExcelExportServer().createSheet(workbook, excelExportParam.getExportParams(),
                         (Class<?>) excelExportParam.getClazz(),
                         (Collection<?>) data);
                 break;
             case MapExcel:
-                workbook = ExcelExportUtil.exportExcel(
-                        excelExportParam.getExportParams(),
+                workbook = getWorkBook(excelExportParam.getExportParams().getType());
+                new ExcelExportServer().createSheetForMap(workbook, excelExportParam.getExportParams(),
                         excelExportParam.getExcelExportEntities(),
                         (Collection<? extends Map<?, ?>>) data);
                 break;
@@ -142,5 +145,14 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
     @Override
     public void write(Object o, Type type, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         super.write(o, contentType, outputMessage);
+    }
+
+    private Workbook getWorkBook(ExcelType type) {
+        if (ExcelType.HSSF.equals(type)) {
+            return new HSSFWorkbook();
+        } else {
+            //stream  默认情况下100条刷盘
+            return new SXSSFWorkbook();
+        }
     }
 }
