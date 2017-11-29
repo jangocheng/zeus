@@ -68,7 +68,7 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        genCode("tb_user", "tb_org", "tb_menu", "tb_org_mac");
+        genCode("ts_maintain");
     }
 
     /**
@@ -129,8 +129,8 @@ public class CodeGenerator {
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetProject(PROJECT_PATH + Module.model.moduleDir + JAVA_PATH);
         String javaPackage = MODEL_PACKAGE;
-        String mapperPackage = MAPPER_PACKAGE;
-        String xmlPackage = "mapper";
+        String mapperPackage = MAPPER_PACKAGE + "2";
+        String xmlPackage = "mapper" + "2";
         if (!Strings.isNullOrEmpty(subPackageName)) {
             javaPackage += ("." + subPackageName);
             mapperPackage += ("." + subPackageName);

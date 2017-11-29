@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.f6car.base.dao2.maintain.TsMaintainMapper">
+    <resultMap id="BaseResultMap" type="com.f6car.base.po.maintain.TsMaintain">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="pk_id" jdbcType="BIGINT" property="pkId"/>
+        <result column="bill_no" jdbcType="VARCHAR" property="billNo"/>
+        <result column="bill_date" jdbcType="TIMESTAMP" property="billDate"/>
+        <result column="id_customer" jdbcType="BIGINT" property="idCustomer"/>
+        <result column="id_car" jdbcType="BIGINT" property="idCar"/>
+        <result column="id_member" jdbcType="BIGINT" property="idMember"/>
+        <result column="mileage" jdbcType="DECIMAL" property="mileage"/>
+        <result column="maintain_type" jdbcType="VARCHAR" property="maintainType"/>
+        <result column="bill_type" jdbcType="CHAR" property="billType"/>
+        <result column="maintain_type_id" jdbcType="BIGINT" property="maintainTypeId"/>
+        <result column="bill_status" jdbcType="CHAR" property="billStatus"/>
+        <result column="balance_status" jdbcType="CHAR" property="balanceStatus"/>
+        <result column="stock_status" jdbcType="CHAR" property="stockStatus"/>
+        <result column="owe_amount" jdbcType="DECIMAL" property="oweAmount"/>
+        <result column="receive_amount" jdbcType="DECIMAL" property="receiveAmount"/>
+        <result column="partinfo_subtotal" jdbcType="DECIMAL" property="partinfoSubtotal"/>
+        <result column="service_subtotal" jdbcType="DECIMAL" property="serviceSubtotal"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="amount_all" jdbcType="DECIMAL" property="amountAll"/>
+        <result column="amount_real" jdbcType="DECIMAL" property="amountReal"/>
+        <result column="vip_expense" jdbcType="DECIMAL" property="vipExpense"/>
+        <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime"/>
+        <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime"/>
+        <result column="creator" jdbcType="BIGINT" property="creator"/>
+        <result column="modifier" jdbcType="BIGINT" property="modifier"/>
+        <result column="id_own_org" jdbcType="BIGINT" property="idOwnOrg"/>
+        <result column="is_attached" jdbcType="TINYINT" property="isAttached"/>
+        <result column="id_employee" jdbcType="BIGINT" property="idEmployee"/>
+        <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime"/>
+        <result column="id_insurer" jdbcType="BIGINT" property="idInsurer"/>
+        <result column="insurancepolicy_no" jdbcType="VARCHAR" property="insurancepolicyNo"/>
+        <result column="insurancepolicy_type" jdbcType="CHAR" property="insurancepolicyType"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="reservation_number" jdbcType="VARCHAR" property="reservationNumber"/>
+        <result column="complate_date" jdbcType="TIMESTAMP" property="complateDate"/>
+        <result column="complete_user" jdbcType="BIGINT" property="completeUser"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+        <result column="commission_cost" jdbcType="DECIMAL" property="commissionCost"/>
+        <result column="commission_cost_real" jdbcType="DECIMAL" property="commissionCostReal"/>
+        <result column="commission_cost_real_settlement" jdbcType="DECIMAL" property="commissionCostRealSettlement"/>
+        <result column="diagnosis_cost" jdbcType="DECIMAL" property="diagnosisCost"/>
+        <result column="diagnosis_cost_real" jdbcType="DECIMAL" property="diagnosisCostReal"/>
+        <result column="diagnosis_cost_real_settlement" jdbcType="DECIMAL" property="diagnosisCostRealSettlement"/>
+        <result column="check_cost" jdbcType="DECIMAL" property="checkCost"/>
+        <result column="check_cost_real" jdbcType="DECIMAL" property="checkCostReal"/>
+        <result column="check_cost_real_settlement" jdbcType="DECIMAL" property="checkCostRealSettlement"/>
+        <result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
+        <result column="process_cost_real" jdbcType="DECIMAL" property="processCostReal"/>
+        <result column="process_cost_real_settlement" jdbcType="DECIMAL" property="processCostRealSettlement"/>
+        <result column="management_cost" jdbcType="DECIMAL" property="managementCost"/>
+        <result column="management_cost_real" jdbcType="DECIMAL" property="managementCostReal"/>
+        <result column="management_cost_real_settlement" jdbcType="DECIMAL" property="managementCostRealSettlement"/>
+        <result column="repair_person" jdbcType="VARCHAR" property="repairPerson"/>
+        <result column="repair_person_contact" jdbcType="VARCHAR" property="repairPersonContact"/>
+        <result column="contact_sex" jdbcType="VARCHAR" property="contactSex"/>
+        <result column="contact_credentials_number" jdbcType="VARCHAR" property="contactCredentialsNumber"/>
+        <result column="contact_credentials_type" jdbcType="VARCHAR" property="contactCredentialsType"/>
+        <result column="contact_detail_address" jdbcType="VARCHAR" property="contactDetailAddress"/>
+        <result column="next_maintain_date" jdbcType="VARCHAR" property="nextMaintainDate"/>
+        <result column="next_mileage" jdbcType="DECIMAL" property="nextMileage"/>
+        <result column="oil_capacity" jdbcType="INTEGER" property="oilCapacity"/>
+        <result column="version" jdbcType="BIGINT" property="version"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+        <result column="is_migration" jdbcType="INTEGER" property="isMigration"/>
+        <result column="from_maintain_id" jdbcType="BIGINT" property="fromMaintainId"/>
+        <result column="from_maintain_type" jdbcType="VARCHAR" property="fromMaintainType"/>
+        <result column="carpreview_maintain_id" jdbcType="BIGINT" property="carpreviewMaintainId"/>
+        <result column="quality_check_status" jdbcType="CHAR" property="qualityCheckStatus"/>
+        <result column="vip_expense_favourable" jdbcType="DECIMAL" property="vipExpenseFavourable"/>
+        <result column="package_favourable" jdbcType="DECIMAL" property="packageFavourable"/>
+        <result column="service_discount_favourable" jdbcType="DECIMAL" property="serviceDiscountFavourable"/>
+        <result column="partinfo_discount_favourable" jdbcType="DECIMAL" property="partinfoDiscountFavourable"/>
+        <result column="czk_expense" jdbcType="DECIMAL" property="czkExpense"/>
+        <result column="czk_expense_favourable" jdbcType="DECIMAL" property="czkExpenseFavourable"/>
+        <result column="service_favourable" jdbcType="DECIMAL" property="serviceFavourable"/>
+        <result column="service_favourable_backup" jdbcType="DECIMAL" property="serviceFavourableBackup"/>
+        <result column="partinfo_favourable" jdbcType="DECIMAL" property="partinfoFavourable"/>
+        <result column="partinfo_favourable_backup" jdbcType="DECIMAL" property="partinfoFavourableBackup"/>
+        <result column="point_favourable" jdbcType="DECIMAL" property="pointFavourable"/>
+        <result column="use_point" jdbcType="DECIMAL" property="usePoint"/>
+        <result column="discount_favourable" jdbcType="DECIMAL" property="discountFavourable"/>
+        <result column="source_bill_no" jdbcType="VARCHAR" property="sourceBillNo"/>
+        <result column="id_source_bill" jdbcType="BIGINT" property="idSourceBill"/>
+        <result column="gathering_favourable" jdbcType="DECIMAL" property="gatheringFavourable"/>
+        <result column="car_category_id" jdbcType="BIGINT" property="carCategoryId"/>
+        <result column="id_channel" jdbcType="BIGINT" property="idChannel"/>
+        <result column="insurance_contacts" jdbcType="VARCHAR" property="insuranceContacts"/>
+        <result column="insurance_contact_telephone" jdbcType="VARCHAR" property="insuranceContactTelephone"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        pk_id, bill_no, bill_date, id_customer, id_car, id_member, mileage, maintain_type,
+        bill_type, maintain_type_id, bill_status, balance_status, stock_status, owe_amount,
+        receive_amount, partinfo_subtotal, service_subtotal, amount, amount_all, amount_real,
+        vip_expense, creationtime, modifiedtime, creator, modifier, id_own_org, is_attached,
+        id_employee, delivery_time, id_insurer, insurancepolicy_no, insurancepolicy_type,
+        order_id, reservation_number, complate_date, complete_user, memo, commission_cost,
+        commission_cost_real, commission_cost_real_settlement, diagnosis_cost, diagnosis_cost_real,
+        diagnosis_cost_real_settlement, check_cost, check_cost_real, check_cost_real_settlement,
+        process_cost, process_cost_real, process_cost_real_settlement, management_cost, management_cost_real,
+        management_cost_real_settlement, repair_person, repair_person_contact, contact_sex,
+        contact_credentials_number, contact_credentials_type, contact_detail_address, next_maintain_date,
+        next_mileage, oil_capacity, version, is_del, is_migration, from_maintain_id, from_maintain_type,
+        carpreview_maintain_id, quality_check_status, vip_expense_favourable, package_favourable,
+        service_discount_favourable, partinfo_discount_favourable, czk_expense, czk_expense_favourable,
+        service_favourable, service_favourable_backup, partinfo_favourable, partinfo_favourable_backup,
+        point_favourable, use_point, discount_favourable, source_bill_no, id_source_bill,
+        gathering_favourable, car_category_id, id_channel, insurance_contacts, insurance_contact_telephone
+    </sql>
+</mapper>

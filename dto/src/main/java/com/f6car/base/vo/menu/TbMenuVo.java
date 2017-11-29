@@ -35,37 +35,37 @@ public class TbMenuVo extends Vo {
      * url
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "url",orderNum="20")
-   private String   url;
+   @Excel(name = "url", orderNum = "20")
+   private String url;
 
    /**
      * 名称
     */
    @NotNull
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "名称",orderNum="30")
-   private String   name;
+   @Excel(name = "名称", orderNum = "30")
+   private String name;
 
    /**
      * 角色备注
     */
    @Size(min = 0, max = 500, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "角色备注",orderNum="40")
-   private String   remark;
+   @Excel(name = "角色备注", orderNum = "40")
+   private String remark;
 
    /**
      * 图标
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "图标",orderNum="50")
-   private String   ico;
+   @Excel(name = "图标", orderNum = "50")
+   private String ico;
 
    /**
      * 所属模块
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "所属模块",orderNum="60")
-   private String   model;
+   @Excel(name = "所属模块", orderNum = "60")
+   private String model;
 
    /**
      * 父节点
@@ -90,15 +90,15 @@ public class TbMenuVo extends Vo {
     */
    @NotNull
    @Size(min = 0, max = 250, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "符合Shiro格式的权限字符串，例如[maintain:*]",orderNum="100")
-   private String   permission;
+   @Excel(name = "符合Shiro格式的权限字符串，例如[maintain:*]", orderNum = "100")
+   private String permission;
 
    /**
      * 选中url
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "选中url",orderNum="110")
-   private String   activeUrl;
+   @Excel(name = "选中url", orderNum = "110")
+   private String activeUrl;
 
 
     public void setId(BigInteger id) {

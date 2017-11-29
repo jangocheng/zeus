@@ -8,24 +8,22 @@
 
 package com.f6car.base.config;
 
-import com.f6car.base.core.MybatisTransactionTimeoutInterceptor;
-import com.f6car.base.core.SoInterceptor;
-import com.github.pagehelper.PageHelper;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.session.ExecutorType;
+import com.f6car.base.constant.Constants;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
-import static com.f6car.base.constant.Constants.*;
+import static com.f6car.base.constant.Constants.MAPPER_PACKAGE;
 
 
 /**
@@ -34,56 +32,39 @@ import static com.f6car.base.constant.Constants.*;
  * @author qixiaobo
  */
 @Configuration
-public class MybatisConfigurer {
+public class MybatisConfigurer extends AbstractMyBatisConfigurer {
 
-    @Bean
+    public static final String PRIMARY_SQL_SESSION_FACTORY_NAME = Constants.LEVEL_PRIMARY + SQL_SESSION_FACTORY_NAME;
+    public static final String PRIMARY_TRANSACTION_MANAGER_NAME = Constants.LEVEL_PRIMARY + TRANSACTION_MANAGER_NAME;
+    public static final String PRIMARY_DATA_SOURCE_NAME = Constants.LEVEL_PRIMARY + DATA_SOURCE_NAME;
+
+
+    @Bean(name = PRIMARY_SQL_SESSION_FACTORY_NAME)
     @Primary
-    public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
-        factory.setDataSource(dataSource);
-        factory.setTypeAliasesPackage(MODEL_PACKAGE);
-
-        //配置分页插件，详情请查阅官方文档
-        PageHelper pageHelper = new PageHelper();
-        Properties properties = new Properties();
-        properties.setProperty("pageSizeZero", "true");
-        //分页尺寸为0时查询所有纪录不再执行分页
-        properties.setProperty("reasonable", "true");
-        //页码<=0 查询第一页，页码>=总页数查询最后一页
-        properties.setProperty("supportMethodsArguments", "false");
-        //支持通过 Mapper 接口参数来传递分页参数
-        pageHelper.setProperties(properties);
-
-        //添加插件
-        factory.setPlugins(new Interceptor[]{new MybatisTransactionTimeoutInterceptor(), new SoInterceptor(), pageHelper});
-
-        //添加XML目录
+    public SqlSessionFactory sqlSessionFactoryBean(@Autowired @Qualifier(PRIMARY_DATA_SOURCE_NAME) DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = getSqlSessionFactoryBean(dataSource);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath*:mapper/**/*.xml"));
-        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
-        config.setDefaultStatementTimeout(5);
-        config.setDefaultExecutorType(ExecutorType.REUSE);
-        factory.setConfiguration(config);
-        return factory.getObject();
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:mapper/**/*.xml"));
+        return sqlSessionFactoryBean.getObject();
     }
 
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
+        MapperScannerConfigurer mapperScannerConfigurer = getMapperScannerConfigurer();
+        mapperScannerConfigurer.setSqlSessionFactoryBeanName(PRIMARY_SQL_SESSION_FACTORY_NAME);
         mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
-
-        //配置通用Mapper，详情请查阅官方文档
-        Properties properties = new Properties();
-        properties.setProperty("mappers", MAPPER_INTERFACE_REFERENCE);
-        properties.setProperty("notEmpty", "false");
-        //insert、update是否判断字符串类型!='' 即 test="str != null"表达式内是否追加 and str != ''
-        properties.setProperty("IDENTITY", "MYSQL");
-        mapperScannerConfigurer.setProperties(properties);
-
         return mapperScannerConfigurer;
     }
+
+
+    @Bean(name = PRIMARY_TRANSACTION_MANAGER_NAME)
+    @Primary
+    public DataSourceTransactionManager transactionManager1(@Autowired @Qualifier(PRIMARY_DATA_SOURCE_NAME) DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+
+    }
+
 
 }
 

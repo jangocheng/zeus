@@ -36,15 +36,15 @@ public class TbOrgMacVo extends Vo {
     */
    @NotNull
    @Size(min = 0, max = 500, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "mac地址",orderNum="20")
-   private String   macAddress;
+   @Excel(name = "mac地址", orderNum = "20")
+   private String macAddress;
 
    /**
      * 组织
     */
    @NotNull
-   @Excel(name = "组织",orderNum="30")
-   private BigInteger   idOwnOrg;
+   @Excel(name = "组织", orderNum = "30")
+   private BigInteger idOwnOrg;
 
 
     public void setPkId(BigInteger pkId) {

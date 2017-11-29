@@ -38,4 +38,8 @@ public class Constants {
     public static final String COMMA = ",";
     public static final String STRIKE = "-";
     public static final String UNDER_LINE = "_";
+
+    public static final String LEVEL_PRIMARY = "primary";
+    public static final String LEVEL_SECOND = "second";
+
 }

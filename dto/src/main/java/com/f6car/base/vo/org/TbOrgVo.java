@@ -31,99 +31,99 @@ public class TbOrgVo extends Vo {
      * 主键
     */
    @NotNull
-   @Excel(name = "主键",orderNum="10")
-   private BigInteger   pkId;
+   @Excel(name = "主键", orderNum = "10")
+   private BigInteger pkId;
 
    /**
      * 机构代码
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "机构代码",orderNum="20")
-   private String   code;
+   @Excel(name = "机构代码", orderNum = "20")
+   private String code;
 
    /**
      * 机构名称
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "机构名称",orderNum="30")
-   private String   name;
+   @Excel(name = "机构名称", orderNum = "30")
+   private String name;
 
    /**
      * 联系人
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "联系人",orderNum="40")
-   private String   contacts;
+   @Excel(name = "联系人", orderNum = "40")
+   private String contacts;
 
    /**
      * 联系电话
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "联系电话",orderNum="50")
-   private String   contactNumber;
+   @Excel(name = "联系电话", orderNum = "50")
+   private String contactNumber;
 
    /**
      * 手机
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "手机",orderNum="60")
-   private String   contactMobile;
+   @Excel(name = "手机", orderNum = "60")
+   private String contactMobile;
 
    /**
      * 传真
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "传真",orderNum="70")
-   private String   fax;
+   @Excel(name = "传真", orderNum = "70")
+   private String fax;
 
    /**
      * 省
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "省",orderNum="80")
-   private String   province;
+   @Excel(name = "省", orderNum = "80")
+   private String province;
 
    /**
      * 市
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "市",orderNum="90")
-   private String   city;
+   @Excel(name = "市", orderNum = "90")
+   private String city;
 
    /**
      * 区
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "区",orderNum="100")
-   private String   area;
+   @Excel(name = "区", orderNum = "100")
+   private String area;
 
    /**
      * 街道
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "街道",orderNum="110")
-   private String   street;
+   @Excel(name = "街道", orderNum = "110")
+   private String street;
 
    /**
      * 地址
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "地址",orderNum="120")
-   private String   address;
+   @Excel(name = "地址", orderNum = "120")
+   private String address;
 
    /**
      * 详细地址：省+市+区+街道+地址
     */
    @Size(min = 0, max = 500, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "详细地址：省+市+区+街道+地址",orderNum="130")
-   private String   detailAddress;
+   @Excel(name = "详细地址：省+市+区+街道+地址", orderNum = "130")
+   private String detailAddress;
 
    /**
      * 邮箱
     */
    @Size(min = 0, max = 50, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "邮箱",orderNum="140")
-   private String   email;
+   @Excel(name = "邮箱", orderNum = "140")
+   private String email;
 
    /**
      * 父机构ID
@@ -141,92 +141,92 @@ public class TbOrgVo extends Vo {
      * DB硬件码
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "DB硬件码",orderNum="170")
-   private String   entityCode;
+   @Excel(name = "DB硬件码", orderNum = "170")
+   private String entityCode;
 
    /**
      * bussiness
     */
    @Size(min = 0, max = 50, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "bussiness",orderNum="180")
-   private String   bussiness;
+   @Excel(name = "bussiness", orderNum = "180")
+   private String bussiness;
 
    /**
      * logo
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "logo",orderNum="190")
-   private String   logo;
+   @Excel(name = "logo", orderNum = "190")
+   private String logo;
 
    /**
      * 门店logo
     */
    @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "门店logo",orderNum="200")
-   private String   storeLogo;
+   @Excel(name = "门店logo", orderNum = "200")
+   private String storeLogo;
 
    /**
      * erp左上角图片路径
     */
    @Size(min = 0, max = 200, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "erp左上角图片路径",orderNum="210")
-   private String   applicationLogo;
+   @Excel(name = "erp左上角图片路径", orderNum = "210")
+   private String applicationLogo;
 
    /**
      * responsible
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "responsible",orderNum="220")
-   private String   responsible;
+   @Excel(name = "responsible", orderNum = "220")
+   private String responsible;
 
    /**
      * zipCode
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "zipCode",orderNum="230")
-   private String   zipCode;
+   @Excel(name = "zipCode", orderNum = "230")
+   private String zipCode;
 
    /**
      * 截止有效期
     */
    @NotNull
-   @Excel(name = "截止有效期",orderNum="240")
-   private Date   endDate;
+   @Excel(name = "截止有效期", orderNum = "240")
+   private Date endDate;
 
    /**
      * qq号码
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "qq号码",orderNum="250")
-   private String   qq;
+   @Excel(name = "qq号码", orderNum = "250")
+   private String qq;
 
    /**
      * 开户银行
     */
    @Size(min = 0, max = 50, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "开户银行",orderNum="260")
-   private String   bankAccount;
+   @Excel(name = "开户银行", orderNum = "260")
+   private String bankAccount;
 
    /**
      * 账号
     */
    @Size(min = 0, max = 50, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "账号",orderNum="270")
-   private String   accountNumber;
+   @Excel(name = "账号", orderNum = "270")
+   private String accountNumber;
 
    /**
      * idCustomerCarzone
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "idCustomerCarzone",orderNum="280")
-   private String   idCustomerCarzone;
+   @Excel(name = "idCustomerCarzone", orderNum = "280")
+   private String idCustomerCarzone;
 
    /**
      * idDepartmentCarzone
     */
    @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "idDepartmentCarzone",orderNum="290")
-   private String   idDepartmentCarzone;
+   @Excel(name = "idDepartmentCarzone", orderNum = "290")
+   private String idDepartmentCarzone;
 
    /**
      * 是否启用pad端，对工单等可以使用任务模式，0代表不启用，1代表启用
@@ -262,8 +262,8 @@ public class TbOrgVo extends Vo {
      * 门店缩写，用于连锁查询显示门店信息
     */
    @Size(min = 0, max = 10, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "门店缩写，用于连锁查询显示门店信息",orderNum="350")
-   private String   abbreviation;
+   @Excel(name = "门店缩写，用于连锁查询显示门店信息", orderNum = "350")
+   private String abbreviation;
 
    /**
      * 开户来源，0表示从f6开户，1表示从康众开户，2表示从帮您车开户
@@ -281,15 +281,15 @@ public class TbOrgVo extends Vo {
      * 快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）
     */
    @NotNull
-   @Excel(name = "快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）",orderNum="380")
-   private Byte   isCloudItemSearchable;
+   @Excel(name = "快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）", orderNum = "380")
+   private Byte isCloudItemSearchable;
 
    /**
      * 快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）
     */
    @NotNull
-   @Excel(name = "快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）",orderNum="390")
-   private Byte   isCloudPartSearchable;
+   @Excel(name = "快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）", orderNum = "390")
+   private Byte isCloudPartSearchable;
 
    /**
      * pc端是否需要扫码登录。0:不需要；1:需要扫码
