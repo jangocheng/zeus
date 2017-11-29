@@ -12,6 +12,7 @@ import com.air.tqb.service.user.UserService;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.alibaba.dubbo.config.*;
 import com.alibaba.dubbo.config.spring.ReferenceBean;
+import com.alibaba.dubbo.config.spring.ServiceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -93,6 +94,18 @@ public class DubboConfigurer {
         ref.setConsumer(consumerConfig);
         ref.setGroup(dubbo.getGroup());
         ref.setCheck(false);
+        return ref;
+    }
+
+    protected <T> ServiceBean<T> registerService(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ProviderConfig providerConfig, ProtocolConfig protocolConfig, Dubbo dubbo, Class<T> interfaceClazz, T t) {
+        ServiceBean<T> ref = new ServiceBean<>();
+        ref.setInterface(interfaceClazz);
+        ref.setRegistry(registryConfig);
+        ref.setApplication(applicationConfig);
+        ref.setProvider(providerConfig);
+        ref.setRef(t);
+        ref.setProtocol(protocolConfig);
+        ref.setGroup(dubbo.getGroup());
         return ref;
     }
 
