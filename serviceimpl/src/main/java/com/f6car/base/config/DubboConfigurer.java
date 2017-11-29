@@ -74,26 +74,25 @@ public class DubboConfigurer {
 
     @Bean
     public ReferenceBean<RpcRealm> rpcRealm(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo) {
-        ReferenceBean<RpcRealm> ref = new ReferenceBean<>();
-        ref.setInterface(RpcRealm.class);
-        ref.setRegistry(registryConfig);
-        ref.setApplication(applicationConfig);
-        ref.setConsumer(consumerConfig);
-        ref.setGroup(dubbo.getGroup());
-        ref.setCheck(true);
+        ReferenceBean<RpcRealm> ref = registerReference(registryConfig, applicationConfig, consumerConfig, dubbo, RpcRealm.class);
         return ref;
     }
 
 
     @Bean
     public ReferenceBean<UserService> userService(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo) {
-        ReferenceBean<UserService> ref = new ReferenceBean<>();
-        ref.setInterface(UserService.class);
+        ReferenceBean<UserService> ref = registerReference(registryConfig, applicationConfig, consumerConfig, dubbo, UserService.class);
+        return ref;
+    }
+
+    protected <T> ReferenceBean<T> registerReference(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo, Class<T> interfaceClazz) {
+        ReferenceBean<T> ref = new ReferenceBean<>();
+        ref.setInterface(interfaceClazz);
         ref.setRegistry(registryConfig);
         ref.setApplication(applicationConfig);
         ref.setConsumer(consumerConfig);
         ref.setGroup(dubbo.getGroup());
-        ref.setCheck(true);
+        ref.setCheck(false);
         return ref;
     }
 
