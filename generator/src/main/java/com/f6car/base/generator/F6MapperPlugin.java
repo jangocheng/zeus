@@ -65,7 +65,7 @@ public class F6MapperPlugin extends MapperPlugin {
                                        TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
                                        IntrospectedTable introspectedTable, ModelClassType modelClassType) {
 
-        if (!introspectedColumn.isNullable() && !introspectedColumn.isIdentity()) {
+        if (!introspectedColumn.isNullable() && !introspectedColumn.isAutoIncrement()) {
             //非主键增加
             topLevelClass.addImportedType("javax.validation.constraints.NotNull");
             field.addAnnotation("@NotNull");
