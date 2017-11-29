@@ -12,7 +12,6 @@ import com.f6car.base.constant.Constants;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -39,9 +38,9 @@ public class MybatisConfigurer extends AbstractMyBatisConfigurer {
     public static final String PRIMARY_DATA_SOURCE_NAME = Constants.LEVEL_PRIMARY + DATA_SOURCE_NAME;
 
 
-    @Bean(name = PRIMARY_SQL_SESSION_FACTORY_NAME)
+    @Bean
     @Primary
-    public SqlSessionFactory sqlSessionFactoryBean(@Autowired @Qualifier(PRIMARY_DATA_SOURCE_NAME) DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactoryBean(@Autowired DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = getSqlSessionFactoryBean(dataSource);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:mapper/**/*.xml"));
@@ -52,15 +51,14 @@ public class MybatisConfigurer extends AbstractMyBatisConfigurer {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = getMapperScannerConfigurer();
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName(PRIMARY_SQL_SESSION_FACTORY_NAME);
         mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
         return mapperScannerConfigurer;
     }
 
 
-    @Bean(name = PRIMARY_TRANSACTION_MANAGER_NAME)
+    @Bean
     @Primary
-    public DataSourceTransactionManager transactionManager1(@Autowired @Qualifier(PRIMARY_DATA_SOURCE_NAME) DataSource dataSource) {
+    public DataSourceTransactionManager transactionManager1(@Autowired DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
 
     }
