@@ -51,6 +51,7 @@ public class AbstractMyBatisConfigurer {
 
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
         config.setDefaultStatementTimeout(5);
+        config.setDefaultFetchSize(10000);
         config.setDefaultExecutorType(ExecutorType.REUSE);
         factory.setConfiguration(config);
         return factory;

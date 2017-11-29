@@ -9,16 +9,19 @@
 package com.f6car.base.config;
 
 
+import com.air.tqb.realm.KissoShiroInterceptor;
 import com.air.tqb.realm.LoginCallback;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
+import com.f6car.base.web.interceptor.CleanInterceptor;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -127,13 +130,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new CleanInterceptor());
-//        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
-//        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
-//        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
-//        kissoShiroInterceptor.setLoginCallbackList(callbackList);
-//        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
-//        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        registry.addInterceptor(new CleanInterceptor());
+        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
+        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
+        kissoShiroInterceptor.setLoginCallbackList(callbackList);
+        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
+        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
 
     }
 
