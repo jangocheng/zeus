@@ -19,8 +19,14 @@ public class ${modelNameUpperCamel}Vo extends Vo {
      <%
         for(field in fields){
         %>
-    @Excel(name = "${field.name}",orderNum="${fieldLP.index}0")
-    private ${ field.type.shortName}   ${field.name};
+        <%
+        var comment = isEmpty(field.remarks)?field.javaProperty:field.remarks;
+        %>
+   /**
+     * ${comment}
+    */
+    @Excel(name = "${comment}",orderNum="${fieldLP.index}0")
+    private ${ field.fullyQualifiedJavaType.shortName}   ${field.javaProperty};
 
         <%}%>
 
@@ -28,17 +34,17 @@ public class ${modelNameUpperCamel}Vo extends Vo {
     for(field in fields){
     %>
      <%
-                var firstChar = strutil.subStringTo(field.name,0,1);
-                var leftChar = strutil.subString(field.name,1);
+                var firstChar = strutil.subStringTo(field.javaProperty,0,1);
+                var leftChar = strutil.subString(field.javaProperty,1);
                 var firstChar_upper =  strutil.toUpperCase(firstChar);
                 var fieldNameWithUpper =firstChar_upper+ leftChar;
             %>
-    public void set${fieldNameWithUpper}(${ field.type.shortName} ${field.name}) {
-            this.${field.name} = ${field.name};
+    public void set${fieldNameWithUpper}(${ field.fullyQualifiedJavaType.shortName} ${field.javaProperty}) {
+       this.${field.javaProperty} = ${field.javaProperty};
     }
 
-    public ${ field.type.shortName} get${fieldNameWithUpper}() {
-          return ${field.name};
+    public ${ field.fullyQualifiedJavaType.shortName} get${fieldNameWithUpper}() {
+       return ${field.javaProperty};
     }
 
 

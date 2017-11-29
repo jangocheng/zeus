@@ -1,192 +1,223 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.vo.user;
 
-import com.f6car.base.common.Vo;
-import java.util.Date;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.f6car.base.common.Vo;
+
+import java.math.BigInteger;
 
 
 
 
 /**
- * Created by qixiaobo on 2017-11-28.
+ * Created by qixiaobo on 2017-11-29.
  */
 public class TbUserVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
-    @Excel(name = "pkId",orderNum="10")
+    /**
+     * 主键
+     */
+    @Excel(name = "主键", orderNum = "10")
     private BigInteger   pkId;
 
-    @Excel(name = "username",orderNum="20")
+    /**
+     * 用户名
+     */
+    @Excel(name = "用户名", orderNum = "20")
     private String   username;
 
+    /**
+     * cellPhone
+     */
     @Excel(name = "cellPhone",orderNum="30")
     private String   cellPhone;
 
-    @Excel(name = "password",orderNum="40")
+    /**
+     * 密码
+     */
+    @Excel(name = "密码", orderNum = "40")
     private String   password;
 
-    @Excel(name = "isAdmin",orderNum="50")
+    /**
+     * 是否管理员
+     */
+    @Excel(name = "是否管理员", orderNum = "50")
     private Byte   isAdmin;
 
-    @Excel(name = "idRole",orderNum="60")
+    /**
+     * 角色ID
+     */
+    @Excel(name = "角色ID", orderNum = "60")
     private BigInteger   idRole;
 
-    @Excel(name = "idOwnOrg",orderNum="70")
+    /**
+     * 组织
+     */
+    @Excel(name = "组织", orderNum ="70")
     private BigInteger   idOwnOrg;
 
-    @Excel(name = "idEmployee",orderNum="80")
+    /**
+     * 员工ID
+     */
+    @Excel(name = "员工ID", orderNum="80")
     private BigInteger   idEmployee;
 
+    /**
+     * isDel
+     */
     @Excel(name = "isDel",orderNum="90")
     private Byte   isDel;
 
-    @Excel(name = "isGuideOpen",orderNum="100")
+    /**
+     * 向导默认开关：0默认关闭，1默认打开
+     */
+    @Excel(name = "向导默认开关：0默认关闭，1默认打开", orderNum="100")
     private Byte   isGuideOpen;
 
-    @Excel(name = "idWxbUser",orderNum="110")
+    /**
+     * 维小宝用户ID
+     */
+    @Excel(name = "维小宝用户ID", orderNum="110")
     private String   idWxbUser;
 
-    @Excel(name = "idWxbStation",orderNum="120")
+    /**
+     * 维小宝店铺ID
+     */
+    @Excel(name = "维小宝店铺ID", orderNum="120")
     private String   idWxbStation;
 
+    /**
+     * openid
+     */
     @Excel(name = "openid",orderNum="130")
-    private String   openid;
+    private String openid;
 
-    @Excel(name = "limitMac",orderNum="140")
+    /**
+     * 是否限定PC登录设备 0 不选中 1 选中
+     */
+    @Excel(name = "是否限定PC登录设备 0 不选中 1 选中", orderNum="140")
     private Byte   limitMac;
 
+    public BigInteger getPkId() {
+        return pkId;
+    }
 
     public void setPkId(BigInteger pkId) {
-            this.pkId = pkId;
-    }
-
-    public BigInteger getPkId() {
-          return pkId;
-    }
-
-
-    public void setUsername(String username) {
-            this.username = username;
+        this.pkId = pkId;
     }
 
     public String getUsername() {
-          return username;
+        return username;
     }
 
-
-    public void setCellPhone(String cellPhone) {
-            this.cellPhone = cellPhone;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCellPhone() {
-          return cellPhone;
+        return cellPhone;
     }
 
-
-    public void setPassword(String password) {
-            this.password = password;
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 
     public String getPassword() {
-          return password;
+        return password;
     }
 
-
-    public void setIsAdmin(Byte isAdmin) {
-            this.isAdmin = isAdmin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Byte getIsAdmin() {
-          return isAdmin;
+        return isAdmin;
     }
 
-
-    public void setIdRole(BigInteger idRole) {
-            this.idRole = idRole;
+    public void setIsAdmin(Byte isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public BigInteger getIdRole() {
-          return idRole;
+        return idRole;
     }
 
-
-    public void setIdOwnOrg(BigInteger idOwnOrg) {
-            this.idOwnOrg = idOwnOrg;
+    public void setIdRole(BigInteger idRole) {
+        this.idRole = idRole;
     }
 
     public BigInteger getIdOwnOrg() {
-          return idOwnOrg;
+        return idOwnOrg;
     }
 
-
-    public void setIdEmployee(BigInteger idEmployee) {
-            this.idEmployee = idEmployee;
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
+        this.idOwnOrg = idOwnOrg;
     }
 
     public BigInteger getIdEmployee() {
-          return idEmployee;
+        return idEmployee;
     }
 
-
-    public void setIsDel(Byte isDel) {
-            this.isDel = isDel;
+    public void setIdEmployee(BigInteger idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public Byte getIsDel() {
-          return isDel;
+        return isDel;
     }
 
-
-    public void setIsGuideOpen(Byte isGuideOpen) {
-            this.isGuideOpen = isGuideOpen;
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     public Byte getIsGuideOpen() {
-          return isGuideOpen;
+        return isGuideOpen;
     }
 
-
-    public void setIdWxbUser(String idWxbUser) {
-            this.idWxbUser = idWxbUser;
+    public void setIsGuideOpen(Byte isGuideOpen) {
+        this.isGuideOpen = isGuideOpen;
     }
 
     public String getIdWxbUser() {
-          return idWxbUser;
+        return idWxbUser;
     }
 
-
-    public void setIdWxbStation(String idWxbStation) {
-            this.idWxbStation = idWxbStation;
+    public void setIdWxbUser(String idWxbUser) {
+        this.idWxbUser = idWxbUser;
     }
 
     public String getIdWxbStation() {
-          return idWxbStation;
+        return idWxbStation;
     }
 
-
-    public void setOpenid(String openid) {
-            this.openid = openid;
+    public void setIdWxbStation(String idWxbStation) {
+        this.idWxbStation = idWxbStation;
     }
 
     public String getOpenid() {
-          return openid;
+        return openid;
     }
 
-
-    public void setLimitMac(Byte limitMac) {
-            this.limitMac = limitMac;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
     public Byte getLimitMac() {
-          return limitMac;
+        return limitMac;
     }
 
-
-
-
+    public void setLimitMac(Byte limitMac) {
+        this.limitMac = limitMac;
+    }
 
 
 }

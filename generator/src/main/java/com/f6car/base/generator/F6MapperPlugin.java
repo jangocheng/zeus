@@ -10,6 +10,7 @@ package com.f6car.base.generator;
 
 import com.f6car.base.common.Po;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.*;
@@ -39,7 +40,9 @@ public class F6MapperPlugin extends MapperPlugin {
         //PK
         topLevelClass.addImportedType(Po.class.getName());
         topLevelClass.setSuperClass("Po");
-        PO_FIELDS.set(topLevelClass.getFields());
+        List<IntrospectedColumn> columns = Lists.newArrayList(introspectedTable.getPrimaryKeyColumns());
+        columns.addAll(introspectedTable.getBaseColumns());
+        PO_FIELDS.set(columns);
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
     }
 

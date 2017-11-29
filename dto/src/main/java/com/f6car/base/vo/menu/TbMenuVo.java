@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.vo.menu;
 
 import com.f6car.base.common.Vo;
@@ -10,142 +18,175 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 
 
 /**
- * Created by qixiaobo on 2017-11-28.
+ * Created by qixiaobo on 2017-11-29.
  */
 public class TbMenuVo extends Vo {
 
     private static final long serialVersionUID = -6920934492324729614L;
 
-    @Excel(name = "id",orderNum="10")
+   /**
+     * 主键
+    */
+    @Excel(name = "主键",orderNum="10")
     private BigInteger   id;
 
+   /**
+     * url
+    */
     @Excel(name = "url",orderNum="20")
     private String   url;
 
-    @Excel(name = "name",orderNum="30")
+   /**
+     * 名称
+    */
+    @Excel(name = "名称",orderNum="30")
     private String   name;
 
-    @Excel(name = "remark",orderNum="40")
+   /**
+     * 角色备注
+    */
+    @Excel(name = "角色备注",orderNum="40")
     private String   remark;
 
-    @Excel(name = "ico",orderNum="50")
+   /**
+     * 图标
+    */
+    @Excel(name = "图标",orderNum="50")
     private String   ico;
 
-    @Excel(name = "model",orderNum="60")
+   /**
+     * 所属模块
+    */
+    @Excel(name = "所属模块",orderNum="60")
     private String   model;
 
-    @Excel(name = "pId",orderNum="70")
+   /**
+     * 父节点
+    */
+    @Excel(name = "父节点",orderNum="70")
     private BigInteger   pId;
 
-    @Excel(name = "isDelete",orderNum="80")
+   /**
+     * 逻辑删除，0表示不删除
+    */
+    @Excel(name = "逻辑删除，0表示不删除",orderNum="80")
     private Integer   isDelete;
 
-    @Excel(name = "sort",orderNum="90")
+   /**
+     * 排序
+    */
+    @Excel(name = "排序",orderNum="90")
     private Integer   sort;
 
-    @Excel(name = "permission",orderNum="100")
+   /**
+     * 符合Shiro格式的权限字符串，例如[maintain:*]
+    */
+    @Excel(name = "符合Shiro格式的权限字符串，例如[maintain:*]",orderNum="100")
     private String   permission;
 
-    @Excel(name = "activeUrl",orderNum="110")
+   /**
+     * 选中url
+    */
+    @Excel(name = "选中url",orderNum="110")
     private String   activeUrl;
 
 
     public void setId(BigInteger id) {
-            this.id = id;
+       this.id = id;
     }
 
     public BigInteger getId() {
-          return id;
+       return id;
     }
 
 
     public void setUrl(String url) {
-            this.url = url;
+       this.url = url;
     }
 
     public String getUrl() {
-          return url;
+       return url;
     }
 
 
     public void setName(String name) {
-            this.name = name;
+       this.name = name;
     }
 
     public String getName() {
-          return name;
+       return name;
     }
 
 
     public void setRemark(String remark) {
-            this.remark = remark;
+       this.remark = remark;
     }
 
     public String getRemark() {
-          return remark;
+       return remark;
     }
 
 
     public void setIco(String ico) {
-            this.ico = ico;
+       this.ico = ico;
     }
 
     public String getIco() {
-          return ico;
+       return ico;
     }
 
 
     public void setModel(String model) {
-            this.model = model;
+       this.model = model;
     }
 
     public String getModel() {
-          return model;
+       return model;
     }
 
 
     public void setPId(BigInteger pId) {
-            this.pId = pId;
+       this.pId = pId;
     }
 
     public BigInteger getPId() {
-          return pId;
+       return pId;
     }
 
 
     public void setIsDelete(Integer isDelete) {
-            this.isDelete = isDelete;
+       this.isDelete = isDelete;
     }
 
     public Integer getIsDelete() {
-          return isDelete;
+       return isDelete;
     }
 
 
     public void setSort(Integer sort) {
-            this.sort = sort;
+       this.sort = sort;
     }
 
     public Integer getSort() {
-          return sort;
+       return sort;
     }
 
 
     public void setPermission(String permission) {
-            this.permission = permission;
+       this.permission = permission;
     }
 
     public String getPermission() {
-          return permission;
+       return permission;
     }
 
 
     public void setActiveUrl(String activeUrl) {
-            this.activeUrl = activeUrl;
+       this.activeUrl = activeUrl;
     }
 
     public String getActiveUrl() {
-          return activeUrl;
+       return activeUrl;
     }
 
 

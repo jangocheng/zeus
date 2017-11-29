@@ -15,8 +15,8 @@ import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.joda.time.DateTime;
+import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.MyBatisGenerator;
-import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.DefaultShellCallback;
@@ -38,7 +38,7 @@ public class CodeGenerator {
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    public static final ThreadLocal<List<Field>> PO_FIELDS = new ThreadLocal<>();
+    public static final ThreadLocal<List<IntrospectedColumn>> PO_FIELDS = new ThreadLocal<>();
     public static final ThreadLocal<FullyQualifiedJavaType> PK_TYPE = new ThreadLocal<>();
     private static final String PROJECT_PATH = System.getProperty("user.dir");
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/template";
@@ -217,14 +217,14 @@ public class CodeGenerator {
 
     }
 
-    private static Collection<Field> getVoFields() {
+    private static Collection<IntrospectedColumn> getVoFields() {
         if (PO_FIELDS.get().isEmpty()) {
             return Collections.emptyList();
         } else {
-            return Collections2.filter(PO_FIELDS.get(), new Predicate<Field>() {
+            return Collections2.filter(PO_FIELDS.get(), new Predicate<IntrospectedColumn>() {
                 @Override
-                public boolean apply(Field input) {
-                    if (VO_EXCLUED_FIELD_NAMES.contains(input.getName())) {
+                public boolean apply(IntrospectedColumn input) {
+                    if (VO_EXCLUED_FIELD_NAMES.contains(input.getJavaProperty())) {
                         return false;
                     }
                     return true;
