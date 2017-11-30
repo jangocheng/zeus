@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -42,6 +43,7 @@ import static com.f6car.base.core.F6Static.getExcelExportParam;
 public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Object>
         implements GenericHttpMessageConverter<Object> {
     public static final MediaType EXCEL_MEDIA_TYPE = new MediaType("application", "vnd.ms-excel");
+    public static int MAX_SIZE = 1000;
 
     public ExcelHttpMessageConverter() {
         super(EXCEL_MEDIA_TYPE);
@@ -65,13 +67,13 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         Workbook workbook;
         switch (excelExportParam.getExcelExport()) {
             case NormalExcel:
-                workbook = getWorkBook(excelExportParam.getExportParams().getType());
+                workbook = getWorkBook(excelExportParam.getExportParams().getType(), data.size());
                 new ExcelExportServer().createSheet(workbook, excelExportParam.getExportParams(),
                         (Class<?>) excelExportParam.getClazz(),
                         (Collection<?>) data);
                 break;
             case MapExcel:
-                workbook = getWorkBook(excelExportParam.getExportParams().getType());
+                workbook = getWorkBook(excelExportParam.getExportParams().getType(), data.size());
                 new ExcelExportServer().createSheetForMap(workbook, excelExportParam.getExportParams(),
                         excelExportParam.getExcelExportEntities(),
                         (Collection<? extends Map<?, ?>>) data);
@@ -147,12 +149,16 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         super.write(o, contentType, outputMessage);
     }
 
-    private Workbook getWorkBook(ExcelType type) {
+    private Workbook getWorkBook(ExcelType type, int size) {
         if (ExcelType.HSSF.equals(type)) {
             return new HSSFWorkbook();
         } else {
-            //stream  默认情况下100条刷盘
-            return new SXSSFWorkbook();
+            if (size > MAX_SIZE) {
+                //stream  默认情况下100条刷盘
+                return new SXSSFWorkbook();
+            } else {
+                return new XSSFWorkbook();
+            }
         }
     }
 }

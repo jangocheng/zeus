@@ -71,6 +71,10 @@
             <groupId>com.f6car.erp</groupId>
             <artifactId>biz-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.f6car.erp</groupId>
+            <artifactId>biz-realm</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

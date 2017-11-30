@@ -94,6 +94,7 @@ public class DubboConfigurer {
         ref.setConsumer(consumerConfig);
         ref.setGroup(dubbo.getGroup());
         ref.setCheck(false);
+
         return ref;
     }
 
