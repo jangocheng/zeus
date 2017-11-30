@@ -8,6 +8,7 @@
 
 package com.f6car.base.config;
 
+import com.air.tqb.rmi.clientInfo.RemoteInvocationCallback;
 import com.air.tqb.service.user.UserService;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.alibaba.dubbo.config.*;
@@ -15,6 +16,7 @@ import com.alibaba.dubbo.config.spring.ReferenceBean;
 import com.alibaba.dubbo.config.spring.ServiceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * @author qixiaobo
@@ -86,6 +88,12 @@ public class DubboConfigurer {
         return ref;
     }
 
+    @Bean
+    @Primary
+    public RemoteInvocationCallback remoteInvocationCallback() {
+        return new DefaultRemoteCallback();
+    }
+
     protected <T> ReferenceBean<T> registerReference(RegistryConfig registryConfig, ApplicationConfig applicationConfig, ConsumerConfig consumerConfig, Dubbo dubbo, Class<T> interfaceClazz) {
         ReferenceBean<T> ref = new ReferenceBean<>();
         ref.setInterface(interfaceClazz);
@@ -94,6 +102,7 @@ public class DubboConfigurer {
         ref.setConsumer(consumerConfig);
         ref.setGroup(dubbo.getGroup());
         ref.setCheck(false);
+        ref.setFilter("clientInfoConsumer");
 
         return ref;
     }

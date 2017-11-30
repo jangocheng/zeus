@@ -14,10 +14,16 @@ import java.util.List;
 public class F6Static {
 
     private static final ThreadLocal<ExcelExportParam> EXCEL_EXPORT_PARAM_TL = new ThreadLocal<>();
+    private static final ThreadLocal<String> USER_TL = new ThreadLocal<>();
+    private static final ThreadLocal<String> ORG_TL = new ThreadLocal<>();
+    private static final ThreadLocal<String> IP_TL = new ThreadLocal<>();
     private static final List<ThreadLocal> THREAD_LOCAL_LIST = new ArrayList<>();
 
     static {
         THREAD_LOCAL_LIST.add(EXCEL_EXPORT_PARAM_TL);
+        THREAD_LOCAL_LIST.add(USER_TL);
+        THREAD_LOCAL_LIST.add(ORG_TL);
+        THREAD_LOCAL_LIST.add(IP_TL);
     }
 
     public static ExcelExportParam getExcelExportParam() {
@@ -26,6 +32,30 @@ public class F6Static {
 
     public static void setExcelExportParam(ExcelExportParam excelExportParam) {
         EXCEL_EXPORT_PARAM_TL.set(excelExportParam);
+    }
+
+    public static String getUser() {
+        return USER_TL.get();
+    }
+
+    public static void setUser(String user) {
+        USER_TL.set(user);
+    }
+
+    public static String getOrg() {
+        return ORG_TL.get();
+    }
+
+    public static void setOrg(String org) {
+        ORG_TL.set(org);
+    }
+
+    public static String getIp() {
+        return IP_TL.get();
+    }
+
+    public static void setIp(String ip) {
+        IP_TL.set(ip);
     }
 
     public static void clearAll() {
