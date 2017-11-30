@@ -12,6 +12,7 @@ package com.f6car.base.config;
 import com.air.tqb.realm.KissoShiroInterceptor;
 import com.air.tqb.realm.LoginCallback;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -22,6 +23,7 @@ import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
 import com.f6car.base.web.interceptor.CleanInterceptor;
+import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -167,9 +169,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty,
                 SerializerFeature.WriteNullNumberAsZero);
+        config.setSerializeFilters(serializeFilters());
         converter.setFastJsonConfig(config);
         converter.setDefaultCharset(Charset.forName("UTF-8"));
         return converter;
+    }
+
+    @Bean
+    public SerializeFilter[] serializeFilters() {
+        return new SerializeFilter[]{new BigIntegerValueFilter()};
     }
 
     private HttpMessageConverter<Object> createExcelHttpMessageConverter() {
