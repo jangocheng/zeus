@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -22,12 +23,14 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
 
+import static com.f6car.base.config.MyBatisConfigurer2.SECOND_DATA_SOURCE_NAME;
 import static com.f6car.base.constant.Constants.MAPPER_PACKAGE;
 
 /**
  * @author qixiaobo
  */
 @Configuration
+@ConditionalOnBean(name = SECOND_DATA_SOURCE_NAME)
 public class MyBatisConfigurer2 extends AbstractMyBatisConfigurer {
     public static final String SECOND_TRANSACTION_MANAGER_NAME = Constants.LEVEL_SECOND + TRANSACTION_MANAGER_NAME;
     public static final String SECOND_SQL_SESSION_FACTORY_NAME = Constants.LEVEL_SECOND + SQL_SESSION_FACTORY_NAME;

@@ -13,7 +13,6 @@ import com.f6car.base.service.maintain.TsMaintainService;
 import com.f6car.base.so.maintain.TsMaintainSo;
 import com.f6car.base.vo.maintain.TsMaintainVo;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.math.BigInteger;
@@ -22,7 +21,7 @@ import java.math.BigInteger;
 /**
  * Created by qixiaobo on 2017-11-29.
  */
-@RestController
+//@RestController
 @RequestMapping("maintain")
 public class TsMaintainController extends AbstractRestController<TsMaintainVo, TsMaintainSo, BigInteger> {
     @Resource
