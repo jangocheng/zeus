@@ -44,7 +44,7 @@
         </filter>
     </appender>
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_PATH}/zeus-error.log</File>
+        <File>${LOG_PATH}/${myAppName}-error.log</File>
         <encoder>
             <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
         </encoder>
@@ -52,7 +52,7 @@
             <level>ERROR</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/zeus-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${myAppName}-error.log.%d{yyyy-MM-dd}</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
