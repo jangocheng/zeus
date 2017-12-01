@@ -33,7 +33,7 @@
         <username>${email.username}</username>
         <subject>${email.subject}</subject>
         <from>${email.from}</from>
-        <Name>${smtp.host}</Name>
+        <Name>${email.smtp.host}</Name>
         <password>${email.password}</password>
         <SMTPHost>${email.smtp.host}</SMTPHost>
         <layout class="ch.qos.logback.classic.PatternLayout">
