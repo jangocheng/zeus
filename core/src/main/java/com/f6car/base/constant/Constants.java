@@ -42,4 +42,6 @@ public class Constants {
     public static final String LEVEL_PRIMARY = "primary";
     public static final String LEVEL_SECOND = "second";
 
+    public static final String SESSION_ATTRIBUTE_NAME_USER = "user";
+
 }

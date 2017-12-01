@@ -13,7 +13,9 @@ import cn.afterturn.easypoi.excel.export.ExcelExportServer;
 import com.f6car.base.common.Result;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
+import com.f6car.base.core.F6Static;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,6 +36,7 @@ import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static com.f6car.base.core.F6Static.getExcelExportParam;
 
@@ -44,6 +47,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         implements GenericHttpMessageConverter<Object> {
     public static final MediaType EXCEL_MEDIA_TYPE = new MediaType("application", "vnd.ms-excel");
     public static int MAX_SIZE = 1000;
+    private static final String LOGGER_PATTERN = "Excel export user:%s cost:%sms";
 
     public ExcelHttpMessageConverter() {
         super(EXCEL_MEDIA_TYPE);
@@ -61,6 +65,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
 
     @Override
     protected void writeInternal(Object o, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
         HttpHeaders headers = outputMessage.getHeaders();
         Collection data = getActualData((Result) o);
         ExcelExportParam excelExportParam = getExcelExportParam();
@@ -93,8 +98,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
             }
             workbook.write(outputMessage.getBody());
         }
-
-
+        logger.info(String.format(LOGGER_PATTERN, F6Static.getUser(), stopwatch.elapsed(TimeUnit.MILLISECONDS)));
     }
 
     private Collection getActualData(Result r) {

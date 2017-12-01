@@ -62,7 +62,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
 
-    static final List<String> POSSIBLE_IP_HEADER = Lists.newArrayList("x-forwarded-for", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR");
 
     @Autowired(required = false)
     private List<LoginCallback> callbackList = new ArrayList<>();
@@ -132,13 +131,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CleanInterceptor());
         InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
         ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
         KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
         kissoShiroInterceptor.setLoginCallbackList(callbackList);
         InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
         kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        registry.addInterceptor(new CleanInterceptor());
 
     }
 
@@ -156,7 +155,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     static final Splitter COMMA_SPLITTER = Splitter.on(Constants.COMMA);
 
-    //使用阿里 FastJson 作为JSON MessageConverter
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(createExcelHttpMessageConverter());
