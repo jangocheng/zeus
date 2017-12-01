@@ -47,7 +47,7 @@ public class AbstractMyBatisConfigurer {
         pageHelper.setProperties(properties);
 
         //添加插件
-        factory.setPlugins(new Interceptor[]{new MybatisTransactionTimeoutInterceptor(), new SoInterceptor(), pageHelper});
+        factory.setPlugins(new Interceptor[]{pageHelper, new SoInterceptor(), new MybatisTransactionTimeoutInterceptor()});
 
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
         config.setDefaultStatementTimeout(5);
