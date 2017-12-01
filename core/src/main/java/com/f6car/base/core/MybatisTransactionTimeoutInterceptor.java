@@ -31,7 +31,7 @@ public class MybatisTransactionTimeoutInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         Statement stmt = (Statement) invocation.getArgs()[0];
         Collection<Object> values = TransactionSynchronizationManager.getResourceMap().values();
-        if (values.size() > 0) {
+        if (!values.isEmpty()) {
             for (Object obj : values) {
                 if (obj != null && obj instanceof ConnectionHolder) {
                     ConnectionHolder holder = (ConnectionHolder) obj;

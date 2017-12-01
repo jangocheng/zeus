@@ -30,7 +30,7 @@ public class AbstractMyBatisConfigurer {
     protected static final String TRANSACTION_MANAGER_NAME = "TransactionManager";
     protected static final String DATA_SOURCE_NAME = "DataSource";
 
-    protected SqlSessionFactoryBean getSqlSessionFactoryBean(DataSource dataSource) throws Exception {
+    protected SqlSessionFactoryBean getSqlSessionFactoryBean(DataSource dataSource) {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         factory.setTypeAliasesPackage(MODEL_PACKAGE);

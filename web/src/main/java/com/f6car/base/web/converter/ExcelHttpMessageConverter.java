@@ -46,7 +46,7 @@ import static com.f6car.base.core.F6Static.getExcelExportParam;
 public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Object>
         implements GenericHttpMessageConverter<Object> {
     public static final MediaType EXCEL_MEDIA_TYPE = new MediaType("application", "vnd.ms-excel");
-    public static int MAX_SIZE = 1000;
+    private static final int MAX_SIZE = 1000;
     private static final String LOGGER_PATTERN = "Excel export user:%s cost:%sms";
 
     public ExcelHttpMessageConverter() {

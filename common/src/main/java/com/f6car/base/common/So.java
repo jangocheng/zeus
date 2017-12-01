@@ -68,7 +68,7 @@ public class So implements java.io.Serializable, Pagable, Sortable {
 
     @Override
     public void addSort(Sort sort) {
-        if (sorts != null) {
+        if (sorts == null) {
             sorts = new ArrayList<>();
         }
         sorts.add(sort);
