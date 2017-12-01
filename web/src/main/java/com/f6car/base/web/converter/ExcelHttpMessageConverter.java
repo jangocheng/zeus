@@ -101,12 +101,12 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         if (r != null && r.getData() != null) {
             Object data = r.getData();
             if (data instanceof PageInfo) {
-                return ((PageInfo) data).getList();
+                data = ((PageInfo) data).getList();
             } else if (!(data instanceof Collection)) {
                 data = Lists.newArrayList(data);
-            } else {
-                return (Collection) data;
             }
+            return (Collection) data;
+
         }
         return Collections.emptyList();
 
@@ -135,7 +135,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         if (param == null || param.getExcelExport() == null || param.getExportParams() == null) {
             return false;
         }
-        if (param.getExcelExport() == ExcelExport.NormalExcel) {
+        if (param.getExcelExport() == ExcelExport.NormalExcel || param.getExcelExport() == ExcelExport.MapExcel) {
             return true;
         } else {
             logger.warn(param.getExcelExport() + " not supprot now!");
