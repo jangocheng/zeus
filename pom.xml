@@ -52,6 +52,7 @@
         <zkclient.version>0.1</zkclient.version>
         <swagger.version>2.2.2</swagger.version>
         <j2cache.version>1.4.0-alpha3</j2cache.version>
+        <sonar.host.url>http://192.168.1.246:9000</sonar.host.url>
     </properties>
 
     <dependencyManagement>
@@ -296,6 +297,45 @@
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.8</version>
+                <configuration>
+                    <includes>
+                        <include>com.f6car.*</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>JaCoCo Agent</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>
+                                prepare-agent
+                            </goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>JaCoCo Report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>
+                                report
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
