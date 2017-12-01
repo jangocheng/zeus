@@ -22,7 +22,7 @@ import static com.f6car.base.config.MyBatisConfigurer2.SECOND_DATA_SOURCE_NAME;
  */
 @Configuration
 @ConfigurationProperties("spring.datasource2")
-@ConditionalOnProperty(name = "spring.datasource2", matchIfMissing = false)
+@ConditionalOnProperty(name = "spring.datasource2.url", matchIfMissing = false)
 public class DataSourceConfig2 extends AbstractDataSourceConfig {
     @Bean(SECOND_DATA_SOURCE_NAME)
     public DataSource dataSource2() {
