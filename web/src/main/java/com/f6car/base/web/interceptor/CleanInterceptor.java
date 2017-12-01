@@ -37,10 +37,15 @@ public class CleanInterceptor extends HandlerInterceptorAdapter {
     private static String getIpAddress(HttpServletRequest request) {
         String ip = null;
         for (String ipHeader : POSSIBLE_IP_HEADER) {
-            ip = request.getHeader("x-forwarded-for");
+            ip = request.getHeader(ipHeader);
             if (!Strings.isNullOrEmpty(ip) && !Constants.IP_UNKNOWN.equalsIgnoreCase(ip)) {
                 break;
+            } else {
+                ip = null;
             }
+        }
+        if (ip == null) {
+            ip = request.getRemoteAddr();
         }
         if (ip != null && ip.indexOf(Constants.COMMA) != -1) {
             ip = ip.substring(0, ip.indexOf(Constants.COMMA));
