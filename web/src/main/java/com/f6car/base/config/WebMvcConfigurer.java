@@ -26,6 +26,8 @@ import com.f6car.base.web.interceptor.CleanInterceptor;
 import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +102,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
                     result.setCode(ResultCode.NOT_FOUND).setMessage("接口 [" + request.getRequestURI() + "] 不存在");
                 } else if (e instanceof ServletException) {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
+                } else if (e instanceof AuthorizationException) {
+                    result.setCode(ResultCode.FORBIDDEN).setMessage(e.getMessage());
+                } else if (e instanceof AuthenticationException) {
+                    result.setCode(ResultCode.UNAUTHORIZED).setMessage(e.getMessage());
                 } else {
                     result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
                     String message;
