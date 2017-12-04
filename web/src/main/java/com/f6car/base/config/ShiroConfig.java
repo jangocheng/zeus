@@ -9,6 +9,7 @@
 package com.f6car.base.config;
 
 import com.air.tqb.realm.CustomRpcRealm;
+import com.air.tqb.realm.LoginCallback;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.baomidou.kisso.SSOConfig;
 import org.apache.shiro.mgt.SecurityManager;
@@ -19,11 +20,14 @@ import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,8 +35,12 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
+    @Autowired(required = false)
+    private List<LoginCallback> callbackList = new ArrayList<>();
+
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager, ResourceHandlerConfig resourceHandlerConfig) {
+
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //拦截器.

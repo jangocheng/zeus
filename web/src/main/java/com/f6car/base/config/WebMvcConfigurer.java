@@ -132,15 +132,23 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
-        ssoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
+        interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
         KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
         kissoShiroInterceptor.setLoginCallbackList(callbackList);
         InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
-        kissoInterceptor.excludePathPatterns("/webjars/**").excludePathPatterns("/swagger-ui.html");
-        registry.addInterceptor(new CleanInterceptor());
+        interceptorRegistrationExcluedStaticCallback(kissoInterceptor);
+        InterceptorRegistration cleanInterceptor = registry.addInterceptor(new CleanInterceptor());
+        interceptorRegistrationExcluedStaticCallback(cleanInterceptor);
 
     }
 
+    private void interceptorRegistrationExcluedStaticCallback(InterceptorRegistration interceptorRegistration) {
+        List<ResourceHandler> resourceHandlerList = resourceHandlerConfig().getResourceHandlerList();
+        for (ResourceHandler resourceHandler : resourceHandlerList) {
+            interceptorRegistration.excludePathPatterns(resourceHandler.getPattern());
+        }
+        interceptorRegistration.excludePathPatterns("/webjars/**", "/swagger-ui.html", "/error");
+    }
 
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");
@@ -152,6 +160,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             logger.error(ex.getMessage());
         }
     }
+
 
     static final Splitter COMMA_SPLITTER = Splitter.on(Constants.COMMA);
 
