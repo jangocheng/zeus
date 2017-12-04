@@ -8,6 +8,7 @@
 
 package com.f6car.base.core;
 
+import com.f6car.base.core.orika.converter.BigIntegerConverter;
 import com.github.pagehelper.Page;
 import com.google.common.collect.Lists;
 import ma.glasnost.orika.MapperFacade;
@@ -40,6 +41,7 @@ public class OrikaMapper {
                 orikaRegisty.register(mapperFactory);
             }
         }
+        mapperFactory.getConverterFactory().registerConverter(BigIntegerConverter.class.getSimpleName(), new BigIntegerConverter());
         mapperFacade = mapperFactory.getMapperFacade();
     }
 
