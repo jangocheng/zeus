@@ -9,13 +9,8 @@
 package com.f6car.base.config;
 
 import com.f6car.base.core.OrikaMapper;
-import com.f6car.base.core.OrikaRegisty;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
-import java.util.List;
 
 /**
  * @author qixiaobo
@@ -23,7 +18,7 @@ import java.util.List;
 @Configuration
 public class OrikaConfigurer {
     @Bean
-    public OrikaMapper orikaMapperBean() throws Exception {
+    public OrikaMapper orikaMapperBean() {
         return  new OrikaMapper();
     }
 }

@@ -14,6 +14,7 @@ import com.f6car.base.common.Result;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
 import com.f6car.base.core.F6Static;
+import com.f6car.base.exception.ServiceException;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
@@ -89,15 +90,14 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
             case TemplateExcel:
             case TemplateWord:
             default:
-                throw new RuntimeException();
+                throw new ServiceException(excelExportParam.getExcelExport() + " not supprot now!");
         }
-        if (workbook != null) {
-            if (excelExportParam.getFileName() != null) {
-                String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
-                headers.setContentDispositionFormData("attachment", codedFileName);
-            }
-            workbook.write(outputMessage.getBody());
+
+        if (excelExportParam.getFileName() != null) {
+            String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
+            headers.setContentDispositionFormData("attachment", codedFileName);
         }
+        workbook.write(outputMessage.getBody());
         logger.info(String.format(LOGGER_PATTERN, F6Static.getUser(), stopwatch.elapsed(TimeUnit.MILLISECONDS)));
     }
 

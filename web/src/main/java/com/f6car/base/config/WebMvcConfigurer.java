@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -158,12 +159,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "application/json;charset=UTF-8");
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.toString());
         response.setStatus(200);
         try {
             response.getWriter().write(JSON.toJSONString(result));
-        } catch (IOException ex) {
-            logger.error(ex.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
         }
     }
 

@@ -10,6 +10,7 @@ package com.f6car.base.common;
 
 /**
  * 响应码枚举，参考HTTP状态码的语义
+ * @author qixiaobo
  */
 public enum ResultCode {
     SUCCESS(200),
@@ -19,9 +20,13 @@ public enum ResultCode {
     NOT_FOUND(404),
     INTERNAL_SERVER_ERROR(500);
 
-    public int code;
+    private final int code;
 
     ResultCode(int code) {
         this.code = code;
+    }
+
+    public int getCode() {
+        return code;
     }
 }
