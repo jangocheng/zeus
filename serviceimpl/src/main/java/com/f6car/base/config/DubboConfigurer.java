@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Primary;
  * @author qixiaobo
  */
 @Configuration
-
 public class DubboConfigurer {
 
     @Bean
@@ -101,8 +100,9 @@ public class DubboConfigurer {
         ref.setApplication(applicationConfig);
         ref.setConsumer(consumerConfig);
         ref.setGroup(dubbo.getGroup());
-        ref.setCheck(false);
+        ref.setCheck(dubbo.isStartUpCheck());
         ref.setFilter("clientInfoConsumer");
+        ref.setUrl(dubbo.getRefUrl());
 
         return ref;
     }

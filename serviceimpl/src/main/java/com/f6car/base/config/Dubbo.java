@@ -19,6 +19,8 @@ public class Dubbo {
     private String serialization;
     private String owner;
     private int timeOut;
+    private String refUrl;
+    private boolean startUpCheck;
 
     public int getTimeOut() {
         return timeOut;
@@ -74,5 +76,21 @@ public class Dubbo {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getRefUrl() {
+        return refUrl;
+    }
+
+    public void setRefUrl(String refUrl) {
+        this.refUrl = refUrl;
+    }
+
+    public boolean isStartUpCheck() {
+        return startUpCheck;
+    }
+
+    public void setStartUpCheck(boolean startUpCheck) {
+        this.startUpCheck = startUpCheck;
     }
 }
