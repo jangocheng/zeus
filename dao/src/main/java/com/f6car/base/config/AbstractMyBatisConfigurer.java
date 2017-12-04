@@ -11,6 +11,7 @@ package com.f6car.base.config;
 import com.f6car.base.core.MybatisTransactionTimeoutInterceptor;
 import com.f6car.base.core.SoInterceptor;
 import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.ExecutorType;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -53,6 +54,8 @@ public class AbstractMyBatisConfigurer {
         config.setDefaultStatementTimeout(5);
         config.setDefaultFetchSize(10000);
         config.setDefaultExecutorType(ExecutorType.REUSE);
+        config.setLogImpl(Slf4jImpl.class);
+        config.setLogPrefix("dao.");
         factory.setConfiguration(config);
         return factory;
     }

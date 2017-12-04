@@ -56,8 +56,29 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
-
-
+    <springProfile name="dev,local-test,re">
+        <appender name="sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>${LOG_PATH}/${myAppName}-sql.log</File>
+            <encoder>
+                <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>DEBUG</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${myAppName}-sql.log.%d{yyyy-MM-dd}</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <appender name="sql-queue" class="ch.qos.logback.classic.AsyncAppender">
+            <queueSize>512</queueSize>
+            <appender-ref ref="sql"/>
+        </appender>
+        <!-- mybatis loggers -->
+        <logger name="dao" level="DEBUG">
+            <appender-ref ref="sql-queue"/>
+        </logger>
+    </springProfile>
     <appender name="error-queue" class="ch.qos.logback.classic.AsyncAppender">
         <queueSize>512</queueSize>
         <appender-ref ref="ERROR"/>
