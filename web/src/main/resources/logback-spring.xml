@@ -75,7 +75,7 @@
             <appender-ref ref="sql"/>
         </appender>
         <!-- mybatis loggers -->
-        <logger name="dao" level="DEBUG">
+        <logger name="dao" level="DEBUG" additivity="false">
             <appender-ref ref="sql-queue"/>
         </logger>
     </springProfile>
