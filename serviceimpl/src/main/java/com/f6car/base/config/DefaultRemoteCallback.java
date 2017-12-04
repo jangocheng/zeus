@@ -23,7 +23,7 @@ public class DefaultRemoteCallback implements RemoteInvocationCallback {
 
     @Override
     public void afterCreateRemoteInvocation(ClientInfoRemoteInvocationFilter clientInfoRemoteInvocationFilter, String s, Object[] objects) {
-
+        // Do nothing
     }
 
     @Override

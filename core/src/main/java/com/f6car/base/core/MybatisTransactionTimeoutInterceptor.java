@@ -19,7 +19,9 @@ import java.util.Collection;
 import java.util.Properties;
 
 /**
- * Created by qixiaobo on 2016/12/1.
+ *
+ * @author qixiaobo
+ * @date 2016/12/1
  */
 @Intercepts({
         @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
@@ -57,6 +59,6 @@ public class MybatisTransactionTimeoutInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-
+        // Do nothing
     }
 }

@@ -53,6 +53,6 @@ public class SoInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-
+        // Do nothing
     }
 }

@@ -74,7 +74,7 @@ public class So implements java.io.Serializable, Pagable, Sortable {
         sorts.add(sort);
     }
 
-    public static enum PAGESIZE {
+    public enum PAGESIZE {
         xs(5), s(10), m(20), l(30), xl(50), xxl(100), xxxl(1000);
         private int pageSize;
 

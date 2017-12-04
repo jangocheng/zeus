@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class F6Static {
+    private F6Static() {
+
+    }
 
     private static final ThreadLocal<ExcelExportParam> EXCEL_EXPORT_PARAM_TL = new ThreadLocal<>();
     private static final ThreadLocal<String> USER_TL = new ThreadLocal<>();

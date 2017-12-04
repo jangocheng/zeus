@@ -10,9 +10,15 @@ package com.f6car.base.common;
 
 /**
  * 响应结果生成工具
+ *
+ * @author qixiaobo
  */
 public class ResultGenerator {
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
+
+    private ResultGenerator() {
+
+    }
 
     public static Result genSuccessResult() {
         return new Result()

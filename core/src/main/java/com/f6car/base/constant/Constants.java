@@ -12,6 +12,10 @@ package com.f6car.base.constant;
  * @author qixiaobo
  */
 public class Constants {
+    private Constants() {
+
+    }
+
     public static final String BASE_PACKAGE = "com.f6car.base";
     //Model所在包
     public static final String MODEL_PACKAGE = BASE_PACKAGE + ".po";
