@@ -93,7 +93,7 @@ public class F6MapperPlugin extends MapperPlugin {
             field.addAnnotation("@Size(min = 0, max = " + introspectedColumn.getLength() + " , message = \"长度必须在{min}和{max}之间\")");
         }
         if ("version".equalsIgnoreCase(field.getName())) {
-            field.addAnnotation("@Version(\"version\")");
+            field.addAnnotation("@Version(\"" + introspectedColumn.getActualColumnName() + "\")");
             topLevelClass.addImportedType("se.spagettikod.optimist.Version");
         }
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
