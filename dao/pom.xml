@@ -70,6 +70,10 @@
             <artifactId>dto</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>se.spagettikod</groupId>
+            <artifactId>optimist</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

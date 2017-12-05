@@ -9,6 +9,8 @@
 package com.f6car.base.po.maintain;
 
 import com.f6car.base.common.Po;
+import se.spagettikod.optimist.OptimisticLocking;
+import se.spagettikod.optimist.Version;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
+@OptimisticLocking("ts_maintain")
 @Table(name = "ts_maintain")
 public class TsMaintain extends Po {
     /**
@@ -268,6 +271,12 @@ public class TsMaintain extends Po {
     private BigDecimal commissionCostReal;
 
     /**
+     * 实收中的冲销部分
+     */
+    @Column(name = "commission_cost_real_cx")
+    private BigDecimal commissionCostRealCx;
+
+    /**
      * 代办费实收（仅包含结算时优惠）
      */
     @Column(name = "commission_cost_real_settlement")
@@ -284,6 +293,12 @@ public class TsMaintain extends Po {
      */
     @Column(name = "diagnosis_cost_real")
     private BigDecimal diagnosisCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Column(name = "diagnosis_cost_real_cx")
+    private BigDecimal diagnosisCostRealCx;
 
     /**
      * 诊断费实收（仅包含结算时优惠）
@@ -304,6 +319,12 @@ public class TsMaintain extends Po {
     private BigDecimal checkCostReal;
 
     /**
+     * 实收中的冲销部分
+     */
+    @Column(name = "check_cost_real_cx")
+    private BigDecimal checkCostRealCx;
+
+    /**
      * 检测费实收（仅包含结算时优惠）
      */
     @Column(name = "check_cost_real_settlement")
@@ -322,6 +343,12 @@ public class TsMaintain extends Po {
     private BigDecimal processCostReal;
 
     /**
+     * 实收中的冲销部分
+     */
+    @Column(name = "process_cost_real_cx")
+    private BigDecimal processCostRealCx;
+
+    /**
      * 加工费实收（仅包含结算时优惠）
      */
     @Column(name = "process_cost_real_settlement")
@@ -338,6 +365,12 @@ public class TsMaintain extends Po {
      */
     @Column(name = "management_cost_real")
     private BigDecimal managementCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Column(name = "management_cost_real_cx")
+    private BigDecimal managementCostRealCx;
 
     /**
      * 管理费实收（仅包含结算时优惠）
@@ -407,6 +440,7 @@ public class TsMaintain extends Po {
     private Integer oilCapacity;
 
     @NotNull
+    @Version("version")
     private BigInteger version;
 
     /**
@@ -1271,6 +1305,24 @@ public class TsMaintain extends Po {
     }
 
     /**
+     * 获取实收中的冲销部分
+     *
+     * @return commission_cost_real_cx - 实收中的冲销部分
+     */
+    public BigDecimal getCommissionCostRealCx() {
+        return commissionCostRealCx;
+    }
+
+    /**
+     * 设置实收中的冲销部分
+     *
+     * @param commissionCostRealCx 实收中的冲销部分
+     */
+    public void setCommissionCostRealCx(BigDecimal commissionCostRealCx) {
+        this.commissionCostRealCx = commissionCostRealCx;
+    }
+
+    /**
      * 获取代办费实收（仅包含结算时优惠）
      *
      * @return commission_cost_real_settlement - 代办费实收（仅包含结算时优惠）
@@ -1322,6 +1374,24 @@ public class TsMaintain extends Po {
      */
     public void setDiagnosisCostReal(BigDecimal diagnosisCostReal) {
         this.diagnosisCostReal = diagnosisCostReal;
+    }
+
+    /**
+     * 获取实收中的冲销部分
+     *
+     * @return diagnosis_cost_real_cx - 实收中的冲销部分
+     */
+    public BigDecimal getDiagnosisCostRealCx() {
+        return diagnosisCostRealCx;
+    }
+
+    /**
+     * 设置实收中的冲销部分
+     *
+     * @param diagnosisCostRealCx 实收中的冲销部分
+     */
+    public void setDiagnosisCostRealCx(BigDecimal diagnosisCostRealCx) {
+        this.diagnosisCostRealCx = diagnosisCostRealCx;
     }
 
     /**
@@ -1379,6 +1449,24 @@ public class TsMaintain extends Po {
     }
 
     /**
+     * 获取实收中的冲销部分
+     *
+     * @return check_cost_real_cx - 实收中的冲销部分
+     */
+    public BigDecimal getCheckCostRealCx() {
+        return checkCostRealCx;
+    }
+
+    /**
+     * 设置实收中的冲销部分
+     *
+     * @param checkCostRealCx 实收中的冲销部分
+     */
+    public void setCheckCostRealCx(BigDecimal checkCostRealCx) {
+        this.checkCostRealCx = checkCostRealCx;
+    }
+
+    /**
      * 获取检测费实收（仅包含结算时优惠）
      *
      * @return check_cost_real_settlement - 检测费实收（仅包含结算时优惠）
@@ -1433,6 +1521,24 @@ public class TsMaintain extends Po {
     }
 
     /**
+     * 获取实收中的冲销部分
+     *
+     * @return process_cost_real_cx - 实收中的冲销部分
+     */
+    public BigDecimal getProcessCostRealCx() {
+        return processCostRealCx;
+    }
+
+    /**
+     * 设置实收中的冲销部分
+     *
+     * @param processCostRealCx 实收中的冲销部分
+     */
+    public void setProcessCostRealCx(BigDecimal processCostRealCx) {
+        this.processCostRealCx = processCostRealCx;
+    }
+
+    /**
      * 获取加工费实收（仅包含结算时优惠）
      *
      * @return process_cost_real_settlement - 加工费实收（仅包含结算时优惠）
@@ -1484,6 +1590,24 @@ public class TsMaintain extends Po {
      */
     public void setManagementCostReal(BigDecimal managementCostReal) {
         this.managementCostReal = managementCostReal;
+    }
+
+    /**
+     * 获取实收中的冲销部分
+     *
+     * @return management_cost_real_cx - 实收中的冲销部分
+     */
+    public BigDecimal getManagementCostRealCx() {
+        return managementCostRealCx;
+    }
+
+    /**
+     * 设置实收中的冲销部分
+     *
+     * @param managementCostRealCx 实收中的冲销部分
+     */
+    public void setManagementCostRealCx(BigDecimal managementCostRealCx) {
+        this.managementCostRealCx = managementCostRealCx;
     }
 
     /**

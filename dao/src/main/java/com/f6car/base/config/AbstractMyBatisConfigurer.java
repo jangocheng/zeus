@@ -15,6 +15,7 @@ import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.ExecutorType;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import se.spagettikod.optimist.impl.OptimisticLockingInterceptor;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
@@ -48,7 +49,7 @@ public class AbstractMyBatisConfigurer {
         pageHelper.setProperties(properties);
 
         //添加插件
-        factory.setPlugins(new Interceptor[]{pageHelper, new SoInterceptor(), new MybatisTransactionTimeoutInterceptor()});
+        factory.setPlugins(new Interceptor[]{pageHelper, new SoInterceptor(), new MybatisTransactionTimeoutInterceptor(), new OptimisticLockingInterceptor()});
 
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
         config.setDefaultStatementTimeout(5);

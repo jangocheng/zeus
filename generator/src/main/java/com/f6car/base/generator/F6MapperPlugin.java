@@ -43,8 +43,22 @@ public class F6MapperPlugin extends MapperPlugin {
         List<IntrospectedColumn> columns = Lists.newArrayList(introspectedTable.getPrimaryKeyColumns());
         columns.addAll(introspectedTable.getBaseColumns());
         PO_FIELDS.set(columns);
+        processOptimisticLock(topLevelClass, introspectedTable);
         return super.modelBaseRecordClassGenerated(topLevelClass, introspectedTable);
     }
+
+
+    private void processOptimisticLock(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        topLevelClass.addImportedType("se.spagettikod.optimist.OptimisticLocking");
+        String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
+        if (StringUtility.stringContainsSpace(tableName)) {
+            tableName = context.getBeginningDelimiter()
+                    + tableName
+                    + context.getEndingDelimiter();
+        }
+        topLevelClass.addAnnotation("@OptimisticLocking(\"" + getDelimiterName(tableName) + "\")");
+    }
+
 
     @Override
     public void setProperties(Properties properties) {
@@ -77,6 +91,10 @@ public class F6MapperPlugin extends MapperPlugin {
         if (introspectedColumn.isStringColumn()) {
             topLevelClass.addImportedType("javax.validation.constraints.Size");
             field.addAnnotation("@Size(min = 0, max = " + introspectedColumn.getLength() + " , message = \"长度必须在{min}和{max}之间\")");
+        }
+        if ("version".equalsIgnoreCase(field.getName())) {
+            field.addAnnotation("@Version(\"version\")");
+            topLevelClass.addImportedType("se.spagettikod.optimist.Version");
         }
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
                 introspectedTable, modelClassType);

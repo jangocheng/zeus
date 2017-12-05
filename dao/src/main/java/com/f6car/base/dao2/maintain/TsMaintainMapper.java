@@ -10,7 +10,6 @@ package com.f6car.base.dao2.maintain;
 
 import com.f6car.base.core.Mapper;
 import com.f6car.base.po.maintain.TsMaintain;
-
 import java.math.BigInteger;
 
 public interface TsMaintainMapper extends Mapper<TsMaintain, BigInteger> {

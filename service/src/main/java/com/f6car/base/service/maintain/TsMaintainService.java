@@ -7,16 +7,15 @@
  */
 
 package com.f6car.base.service.maintain;
+import com.f6car.base.vo.maintain.TsMaintainVo;
+import com.f6car.base.so.maintain.TsMaintainSo;
+import java.math.BigInteger;
 
 import com.f6car.base.common.Service;
-import com.f6car.base.so.maintain.TsMaintainSo;
-import com.f6car.base.vo.maintain.TsMaintainVo;
-
-import java.math.BigInteger;
 
 
 /**
- * Created by qixiaobo on 2017-11-29.
+ * Created by qixiaobo on 2017-12-05.
  */
 public interface TsMaintainService extends Service<TsMaintainVo, TsMaintainSo, BigInteger> {
 

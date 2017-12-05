@@ -8,18 +8,19 @@
 
 package com.f6car.base.vo.maintain;
 
-import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.f6car.base.common.Vo;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.Date;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
+
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 /**
- * Created by qixiaobo on 2017-11-29.
+ * Created by qixiaobo on 2017-12-05.
  */
 public class TsMaintainVo extends Vo {
 
@@ -253,182 +254,212 @@ public class TsMaintainVo extends Vo {
     private BigDecimal commissionCostReal;
 
     /**
+     * 实收中的冲销部分
+     */
+    @Excel(name = "实收中的冲销部分", orderNum = "360")
+    private BigDecimal commissionCostRealCx;
+
+    /**
      * 代办费实收（仅包含结算时优惠）
      */
-    @Excel(name = "代办费实收（仅包含结算时优惠）", orderNum = "360")
+    @Excel(name = "代办费实收（仅包含结算时优惠）", orderNum = "370")
     private BigDecimal commissionCostRealSettlement;
 
     /**
      * 诊断费
      */
-    @Excel(name = "诊断费", orderNum = "370")
+    @Excel(name = "诊断费", orderNum = "380")
     private BigDecimal diagnosisCost;
 
     /**
      * 诊断费实收
      */
-    @Excel(name = "诊断费实收", orderNum = "380")
+    @Excel(name = "诊断费实收", orderNum = "390")
     private BigDecimal diagnosisCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Excel(name = "实收中的冲销部分", orderNum = "400")
+    private BigDecimal diagnosisCostRealCx;
 
     /**
      * 诊断费实收（仅包含结算时优惠）
      */
-    @Excel(name = "诊断费实收（仅包含结算时优惠）", orderNum = "390")
+    @Excel(name = "诊断费实收（仅包含结算时优惠）", orderNum = "410")
     private BigDecimal diagnosisCostRealSettlement;
 
     /**
      * 检测费
      */
-    @Excel(name = "检测费", orderNum = "400")
+    @Excel(name = "检测费", orderNum = "420")
     private BigDecimal checkCost;
 
     /**
      * 检测费实收
      */
-    @Excel(name = "检测费实收", orderNum = "410")
+    @Excel(name = "检测费实收", orderNum = "430")
     private BigDecimal checkCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Excel(name = "实收中的冲销部分", orderNum = "440")
+    private BigDecimal checkCostRealCx;
 
     /**
      * 检测费实收（仅包含结算时优惠）
      */
-    @Excel(name = "检测费实收（仅包含结算时优惠）", orderNum = "420")
+    @Excel(name = "检测费实收（仅包含结算时优惠）", orderNum = "450")
     private BigDecimal checkCostRealSettlement;
 
     /**
      * 加工费
      */
-    @Excel(name = "加工费", orderNum = "430")
+    @Excel(name = "加工费", orderNum = "460")
     private BigDecimal processCost;
 
     /**
      * 加工费实收
      */
-    @Excel(name = "加工费实收", orderNum = "440")
+    @Excel(name = "加工费实收", orderNum = "470")
     private BigDecimal processCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Excel(name = "实收中的冲销部分", orderNum = "480")
+    private BigDecimal processCostRealCx;
 
     /**
      * 加工费实收（仅包含结算时优惠）
      */
-    @Excel(name = "加工费实收（仅包含结算时优惠）", orderNum = "450")
+    @Excel(name = "加工费实收（仅包含结算时优惠）", orderNum = "490")
     private BigDecimal processCostRealSettlement;
 
     /**
      * 管理费
      */
-    @Excel(name = "管理费", orderNum = "460")
+    @Excel(name = "管理费", orderNum = "500")
     private BigDecimal managementCost;
 
     /**
      * 管理费实收
      */
-    @Excel(name = "管理费实收", orderNum = "470")
+    @Excel(name = "管理费实收", orderNum = "510")
     private BigDecimal managementCostReal;
+
+    /**
+     * 实收中的冲销部分
+     */
+    @Excel(name = "实收中的冲销部分", orderNum = "520")
+    private BigDecimal managementCostRealCx;
 
     /**
      * 管理费实收（仅包含结算时优惠）
      */
-    @Excel(name = "管理费实收（仅包含结算时优惠）", orderNum = "480")
+    @Excel(name = "管理费实收（仅包含结算时优惠）", orderNum = "530")
     private BigDecimal managementCostRealSettlement;
 
     /**
      * 送修人
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人", orderNum = "490")
+    @Excel(name = "送修人", orderNum = "540")
     private String repairPerson;
 
     /**
      * 送修人联系方式
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人联系方式", orderNum = "500")
+    @Excel(name = "送修人联系方式", orderNum = "550")
     private String repairPersonContact;
 
     /**
      * 送修人性别
      */
     @Size(min = 0, max = 5, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人性别", orderNum = "510")
+    @Excel(name = "送修人性别", orderNum = "560")
     private String contactSex;
 
     /**
      * 送修人证件号
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人证件号", orderNum = "520")
+    @Excel(name = "送修人证件号", orderNum = "570")
     private String contactCredentialsNumber;
 
     /**
      * 送修人证件类型
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人证件类型", orderNum = "530")
+    @Excel(name = "送修人证件类型", orderNum = "580")
     private String contactCredentialsType;
 
     /**
      * 送修人详细地址
      */
     @Size(min = 0, max = 500, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "送修人详细地址", orderNum = "540")
+    @Excel(name = "送修人详细地址", orderNum = "590")
     private String contactDetailAddress;
 
     /**
      * 下次保养日期
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "下次保养日期", orderNum = "550")
+    @Excel(name = "下次保养日期", orderNum = "600")
     private String nextMaintainDate;
 
     /**
      * 下次保养里程
      */
-    @Excel(name = "下次保养里程", orderNum = "560")
+    @Excel(name = "下次保养里程", orderNum = "610")
     private BigDecimal nextMileage;
 
     /**
      * 当前油量
      */
-    @Excel(name = "当前油量", orderNum = "570")
+    @Excel(name = "当前油量", orderNum = "620")
     private Integer oilCapacity;
 
     /**
      * version
      */
     @NotNull
-    @Excel(name = "version", orderNum = "580")
+    @Excel(name = "version", orderNum = "630")
     private BigInteger version;
 
     /**
      * 删除flag，{0:未删除，1:已删除}
      */
     @NotNull
-    @Excel(name = "删除flag，{0:未删除，1:已删除}", orderNum = "590")
+    @Excel(name = "删除flag，{0:未删除，1:已删除}", orderNum = "640")
     private Integer isDel;
 
     /**
      * 迁移flag 0:非迁移数据 1:迁移数据
      */
     @NotNull
-    @Excel(name = "迁移flag 0:非迁移数据 1:迁移数据", orderNum = "600")
+    @Excel(name = "迁移flag 0:非迁移数据 1:迁移数据", orderNum = "650")
     private Integer isMigration;
 
     /**
      * 工单的来源工单ID，适用于创建返厂单的情况
      */
-    @Excel(name = "工单的来源工单ID，适用于创建返厂单的情况", orderNum = "610")
+    @Excel(name = "工单的来源工单ID，适用于创建返厂单的情况", orderNum = "660")
     private BigInteger fromMaintainId;
 
     /**
      * 通过单据生成单据时的类型（例，创建返厂单时为FCD）
      */
     @Size(min = 0, max = 10, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "通过单据生成单据时的类型（例，创建返厂单时为FCD）", orderNum = "620")
+    @Excel(name = "通过单据生成单据时的类型（例，创建返厂单时为FCD）", orderNum = "670")
     private String fromMaintainType;
 
     /**
      * 与工单关联的车辆预检单ID
      */
-    @Excel(name = "与工单关联的车辆预检单ID", orderNum = "630")
+    @Excel(name = "与工单关联的车辆预检单ID", orderNum = "680")
     private BigInteger carpreviewMaintainId;
 
     /**
@@ -436,806 +467,935 @@ public class TsMaintainVo extends Vo {
      */
     @NotNull
     @Size(min = 0, max = 4, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "工单质检状态，未质检（9000），合格（9100），不合格（9200），返工合格（9300）", orderNum = "640")
+    @Excel(name = "工单质检状态，未质检（9000），合格（9100），不合格（9200），返工合格（9300）", orderNum = "690")
     private String qualityCheckStatus;
 
     /**
      * 综合会员卡/计次卡/套餐卡的优惠金额
      */
     @NotNull
-    @Excel(name = "综合会员卡/计次卡/套餐卡的优惠金额", orderNum = "650")
+    @Excel(name = "综合会员卡/计次卡/套餐卡的优惠金额", orderNum = "700")
     private BigDecimal vipExpenseFavourable;
 
     /**
      * 套餐优惠总金额
      */
-    @Excel(name = "套餐优惠总金额", orderNum = "660")
+    @Excel(name = "套餐优惠总金额", orderNum = "710")
     private BigDecimal packageFavourable;
 
     /**
      * 项目折扣优惠
      */
     @NotNull
-    @Excel(name = "项目折扣优惠", orderNum = "670")
+    @Excel(name = "项目折扣优惠", orderNum = "720")
     private BigDecimal serviceDiscountFavourable;
 
     /**
      * 材料折扣优惠
      */
     @NotNull
-    @Excel(name = "材料折扣优惠", orderNum = "680")
+    @Excel(name = "材料折扣优惠", orderNum = "730")
     private BigDecimal partinfoDiscountFavourable;
 
     /**
      * 储值卡消费金额
      */
-    @Excel(name = "储值卡消费金额", orderNum = "690")
+    @Excel(name = "储值卡消费金额", orderNum = "740")
     private BigDecimal czkExpense;
 
     /**
      * 储值卡消费优惠金额
      */
-    @Excel(name = "储值卡消费优惠金额", orderNum = "700")
+    @Excel(name = "储值卡消费优惠金额", orderNum = "750")
     private BigDecimal czkExpenseFavourable;
 
     /**
      * 服务项目客户等级优惠金额
      */
-    @Excel(name = "服务项目客户等级优惠金额", orderNum = "710")
+    @Excel(name = "服务项目客户等级优惠金额", orderNum = "760")
     private BigDecimal serviceFavourable;
 
     /**
      * 服务项目客户等级优惠金额
      */
-    @Excel(name = "服务项目客户等级优惠金额", orderNum = "720")
+    @Excel(name = "服务项目客户等级优惠金额", orderNum = "770")
     private BigDecimal serviceFavourableBackup;
 
     /**
      * 材料项目客户等级优惠金额
      */
-    @Excel(name = "材料项目客户等级优惠金额", orderNum = "730")
+    @Excel(name = "材料项目客户等级优惠金额", orderNum = "780")
     private BigDecimal partinfoFavourable;
 
     /**
      * 材料项目客户等级优惠金额
      */
-    @Excel(name = "材料项目客户等级优惠金额", orderNum = "740")
+    @Excel(name = "材料项目客户等级优惠金额", orderNum = "790")
     private BigDecimal partinfoFavourableBackup;
 
     /**
      * 积分优惠金额
      */
-    @Excel(name = "积分优惠金额", orderNum = "750")
+    @Excel(name = "积分优惠金额", orderNum = "800")
     private BigDecimal pointFavourable;
 
     /**
      * 使用积分
      */
-    @Excel(name = "使用积分", orderNum = "760")
+    @Excel(name = "使用积分", orderNum = "810")
     private BigDecimal usePoint;
 
     /**
      * 结清优惠
      */
-    @Excel(name = "结清优惠", orderNum = "770")
+    @Excel(name = "结清优惠", orderNum = "820")
     private BigDecimal discountFavourable;
 
     /**
      * 来源单号
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "来源单号", orderNum = "780")
+    @Excel(name = "来源单号", orderNum = "830")
     private String sourceBillNo;
 
     /**
      * 来源id
      */
-    @Excel(name = "来源id", orderNum = "790")
+    @Excel(name = "来源id", orderNum = "840")
     private BigInteger idSourceBill;
 
     /**
      * 收银优惠
      */
     @NotNull
-    @Excel(name = "收银优惠", orderNum = "800")
+    @Excel(name = "收银优惠", orderNum = "850")
     private BigDecimal gatheringFavourable;
 
     /**
      * 车辆分类
      */
-    @Excel(name = "车辆分类", orderNum = "810")
+    @Excel(name = "车辆分类", orderNum = "860")
     private BigInteger carCategoryId;
 
     /**
      * idChannel
      */
-    @Excel(name = "idChannel", orderNum = "820")
+    @Excel(name = "idChannel", orderNum = "870")
     private BigInteger idChannel;
 
     /**
      * insuranceContacts
      */
     @Size(min = 0, max = 100, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "insuranceContacts", orderNum = "830")
+    @Excel(name = "insuranceContacts", orderNum = "880")
     private String insuranceContacts;
 
     /**
      * insuranceContactTelephone
      */
     @Size(min = 0, max = 20, message = "长度必须在{min}和{max}之间")
-    @Excel(name = "insuranceContactTelephone", orderNum = "840")
+    @Excel(name = "insuranceContactTelephone", orderNum = "890")
     private String insuranceContactTelephone;
+
+
+    public void setPkId(BigInteger pkId) {
+        this.pkId = pkId;
+    }
 
     public BigInteger getPkId() {
         return pkId;
     }
 
-    public void setPkId(BigInteger pkId) {
-        this.pkId = pkId;
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
     }
 
     public String getBillNo() {
         return billNo;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
     }
 
     public Date getBillDate() {
         return billDate;
     }
 
-    public void setBillDate(Date billDate) {
-        this.billDate = billDate;
+
+    public void setIdCustomer(BigInteger idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public BigInteger getIdCustomer() {
         return idCustomer;
     }
 
-    public void setIdCustomer(BigInteger idCustomer) {
-        this.idCustomer = idCustomer;
+
+    public void setIdCar(BigInteger idCar) {
+        this.idCar = idCar;
     }
 
     public BigInteger getIdCar() {
         return idCar;
     }
 
-    public void setIdCar(BigInteger idCar) {
-        this.idCar = idCar;
+
+    public void setIdMember(BigInteger idMember) {
+        this.idMember = idMember;
     }
 
     public BigInteger getIdMember() {
         return idMember;
     }
 
-    public void setIdMember(BigInteger idMember) {
-        this.idMember = idMember;
+
+    public void setMileage(BigDecimal mileage) {
+        this.mileage = mileage;
     }
 
     public BigDecimal getMileage() {
         return mileage;
     }
 
-    public void setMileage(BigDecimal mileage) {
-        this.mileage = mileage;
+
+    public void setMaintainType(String maintainType) {
+        this.maintainType = maintainType;
     }
 
     public String getMaintainType() {
         return maintainType;
     }
 
-    public void setMaintainType(String maintainType) {
-        this.maintainType = maintainType;
+
+    public void setBillType(String billType) {
+        this.billType = billType;
     }
 
     public String getBillType() {
         return billType;
     }
 
-    public void setBillType(String billType) {
-        this.billType = billType;
+
+    public void setMaintainTypeId(BigInteger maintainTypeId) {
+        this.maintainTypeId = maintainTypeId;
     }
 
     public BigInteger getMaintainTypeId() {
         return maintainTypeId;
     }
 
-    public void setMaintainTypeId(BigInteger maintainTypeId) {
-        this.maintainTypeId = maintainTypeId;
+
+    public void setBillStatus(String billStatus) {
+        this.billStatus = billStatus;
     }
 
     public String getBillStatus() {
         return billStatus;
     }
 
-    public void setBillStatus(String billStatus) {
-        this.billStatus = billStatus;
+
+    public void setBalanceStatus(String balanceStatus) {
+        this.balanceStatus = balanceStatus;
     }
 
     public String getBalanceStatus() {
         return balanceStatus;
     }
 
-    public void setBalanceStatus(String balanceStatus) {
-        this.balanceStatus = balanceStatus;
+
+    public void setStockStatus(String stockStatus) {
+        this.stockStatus = stockStatus;
     }
 
     public String getStockStatus() {
         return stockStatus;
     }
 
-    public void setStockStatus(String stockStatus) {
-        this.stockStatus = stockStatus;
+
+    public void setOweAmount(BigDecimal oweAmount) {
+        this.oweAmount = oweAmount;
     }
 
     public BigDecimal getOweAmount() {
         return oweAmount;
     }
 
-    public void setOweAmount(BigDecimal oweAmount) {
-        this.oweAmount = oweAmount;
+
+    public void setReceiveAmount(BigDecimal receiveAmount) {
+        this.receiveAmount = receiveAmount;
     }
 
     public BigDecimal getReceiveAmount() {
         return receiveAmount;
     }
 
-    public void setReceiveAmount(BigDecimal receiveAmount) {
-        this.receiveAmount = receiveAmount;
+
+    public void setPartinfoSubtotal(BigDecimal partinfoSubtotal) {
+        this.partinfoSubtotal = partinfoSubtotal;
     }
 
     public BigDecimal getPartinfoSubtotal() {
         return partinfoSubtotal;
     }
 
-    public void setPartinfoSubtotal(BigDecimal partinfoSubtotal) {
-        this.partinfoSubtotal = partinfoSubtotal;
+
+    public void setServiceSubtotal(BigDecimal serviceSubtotal) {
+        this.serviceSubtotal = serviceSubtotal;
     }
 
     public BigDecimal getServiceSubtotal() {
         return serviceSubtotal;
     }
 
-    public void setServiceSubtotal(BigDecimal serviceSubtotal) {
-        this.serviceSubtotal = serviceSubtotal;
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+
+    public void setAmountAll(BigDecimal amountAll) {
+        this.amountAll = amountAll;
     }
 
     public BigDecimal getAmountAll() {
         return amountAll;
     }
 
-    public void setAmountAll(BigDecimal amountAll) {
-        this.amountAll = amountAll;
+
+    public void setAmountReal(BigDecimal amountReal) {
+        this.amountReal = amountReal;
     }
 
     public BigDecimal getAmountReal() {
         return amountReal;
     }
 
-    public void setAmountReal(BigDecimal amountReal) {
-        this.amountReal = amountReal;
+
+    public void setVipExpense(BigDecimal vipExpense) {
+        this.vipExpense = vipExpense;
     }
 
     public BigDecimal getVipExpense() {
         return vipExpense;
     }
 
-    public void setVipExpense(BigDecimal vipExpense) {
-        this.vipExpense = vipExpense;
+
+    public void setIdOwnOrg(BigInteger idOwnOrg) {
+        this.idOwnOrg = idOwnOrg;
     }
 
     public BigInteger getIdOwnOrg() {
         return idOwnOrg;
     }
 
-    public void setIdOwnOrg(BigInteger idOwnOrg) {
-        this.idOwnOrg = idOwnOrg;
+
+    public void setIsAttached(Byte isAttached) {
+        this.isAttached = isAttached;
     }
 
     public Byte getIsAttached() {
         return isAttached;
     }
 
-    public void setIsAttached(Byte isAttached) {
-        this.isAttached = isAttached;
+
+    public void setIdEmployee(BigInteger idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public BigInteger getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(BigInteger idEmployee) {
-        this.idEmployee = idEmployee;
+
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public Date getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
+
+    public void setIdInsurer(BigInteger idInsurer) {
+        this.idInsurer = idInsurer;
     }
 
     public BigInteger getIdInsurer() {
         return idInsurer;
     }
 
-    public void setIdInsurer(BigInteger idInsurer) {
-        this.idInsurer = idInsurer;
+
+    public void setInsurancepolicyNo(String insurancepolicyNo) {
+        this.insurancepolicyNo = insurancepolicyNo;
     }
 
     public String getInsurancepolicyNo() {
         return insurancepolicyNo;
     }
 
-    public void setInsurancepolicyNo(String insurancepolicyNo) {
-        this.insurancepolicyNo = insurancepolicyNo;
+
+    public void setInsurancepolicyType(String insurancepolicyType) {
+        this.insurancepolicyType = insurancepolicyType;
     }
 
     public String getInsurancepolicyType() {
         return insurancepolicyType;
     }
 
-    public void setInsurancepolicyType(String insurancepolicyType) {
-        this.insurancepolicyType = insurancepolicyType;
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+
+    public void setReservationNumber(String reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 
     public String getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(String reservationNumber) {
-        this.reservationNumber = reservationNumber;
+
+    public void setComplateDate(Date complateDate) {
+        this.complateDate = complateDate;
     }
 
     public Date getComplateDate() {
         return complateDate;
     }
 
-    public void setComplateDate(Date complateDate) {
-        this.complateDate = complateDate;
+
+    public void setCompleteUser(BigInteger completeUser) {
+        this.completeUser = completeUser;
     }
 
     public BigInteger getCompleteUser() {
         return completeUser;
     }
 
-    public void setCompleteUser(BigInteger completeUser) {
-        this.completeUser = completeUser;
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     public String getMemo() {
         return memo;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo;
+
+    public void setCommissionCost(BigDecimal commissionCost) {
+        this.commissionCost = commissionCost;
     }
 
     public BigDecimal getCommissionCost() {
         return commissionCost;
     }
 
-    public void setCommissionCost(BigDecimal commissionCost) {
-        this.commissionCost = commissionCost;
+
+    public void setCommissionCostReal(BigDecimal commissionCostReal) {
+        this.commissionCostReal = commissionCostReal;
     }
 
     public BigDecimal getCommissionCostReal() {
         return commissionCostReal;
     }
 
-    public void setCommissionCostReal(BigDecimal commissionCostReal) {
-        this.commissionCostReal = commissionCostReal;
+
+    public void setCommissionCostRealCx(BigDecimal commissionCostRealCx) {
+        this.commissionCostRealCx = commissionCostRealCx;
+    }
+
+    public BigDecimal getCommissionCostRealCx() {
+        return commissionCostRealCx;
+    }
+
+
+    public void setCommissionCostRealSettlement(BigDecimal commissionCostRealSettlement) {
+        this.commissionCostRealSettlement = commissionCostRealSettlement;
     }
 
     public BigDecimal getCommissionCostRealSettlement() {
         return commissionCostRealSettlement;
     }
 
-    public void setCommissionCostRealSettlement(BigDecimal commissionCostRealSettlement) {
-        this.commissionCostRealSettlement = commissionCostRealSettlement;
+
+    public void setDiagnosisCost(BigDecimal diagnosisCost) {
+        this.diagnosisCost = diagnosisCost;
     }
 
     public BigDecimal getDiagnosisCost() {
         return diagnosisCost;
     }
 
-    public void setDiagnosisCost(BigDecimal diagnosisCost) {
-        this.diagnosisCost = diagnosisCost;
+
+    public void setDiagnosisCostReal(BigDecimal diagnosisCostReal) {
+        this.diagnosisCostReal = diagnosisCostReal;
     }
 
     public BigDecimal getDiagnosisCostReal() {
         return diagnosisCostReal;
     }
 
-    public void setDiagnosisCostReal(BigDecimal diagnosisCostReal) {
-        this.diagnosisCostReal = diagnosisCostReal;
+
+    public void setDiagnosisCostRealCx(BigDecimal diagnosisCostRealCx) {
+        this.diagnosisCostRealCx = diagnosisCostRealCx;
+    }
+
+    public BigDecimal getDiagnosisCostRealCx() {
+        return diagnosisCostRealCx;
+    }
+
+
+    public void setDiagnosisCostRealSettlement(BigDecimal diagnosisCostRealSettlement) {
+        this.diagnosisCostRealSettlement = diagnosisCostRealSettlement;
     }
 
     public BigDecimal getDiagnosisCostRealSettlement() {
         return diagnosisCostRealSettlement;
     }
 
-    public void setDiagnosisCostRealSettlement(BigDecimal diagnosisCostRealSettlement) {
-        this.diagnosisCostRealSettlement = diagnosisCostRealSettlement;
+
+    public void setCheckCost(BigDecimal checkCost) {
+        this.checkCost = checkCost;
     }
 
     public BigDecimal getCheckCost() {
         return checkCost;
     }
 
-    public void setCheckCost(BigDecimal checkCost) {
-        this.checkCost = checkCost;
+
+    public void setCheckCostReal(BigDecimal checkCostReal) {
+        this.checkCostReal = checkCostReal;
     }
 
     public BigDecimal getCheckCostReal() {
         return checkCostReal;
     }
 
-    public void setCheckCostReal(BigDecimal checkCostReal) {
-        this.checkCostReal = checkCostReal;
+
+    public void setCheckCostRealCx(BigDecimal checkCostRealCx) {
+        this.checkCostRealCx = checkCostRealCx;
+    }
+
+    public BigDecimal getCheckCostRealCx() {
+        return checkCostRealCx;
+    }
+
+
+    public void setCheckCostRealSettlement(BigDecimal checkCostRealSettlement) {
+        this.checkCostRealSettlement = checkCostRealSettlement;
     }
 
     public BigDecimal getCheckCostRealSettlement() {
         return checkCostRealSettlement;
     }
 
-    public void setCheckCostRealSettlement(BigDecimal checkCostRealSettlement) {
-        this.checkCostRealSettlement = checkCostRealSettlement;
+
+    public void setProcessCost(BigDecimal processCost) {
+        this.processCost = processCost;
     }
 
     public BigDecimal getProcessCost() {
         return processCost;
     }
 
-    public void setProcessCost(BigDecimal processCost) {
-        this.processCost = processCost;
+
+    public void setProcessCostReal(BigDecimal processCostReal) {
+        this.processCostReal = processCostReal;
     }
 
     public BigDecimal getProcessCostReal() {
         return processCostReal;
     }
 
-    public void setProcessCostReal(BigDecimal processCostReal) {
-        this.processCostReal = processCostReal;
+
+    public void setProcessCostRealCx(BigDecimal processCostRealCx) {
+        this.processCostRealCx = processCostRealCx;
+    }
+
+    public BigDecimal getProcessCostRealCx() {
+        return processCostRealCx;
+    }
+
+
+    public void setProcessCostRealSettlement(BigDecimal processCostRealSettlement) {
+        this.processCostRealSettlement = processCostRealSettlement;
     }
 
     public BigDecimal getProcessCostRealSettlement() {
         return processCostRealSettlement;
     }
 
-    public void setProcessCostRealSettlement(BigDecimal processCostRealSettlement) {
-        this.processCostRealSettlement = processCostRealSettlement;
+
+    public void setManagementCost(BigDecimal managementCost) {
+        this.managementCost = managementCost;
     }
 
     public BigDecimal getManagementCost() {
         return managementCost;
     }
 
-    public void setManagementCost(BigDecimal managementCost) {
-        this.managementCost = managementCost;
+
+    public void setManagementCostReal(BigDecimal managementCostReal) {
+        this.managementCostReal = managementCostReal;
     }
 
     public BigDecimal getManagementCostReal() {
         return managementCostReal;
     }
 
-    public void setManagementCostReal(BigDecimal managementCostReal) {
-        this.managementCostReal = managementCostReal;
+
+    public void setManagementCostRealCx(BigDecimal managementCostRealCx) {
+        this.managementCostRealCx = managementCostRealCx;
+    }
+
+    public BigDecimal getManagementCostRealCx() {
+        return managementCostRealCx;
+    }
+
+
+    public void setManagementCostRealSettlement(BigDecimal managementCostRealSettlement) {
+        this.managementCostRealSettlement = managementCostRealSettlement;
     }
 
     public BigDecimal getManagementCostRealSettlement() {
         return managementCostRealSettlement;
     }
 
-    public void setManagementCostRealSettlement(BigDecimal managementCostRealSettlement) {
-        this.managementCostRealSettlement = managementCostRealSettlement;
+
+    public void setRepairPerson(String repairPerson) {
+        this.repairPerson = repairPerson;
     }
 
     public String getRepairPerson() {
         return repairPerson;
     }
 
-    public void setRepairPerson(String repairPerson) {
-        this.repairPerson = repairPerson;
+
+    public void setRepairPersonContact(String repairPersonContact) {
+        this.repairPersonContact = repairPersonContact;
     }
 
     public String getRepairPersonContact() {
         return repairPersonContact;
     }
 
-    public void setRepairPersonContact(String repairPersonContact) {
-        this.repairPersonContact = repairPersonContact;
+
+    public void setContactSex(String contactSex) {
+        this.contactSex = contactSex;
     }
 
     public String getContactSex() {
         return contactSex;
     }
 
-    public void setContactSex(String contactSex) {
-        this.contactSex = contactSex;
+
+    public void setContactCredentialsNumber(String contactCredentialsNumber) {
+        this.contactCredentialsNumber = contactCredentialsNumber;
     }
 
     public String getContactCredentialsNumber() {
         return contactCredentialsNumber;
     }
 
-    public void setContactCredentialsNumber(String contactCredentialsNumber) {
-        this.contactCredentialsNumber = contactCredentialsNumber;
+
+    public void setContactCredentialsType(String contactCredentialsType) {
+        this.contactCredentialsType = contactCredentialsType;
     }
 
     public String getContactCredentialsType() {
         return contactCredentialsType;
     }
 
-    public void setContactCredentialsType(String contactCredentialsType) {
-        this.contactCredentialsType = contactCredentialsType;
+
+    public void setContactDetailAddress(String contactDetailAddress) {
+        this.contactDetailAddress = contactDetailAddress;
     }
 
     public String getContactDetailAddress() {
         return contactDetailAddress;
     }
 
-    public void setContactDetailAddress(String contactDetailAddress) {
-        this.contactDetailAddress = contactDetailAddress;
+
+    public void setNextMaintainDate(String nextMaintainDate) {
+        this.nextMaintainDate = nextMaintainDate;
     }
 
     public String getNextMaintainDate() {
         return nextMaintainDate;
     }
 
-    public void setNextMaintainDate(String nextMaintainDate) {
-        this.nextMaintainDate = nextMaintainDate;
+
+    public void setNextMileage(BigDecimal nextMileage) {
+        this.nextMileage = nextMileage;
     }
 
     public BigDecimal getNextMileage() {
         return nextMileage;
     }
 
-    public void setNextMileage(BigDecimal nextMileage) {
-        this.nextMileage = nextMileage;
+
+    public void setOilCapacity(Integer oilCapacity) {
+        this.oilCapacity = oilCapacity;
     }
 
     public Integer getOilCapacity() {
         return oilCapacity;
     }
 
-    public void setOilCapacity(Integer oilCapacity) {
-        this.oilCapacity = oilCapacity;
+
+    public void setVersion(BigInteger version) {
+        this.version = version;
     }
 
     public BigInteger getVersion() {
         return version;
     }
 
-    public void setVersion(BigInteger version) {
-        this.version = version;
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
     }
 
     public Integer getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Integer isDel) {
-        this.isDel = isDel;
+
+    public void setIsMigration(Integer isMigration) {
+        this.isMigration = isMigration;
     }
 
     public Integer getIsMigration() {
         return isMigration;
     }
 
-    public void setIsMigration(Integer isMigration) {
-        this.isMigration = isMigration;
+
+    public void setFromMaintainId(BigInteger fromMaintainId) {
+        this.fromMaintainId = fromMaintainId;
     }
 
     public BigInteger getFromMaintainId() {
         return fromMaintainId;
     }
 
-    public void setFromMaintainId(BigInteger fromMaintainId) {
-        this.fromMaintainId = fromMaintainId;
+
+    public void setFromMaintainType(String fromMaintainType) {
+        this.fromMaintainType = fromMaintainType;
     }
 
     public String getFromMaintainType() {
         return fromMaintainType;
     }
 
-    public void setFromMaintainType(String fromMaintainType) {
-        this.fromMaintainType = fromMaintainType;
+
+    public void setCarpreviewMaintainId(BigInteger carpreviewMaintainId) {
+        this.carpreviewMaintainId = carpreviewMaintainId;
     }
 
     public BigInteger getCarpreviewMaintainId() {
         return carpreviewMaintainId;
     }
 
-    public void setCarpreviewMaintainId(BigInteger carpreviewMaintainId) {
-        this.carpreviewMaintainId = carpreviewMaintainId;
+
+    public void setQualityCheckStatus(String qualityCheckStatus) {
+        this.qualityCheckStatus = qualityCheckStatus;
     }
 
     public String getQualityCheckStatus() {
         return qualityCheckStatus;
     }
 
-    public void setQualityCheckStatus(String qualityCheckStatus) {
-        this.qualityCheckStatus = qualityCheckStatus;
+
+    public void setVipExpenseFavourable(BigDecimal vipExpenseFavourable) {
+        this.vipExpenseFavourable = vipExpenseFavourable;
     }
 
     public BigDecimal getVipExpenseFavourable() {
         return vipExpenseFavourable;
     }
 
-    public void setVipExpenseFavourable(BigDecimal vipExpenseFavourable) {
-        this.vipExpenseFavourable = vipExpenseFavourable;
+
+    public void setPackageFavourable(BigDecimal packageFavourable) {
+        this.packageFavourable = packageFavourable;
     }
 
     public BigDecimal getPackageFavourable() {
         return packageFavourable;
     }
 
-    public void setPackageFavourable(BigDecimal packageFavourable) {
-        this.packageFavourable = packageFavourable;
+
+    public void setServiceDiscountFavourable(BigDecimal serviceDiscountFavourable) {
+        this.serviceDiscountFavourable = serviceDiscountFavourable;
     }
 
     public BigDecimal getServiceDiscountFavourable() {
         return serviceDiscountFavourable;
     }
 
-    public void setServiceDiscountFavourable(BigDecimal serviceDiscountFavourable) {
-        this.serviceDiscountFavourable = serviceDiscountFavourable;
+
+    public void setPartinfoDiscountFavourable(BigDecimal partinfoDiscountFavourable) {
+        this.partinfoDiscountFavourable = partinfoDiscountFavourable;
     }
 
     public BigDecimal getPartinfoDiscountFavourable() {
         return partinfoDiscountFavourable;
     }
 
-    public void setPartinfoDiscountFavourable(BigDecimal partinfoDiscountFavourable) {
-        this.partinfoDiscountFavourable = partinfoDiscountFavourable;
+
+    public void setCzkExpense(BigDecimal czkExpense) {
+        this.czkExpense = czkExpense;
     }
 
     public BigDecimal getCzkExpense() {
         return czkExpense;
     }
 
-    public void setCzkExpense(BigDecimal czkExpense) {
-        this.czkExpense = czkExpense;
+
+    public void setCzkExpenseFavourable(BigDecimal czkExpenseFavourable) {
+        this.czkExpenseFavourable = czkExpenseFavourable;
     }
 
     public BigDecimal getCzkExpenseFavourable() {
         return czkExpenseFavourable;
     }
 
-    public void setCzkExpenseFavourable(BigDecimal czkExpenseFavourable) {
-        this.czkExpenseFavourable = czkExpenseFavourable;
+
+    public void setServiceFavourable(BigDecimal serviceFavourable) {
+        this.serviceFavourable = serviceFavourable;
     }
 
     public BigDecimal getServiceFavourable() {
         return serviceFavourable;
     }
 
-    public void setServiceFavourable(BigDecimal serviceFavourable) {
-        this.serviceFavourable = serviceFavourable;
+
+    public void setServiceFavourableBackup(BigDecimal serviceFavourableBackup) {
+        this.serviceFavourableBackup = serviceFavourableBackup;
     }
 
     public BigDecimal getServiceFavourableBackup() {
         return serviceFavourableBackup;
     }
 
-    public void setServiceFavourableBackup(BigDecimal serviceFavourableBackup) {
-        this.serviceFavourableBackup = serviceFavourableBackup;
+
+    public void setPartinfoFavourable(BigDecimal partinfoFavourable) {
+        this.partinfoFavourable = partinfoFavourable;
     }
 
     public BigDecimal getPartinfoFavourable() {
         return partinfoFavourable;
     }
 
-    public void setPartinfoFavourable(BigDecimal partinfoFavourable) {
-        this.partinfoFavourable = partinfoFavourable;
+
+    public void setPartinfoFavourableBackup(BigDecimal partinfoFavourableBackup) {
+        this.partinfoFavourableBackup = partinfoFavourableBackup;
     }
 
     public BigDecimal getPartinfoFavourableBackup() {
         return partinfoFavourableBackup;
     }
 
-    public void setPartinfoFavourableBackup(BigDecimal partinfoFavourableBackup) {
-        this.partinfoFavourableBackup = partinfoFavourableBackup;
+
+    public void setPointFavourable(BigDecimal pointFavourable) {
+        this.pointFavourable = pointFavourable;
     }
 
     public BigDecimal getPointFavourable() {
         return pointFavourable;
     }
 
-    public void setPointFavourable(BigDecimal pointFavourable) {
-        this.pointFavourable = pointFavourable;
+
+    public void setUsePoint(BigDecimal usePoint) {
+        this.usePoint = usePoint;
     }
 
     public BigDecimal getUsePoint() {
         return usePoint;
     }
 
-    public void setUsePoint(BigDecimal usePoint) {
-        this.usePoint = usePoint;
+
+    public void setDiscountFavourable(BigDecimal discountFavourable) {
+        this.discountFavourable = discountFavourable;
     }
 
     public BigDecimal getDiscountFavourable() {
         return discountFavourable;
     }
 
-    public void setDiscountFavourable(BigDecimal discountFavourable) {
-        this.discountFavourable = discountFavourable;
+
+    public void setSourceBillNo(String sourceBillNo) {
+        this.sourceBillNo = sourceBillNo;
     }
 
     public String getSourceBillNo() {
         return sourceBillNo;
     }
 
-    public void setSourceBillNo(String sourceBillNo) {
-        this.sourceBillNo = sourceBillNo;
+
+    public void setIdSourceBill(BigInteger idSourceBill) {
+        this.idSourceBill = idSourceBill;
     }
 
     public BigInteger getIdSourceBill() {
         return idSourceBill;
     }
 
-    public void setIdSourceBill(BigInteger idSourceBill) {
-        this.idSourceBill = idSourceBill;
+
+    public void setGatheringFavourable(BigDecimal gatheringFavourable) {
+        this.gatheringFavourable = gatheringFavourable;
     }
 
     public BigDecimal getGatheringFavourable() {
         return gatheringFavourable;
     }
 
-    public void setGatheringFavourable(BigDecimal gatheringFavourable) {
-        this.gatheringFavourable = gatheringFavourable;
+
+    public void setCarCategoryId(BigInteger carCategoryId) {
+        this.carCategoryId = carCategoryId;
     }
 
     public BigInteger getCarCategoryId() {
         return carCategoryId;
     }
 
-    public void setCarCategoryId(BigInteger carCategoryId) {
-        this.carCategoryId = carCategoryId;
+
+    public void setIdChannel(BigInteger idChannel) {
+        this.idChannel = idChannel;
     }
 
     public BigInteger getIdChannel() {
         return idChannel;
     }
 
-    public void setIdChannel(BigInteger idChannel) {
-        this.idChannel = idChannel;
+
+    public void setInsuranceContacts(String insuranceContacts) {
+        this.insuranceContacts = insuranceContacts;
     }
 
     public String getInsuranceContacts() {
         return insuranceContacts;
     }
 
-    public void setInsuranceContacts(String insuranceContacts) {
-        this.insuranceContacts = insuranceContacts;
+
+    public void setInsuranceContactTelephone(String insuranceContactTelephone) {
+        this.insuranceContactTelephone = insuranceContactTelephone;
     }
 
     public String getInsuranceContactTelephone() {
         return insuranceContactTelephone;
-    }
-
-    public void setInsuranceContactTelephone(String insuranceContactTelephone) {
-        this.insuranceContactTelephone = insuranceContactTelephone;
     }
 
 
