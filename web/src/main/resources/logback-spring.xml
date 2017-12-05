@@ -74,9 +74,35 @@
             <queueSize>512</queueSize>
             <appender-ref ref="sql"/>
         </appender>
+        <appender name="druid" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>${LOG_PATH}/${myAppName}-druid.log</File>
+            <encoder>
+                <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
+            </encoder>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>DEBUG</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${myAppName}-druid.log.%d{yyyy-MM-dd}</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <appender name="druid-queue" class="ch.qos.logback.classic.AsyncAppender">
+            <queueSize>512</queueSize>
+            <appender-ref ref="druid"/>
+        </appender>
         <!-- mybatis loggers -->
         <logger name="dao" level="DEBUG" additivity="false">
             <appender-ref ref="sql-queue"/>
+        </logger>
+        <logger name="druid.sql.DataSource" level="DEBUG" additivity="false">
+            <appender-ref ref="druid-queue"/>
+        </logger>
+        <logger name="druid.sql.Connection" level="DEBUG" additivity="false">
+            <appender-ref ref="druid-queue"/>
+        </logger>
+        <logger name="druid.sql.Statement" level="DEBUG" additivity="false">
+            <appender-ref ref="druid-queue"/>
         </logger>
     </springProfile>
     <appender name="error-queue" class="ch.qos.logback.classic.AsyncAppender">

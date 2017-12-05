@@ -26,7 +26,6 @@ public class DataSourceConfig1 extends AbstractDataSourceConfig {
     @Bean(PRIMARY_DATA_SOURCE_NAME)
     @Primary
     public DataSource dataSource1() {
-        DataSource datasource = getDatasource();
-        return datasource;
+        return this;
     }
 }

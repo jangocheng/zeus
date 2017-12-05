@@ -13,7 +13,6 @@ import com.air.tqb.service.user.UserService;
 import com.air.tqb.vo.TbUserVo;
 import com.baomidou.kisso.SSOToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +23,6 @@ import static com.f6car.base.constant.Constants.SESSION_ATTRIBUTE_NAME_USER;
  * @author qixiaobo
  */
 @Component
-@ConditionalOnBean(UserService.class)
 public class CustomCallback implements LoginCallback {
     @Autowired(required = false)
     private UserService userService;
