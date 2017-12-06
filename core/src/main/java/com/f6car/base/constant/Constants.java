@@ -48,4 +48,6 @@ public class Constants {
 
     public static final String SESSION_ATTRIBUTE_NAME_USER = "user";
 
+    public static final double DOUBLE_EQUALE_GAP = 0.00001d;
+
 }
