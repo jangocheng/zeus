@@ -8,7 +8,7 @@
 
 package com.f6car.base.service.impl.maintain;
 
-import com.f6car.base.dao.maintain.TsMaintainMapper;
+import com.f6car.base.dao2.maintain.TsMaintainMapper;
 import com.f6car.base.po.maintain.TsMaintain;
 import com.f6car.base.vo.maintain.TsMaintainVo;
 import com.f6car.base.so.maintain.TsMaintainSo;
@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 /**
  * Created by qixiaobo on 2017-12-05.
  */
-@Service
+//@Service
 @Transactional(rollbackFor = Exception.class, timeout = 1)
 public class TsMaintainServiceImpl extends AbstractService<TsMaintain, TsMaintainVo, TsMaintainSo, BigInteger> implements TsMaintainService {
     @Resource

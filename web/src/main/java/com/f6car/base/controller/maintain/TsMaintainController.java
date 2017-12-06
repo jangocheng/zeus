@@ -27,7 +27,7 @@ import java.math.BigInteger;
 /**
  * Created by qixiaobo on 2017-12-05.
  */
-@RestController
+//@RestController
 @RequestMapping("maintain")
 public class TsMaintainController extends AbstractRestController<TsMaintainVo, TsMaintainSo, BigInteger> {
     @Resource

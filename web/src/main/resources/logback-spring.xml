@@ -56,7 +56,7 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
-    <springProfile name="dev,local-test,re">
+    <springProfile name="dev,local-test,re,unit-test">
         <appender name="sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <File>${LOG_PATH}/${myAppName}-sql.log</File>
             <encoder>
