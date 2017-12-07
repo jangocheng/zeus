@@ -95,6 +95,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
                 handler = workBookHandler;
             }
         }
+        Preconditions.checkNotNull(handler);
         if (isIExcel) {
             handler.preProcess((IExcel) resultData);
         }

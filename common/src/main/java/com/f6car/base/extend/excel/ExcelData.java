@@ -18,7 +18,7 @@ import java.util.List;
 public class ExcelData<V extends Vo> implements IExcel<V> {
     private static final long serialVersionUID = -5673716568016909172L;
     private List<V> data;
-    private List<Cell> dataCells;
+    private List<? extends Cell> dataCells;
 
     public ExcelData(List<V> data) {
         this.data = data;
@@ -35,12 +35,12 @@ public class ExcelData<V extends Vo> implements IExcel<V> {
     }
 
     @Override
-    public List<Cell> getDataCells() {
+    public List<? extends Cell> getDataCells() {
         return dataCells;
     }
 
     @Override
-    public void setDataCells(List<Cell> dataCells) {
+    public void setDataCells(List<? extends Cell> dataCells) {
         this.dataCells = dataCells;
     }
 }

@@ -186,6 +186,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         FastJsonConfig config = new FastJsonConfig();
         config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.DisableCircularReferenceDetect,
                 SerializerFeature.WriteNullNumberAsZero);
         config.setSerializeFilters(serializeFilters());
         converter.setFastJsonConfig(config);

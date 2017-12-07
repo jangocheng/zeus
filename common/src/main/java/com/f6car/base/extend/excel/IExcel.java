@@ -27,8 +27,8 @@ public interface IExcel<V extends Vo> extends Serializable {
     /**
      * @return 获取数据schema
      */
-    List<Cell> getDataCells();
+    List<? extends Cell> getDataCells();
 
-    void setDataCells(List<Cell> dataCells);
+    void setDataCells(List<? extends Cell> dataCells);
 
 }
