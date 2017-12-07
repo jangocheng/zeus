@@ -9,19 +9,18 @@
 package com.f6car.base.config;
 
 
-import com.air.tqb.realm.KissoShiroInterceptor;
 import com.air.tqb.realm.LoginCallback;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
+import com.f6car.base.web.converter.WorkBookHandler;
 import com.f6car.base.web.interceptor.CleanInterceptor;
 import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
@@ -51,7 +50,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.f6car.base.web.converter.ExcelHttpMessageConverter.EXCEL_MEDIA_TYPE;
@@ -67,7 +66,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
 
     @Autowired(required = false)
-    private List<LoginCallback> callbackList = new ArrayList<>();
+    private List<LoginCallback> callbackList = Collections.emptyList();
+
+    @Autowired
+    private List<WorkBookHandler> handlerList = Collections.emptyList();
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -138,12 +140,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
-        interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
-        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
-        kissoShiroInterceptor.setLoginCallbackList(callbackList);
-        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
-        interceptorRegistrationExcluedStaticCallback(kissoInterceptor);
+//        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
+//        interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
+//        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
+//        kissoShiroInterceptor.setLoginCallbackList(callbackList);
+//        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
+//        interceptorRegistrationExcluedStaticCallback(kissoInterceptor);
         InterceptorRegistration cleanInterceptor = registry.addInterceptor(new CleanInterceptor());
         interceptorRegistrationExcluedStaticCallback(cleanInterceptor);
 
@@ -196,6 +198,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private HttpMessageConverter<Object> createExcelHttpMessageConverter() {
         ExcelHttpMessageConverter excelHttpMessageConverter = new ExcelHttpMessageConverter();
+        excelHttpMessageConverter.setHandlerList(handlerList);
         return excelHttpMessageConverter;
     }
 

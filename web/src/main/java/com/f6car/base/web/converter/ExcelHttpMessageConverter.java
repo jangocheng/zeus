@@ -9,13 +9,14 @@
 package com.f6car.base.web.converter;
 
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-import cn.afterturn.easypoi.excel.export.ExcelExportServer;
 import com.f6car.base.common.Result;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
 import com.f6car.base.core.F6Static;
-import com.f6car.base.exception.ServiceException;
+import com.f6car.base.extend.excel.IExcel;
+import com.f6car.base.extend.excel.IExcelWithTotal;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -36,7 +37,7 @@ import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.f6car.base.core.F6Static.getExcelExportParam;
@@ -47,8 +48,11 @@ import static com.f6car.base.core.F6Static.getExcelExportParam;
 public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Object>
         implements GenericHttpMessageConverter<Object> {
     public static final MediaType EXCEL_MEDIA_TYPE = new MediaType("application", "vnd.ms-excel");
-    private static final int MAX_SIZE = 1000;
+
     private static final String LOGGER_PATTERN = "Excel export user:%s cost:%sms";
+
+    private static final int MAX_SIZE = 1000;
+    private List<WorkBookHandler> handlerList = Collections.emptyList();
 
     public ExcelHttpMessageConverter() {
         super(EXCEL_MEDIA_TYPE);
@@ -64,57 +68,49 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
         return null;
     }
 
+    public void setHandlerList(List<WorkBookHandler> handlerList) {
+        this.handlerList = handlerList;
+    }
+
     @Override
     protected void writeInternal(Object o, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         Stopwatch stopwatch = Stopwatch.createStarted();
         HttpHeaders headers = outputMessage.getHeaders();
-        Collection data = getActualData((Result) o);
+        Result result = (Result) o;
         ExcelExportParam excelExportParam = getExcelExportParam();
-        Workbook workbook;
-        switch (excelExportParam.getExcelExport()) {
-            case NormalExcel:
-                workbook = getWorkBook(excelExportParam.getExportParams().getType(), data.size());
-                new ExcelExportServer().createSheet(workbook, excelExportParam.getExportParams(),
-                        (Class<?>) excelExportParam.getClazz(),
-                        (Collection<?>) data);
-                break;
-            case MapExcel:
-                workbook = getWorkBook(excelExportParam.getExportParams().getType(), data.size());
-                new ExcelExportServer().createSheetForMap(workbook, excelExportParam.getExportParams(),
-                        excelExportParam.getExcelExportEntities(),
-                        (Collection<? extends Map<?, ?>>) data);
-                break;
-            case BigExcel:
-            case MapExcelGraph:
-            case PDFTemplate:
-            case TemplateExcel:
-            case TemplateWord:
-            default:
-                throw new ServiceException(excelExportParam.getExcelExport() + " not supprot now!");
+        ExcelType type = excelExportParam.getExportParams().getType();
+        Object resultData = result.getData();
+        Preconditions.checkArgument(resultData != null, "result data is null");
+        boolean isIExcel = false;
+        boolean isIExcelWithTotal = false;
+        if (resultData instanceof IExcel) {
+            isIExcel = true;
+            if (isIExcel) {
+                isIExcelWithTotal = resultData instanceof IExcelWithTotal;
+            }
+        }
+        WorkBookHandler handler = null;
+        for (WorkBookHandler workBookHandler : handlerList) {
+            if (workBookHandler.canProcess(excelExportParam.getExcelExport())) {
+                handler = workBookHandler;
+            }
+        }
+        if (isIExcel) {
+            handler.preProcess((IExcel) resultData);
         }
 
+        Collection data = getActualData(result);
+        Workbook workbook = getWorkBook(type, data.size());
+        handler.process(workbook, data);
+        if (isIExcelWithTotal) {
+            handler.afterProcess(workbook, ((IExcelWithTotal) resultData));
+        }
         if (excelExportParam.getFileName() != null) {
             String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
             headers.setContentDispositionFormData("attachment", codedFileName);
         }
         workbook.write(outputMessage.getBody());
         logger.info(String.format(LOGGER_PATTERN, F6Static.getUser(), stopwatch.elapsed(TimeUnit.MILLISECONDS)));
-    }
-
-    private Collection getActualData(Result r) {
-        if (r != null && r.getData() != null) {
-            Object data = r.getData();
-            if (data instanceof PageInfo) {
-                data = ((PageInfo) data).getList();
-            } else if (!(data instanceof Collection)) {
-                data = Lists.newArrayList(data);
-            }
-            return (Collection) data;
-
-        }
-        return Collections.emptyList();
-
-
     }
 
     @Override
@@ -151,6 +147,24 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
     @Override
     public void write(Object o, Type type, MediaType contentType, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
         super.write(o, contentType, outputMessage);
+    }
+
+    private Collection getActualData(Result r) {
+        if (r != null && r.getData() != null) {
+            Object data = r.getData();
+            if (data instanceof PageInfo) {
+                data = ((PageInfo) data).getList();
+            } else if (data instanceof IExcel) {
+                data = ((IExcel) data).getData();
+            } else if (!(data instanceof Collection)) {
+                data = Lists.newArrayList(data);
+            }
+            return (Collection) data;
+
+        }
+        return Collections.emptyList();
+
+
     }
 
     private Workbook getWorkBook(ExcelType type, int size) {

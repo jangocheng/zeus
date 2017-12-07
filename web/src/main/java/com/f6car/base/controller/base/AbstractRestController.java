@@ -31,7 +31,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     protected Class<V> voClazz;
     @Autowired
-    private Service<V, S, PK> service;
+    protected Service<V, S, PK> service;
 
     public AbstractRestController() {
         TypeToken<V> voType = new TypeToken<V>(getClass()) {
