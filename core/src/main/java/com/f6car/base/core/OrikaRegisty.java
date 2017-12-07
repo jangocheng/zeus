@@ -10,6 +10,9 @@ package com.f6car.base.core;
 
 import ma.glasnost.orika.MapperFactory;
 
+/**
+ * @author qixiaobo
+ */
 public interface OrikaRegisty {
     /**
      * @param factory

@@ -11,6 +11,9 @@ package com.f6car.base.core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author qixiaobo
+ */
 public class F6Static {
     private F6Static() {
 

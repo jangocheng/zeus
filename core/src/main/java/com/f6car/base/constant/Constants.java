@@ -50,4 +50,8 @@ public class Constants {
 
     public static final double DOUBLE_EQUALE_GAP = 0.00001d;
 
+    public static final String DEFAULT_DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DAY_FORMAT_PATTERN = "yyyy-MM-dd";
+    public static final String DEFAULT_CHARSET_NAME = "UTF-8";
+
 }
