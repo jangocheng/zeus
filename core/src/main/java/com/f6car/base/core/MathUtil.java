@@ -15,7 +15,7 @@ import static com.f6car.base.constant.Constants.DOUBLE_EQUALE_GAP;
 /**
  * @author qixiaobo
  */
-public class MathUtil {
+public final class MathUtil {
     private MathUtil() {
 
     }

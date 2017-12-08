@@ -11,7 +11,7 @@ package com.f6car.base.constant;
 /**
  * @author qixiaobo
  */
-public class Constants {
+public final class Constants {
     private Constants() {
 
     }

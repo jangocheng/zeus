@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * @author qixiaobo
+ */
 public class ReturnUrlParamFilter extends FormAuthenticationFilter {
     @Override
     public String getLoginUrl() {

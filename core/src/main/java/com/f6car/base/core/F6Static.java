@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author qixiaobo
  */
-public class F6Static {
+public final class F6Static {
     private F6Static() {
 
     }
