@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@ActiveProfiles("dev")
+@ActiveProfiles("unit-test")
 public abstract class BaseTest {
     @Autowired
     private WebApplicationContext context;

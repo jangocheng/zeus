@@ -9,22 +9,17 @@
 package com.f6car.base.config;
 
 
-import com.air.tqb.realm.LoginCallback;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
 import com.f6car.base.web.converter.WorkBookHandler;
-import com.f6car.base.web.interceptor.CSRFInterceptor;
-import com.f6car.base.web.interceptor.CleanInterceptor;
-import com.f6car.base.web.interceptor.KissoShiroInterceptor;
 import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
@@ -40,10 +35,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
@@ -66,11 +58,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
-
-
-    @Autowired(required = false)
-    private List<LoginCallback> callbackList = Collections.emptyList();
-
+    @Autowired
+    private List<HandlerInterceptor> interceptorList = Collections.emptyList();
     @Autowired
     private List<WorkBookHandler> handlerList = Collections.emptyList();
 
@@ -143,18 +132,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     //添加拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration ssoInterceptor = registry.addInterceptor(new SSOSpringInterceptor());
-        interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
-        KissoShiroInterceptor kissoShiroInterceptor = new KissoShiroInterceptor();
-        kissoShiroInterceptor.setLoginCallbackList(callbackList);
-        InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
-        interceptorRegistrationExcluedStaticCallback(kissoInterceptor);
-        InterceptorRegistration csrfInterceptor = registry.addInterceptor(new CSRFInterceptor());
-        interceptorRegistrationExcluedStaticCallback(csrfInterceptor);
-        InterceptorRegistration cleanInterceptor = registry.addInterceptor(new CleanInterceptor());
-        interceptorRegistrationExcluedStaticCallback(cleanInterceptor);
-
+        for (HandlerInterceptor handlerInterceptor : interceptorList) {
+            logger.info("add interceptor " + handlerInterceptor.getClass());
+            InterceptorRegistration ssoInterceptor = registry.addInterceptor(handlerInterceptor);
+            interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
+        }
     }
+
 
     private void interceptorRegistrationExcluedStaticCallback(InterceptorRegistration interceptorRegistration) {
         List<ResourceHandler> resourceHandlerList = resourceHandlerConfig().getResourceHandlerList();

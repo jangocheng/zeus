@@ -13,6 +13,9 @@ import com.f6car.base.constant.Constants;
 import com.f6car.base.core.F6Static;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,8 @@ import static com.f6car.base.constant.Constants.SESSION_ATTRIBUTE_NAME_USER;
 /**
  * @author qixiaobo
  */
+@Order(Ordered.HIGHEST_PRECEDENCE + 3)
+@Component
 public class CleanInterceptor extends HandlerInterceptorAdapter {
 
     private static final List<String> POSSIBLE_IP_HEADER = Lists.newArrayList("x-forwarded-for", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR");

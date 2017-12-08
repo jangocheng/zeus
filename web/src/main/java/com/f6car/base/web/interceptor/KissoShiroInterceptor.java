@@ -14,21 +14,30 @@ import com.baomidou.kisso.SSOToken;
 import com.baomidou.kisso.common.shiro.SSOAuthToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
  * @author qixiaobo
  */
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
+@Component
+@Profile("!unit-test")
 public class KissoShiroInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = Logger.getLogger("KissoShiroInterceptor");
-    private List<LoginCallback> loginCallbackList = new ArrayList();
+    @Autowired
+    private List<LoginCallback> loginCallbackList = Collections.emptyList();
 
     public KissoShiroInterceptor() {
     }

@@ -11,7 +11,7 @@ package com.f6car.base.controller.base;
 import com.f6car.base.annotation.CSRFTokenRefresh;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultGenerator;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class SystemController {
-    @RequestMapping("csrf")
+    @GetMapping("csrf")
     @CSRFTokenRefresh
     public Result csrfToken() {
         return ResultGenerator.genSuccessResult();
     }
 
-    @RequestMapping("time")
+    @GetMapping("time")
     public Result time() {
         return ResultGenerator.genSuccessResult(System.currentTimeMillis());
     }
