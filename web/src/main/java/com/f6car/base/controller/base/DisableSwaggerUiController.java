@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * @author qixiaobo
  */
-@Profile("prod")
+@Profile({"prod", "unit-test"})
 @RestController
 public class DisableSwaggerUiController {
     @RequestMapping(value = "swagger-ui.html", method = RequestMethod.GET)

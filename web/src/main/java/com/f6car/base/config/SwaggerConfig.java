@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author qixiaobo
  */
-@Profile({"!prod"})
+@Profile({"!prod", "unit-test"})
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
