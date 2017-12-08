@@ -23,9 +23,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author qixiaobo
  */
+@Profile({"!prod"})
 @Configuration
 @EnableSwagger2
-@Profile({"dev", "local-test", "re", "prod-trial"})
 public class SwaggerConfig {
 
     @Bean
