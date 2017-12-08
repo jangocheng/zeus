@@ -8,6 +8,7 @@
 
 package com.f6car.base.controller.base;
 
+import com.f6car.base.annotation.CSRFTokenRefresh;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultGenerator;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SystemController {
     @RequestMapping("csrf")
+    @CSRFTokenRefresh
     public Result csrfToken() {
         return ResultGenerator.genSuccessResult();
     }
