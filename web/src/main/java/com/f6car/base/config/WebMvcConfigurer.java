@@ -22,6 +22,7 @@ import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
 import com.f6car.base.web.converter.WorkBookHandler;
+import com.f6car.base.web.interceptor.CSRFInterceptor;
 import com.f6car.base.web.interceptor.CleanInterceptor;
 import com.f6car.base.web.interceptor.KissoShiroInterceptor;
 import com.f6car.base.web.json.BigIntegerValueFilter;
@@ -148,6 +149,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         kissoShiroInterceptor.setLoginCallbackList(callbackList);
         InterceptorRegistration kissoInterceptor = registry.addInterceptor(kissoShiroInterceptor);
         interceptorRegistrationExcluedStaticCallback(kissoInterceptor);
+        InterceptorRegistration csrfInterceptor = registry.addInterceptor(new CSRFInterceptor());
+        interceptorRegistrationExcluedStaticCallback(csrfInterceptor);
         InterceptorRegistration cleanInterceptor = registry.addInterceptor(new CleanInterceptor());
         interceptorRegistrationExcluedStaticCallback(cleanInterceptor);
 

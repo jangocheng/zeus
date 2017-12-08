@@ -10,6 +10,8 @@ package com.f6car.base.controller.base;
 
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import com.f6car.base.annotation.CSRFTokenRefresh;
+import com.f6car.base.annotation.CSRFTokenValidate;
 import com.f6car.base.common.*;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
@@ -41,6 +43,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @PostMapping()
     @ApiOperation(value = "新建实体", notes = "")
+    @CSRFTokenValidate
     public Result add(@RequestBody V vo) {
         service.saveSelective(vo);
         return ResultGenerator.genSuccessResult();
@@ -48,6 +51,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除实体", notes = "")
+    @CSRFTokenValidate
     public Result delete(@PathVariable PK id) {
         service.deleteById(id);
         return ResultGenerator.genSuccessResult();
@@ -56,6 +60,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @PutMapping
     @ApiOperation(value = "更新实体", notes = "")
+    @CSRFTokenValidate
     public Result update(@RequestBody V vo) {
         service.updateByPrimaryKeySelective(vo);
         return ResultGenerator.genSuccessResult();
@@ -63,6 +68,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @GetMapping
     @ApiOperation(value = "获取实体列表", notes = "")
+    @CSRFTokenRefresh
     public Result list(S so) {
         PageHelper.startPage(so.getCurrentPage(), so.getPageSize());
         List<V> list = service.findAll();
@@ -83,6 +89,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @GetMapping("/{id}")
     @ApiOperation(value = "获取单个实体", notes = "")
+    @CSRFTokenRefresh
     public Result detail(@PathVariable PK id) {
 
         V vo = service.findById(id);
@@ -91,6 +98,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @DeleteMapping("/batch")
     @ApiOperation(value = "批量删除实体", notes = "")
+    @CSRFTokenValidate
     public Result batchDelete(@RequestParam String ids) {
         service.deleteByIds(ids);
         return ResultGenerator.genSuccessResult();
@@ -98,6 +106,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @GetMapping("/batch")
     @ApiOperation(value = "批量获取实体", notes = "")
+    @CSRFTokenRefresh
     public Result batchDetail(@RequestParam String ids) {
         List<V> vos = service.findByIds(ids);
         return ResultGenerator.genSuccessResult(vos);
@@ -105,6 +114,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
 
     @PostMapping("/batch")
     @ApiOperation(value = "批量新建实体", notes = "")
+    @CSRFTokenValidate
     public Result add(@RequestBody List<V> vos) {
         service.save(vos);
         return ResultGenerator.genSuccessResult();
