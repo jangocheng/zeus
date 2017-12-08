@@ -13,6 +13,7 @@ import com.f6car.base.annotation.CSRFTokenValidate;
 import com.f6car.base.exception.InvalidCSRFTokenException;
 import com.google.common.base.Strings;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ import static com.f6car.base.constant.Constants.SESSION_ATTRIBUTE_NAME_CSRF_TOKE
  */
 @Order(Ordered.HIGHEST_PRECEDENCE + 2)
 @Component
+@Profile("!unit-test")
 public class CSRFInterceptor extends HandlerInterceptorAdapter {
     private int length = 10;
 
@@ -76,6 +78,6 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String generateToken() {
-        return RandomStringUtils.random(10, true, true);
+        return RandomStringUtils.random(length, true, true);
     }
 }
