@@ -22,6 +22,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
 import static com.f6car.base.constant.Constants.HTTP_HEADER_NAME_CSRF_TOKEN;
@@ -49,10 +50,13 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
                     if (Strings.isNullOrEmpty(headerCsrf) || headerCsrf.length() != length) {
                         throw new InvalidCSRFTokenException();
                     }
-                    String sessionCsrf = (String) request.getSession().getAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN);
+                    HttpSession session = request.getSession();
+                    String sessionCsrf = (String) session.getAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN);
                     if (!headerCsrf.equals(sessionCsrf)) {
                         throw new InvalidCSRFTokenException();
                     }
+                    session.removeAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN);
+
                 }
 
             }
