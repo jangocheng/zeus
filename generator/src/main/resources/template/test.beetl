@@ -24,6 +24,13 @@ public class ${modelNameUpperCamel}ControllerTest extends BaseTest {
         ${modelNameUpperCamel}Vo ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
         ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
         RequestBuilder request;
+         //delete
+        request = delete("/${baseRequestMapping}/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
         //add
         request = post("/${baseRequestMapping}")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -51,7 +58,7 @@ public class ${modelNameUpperCamel}ControllerTest extends BaseTest {
         //update
         ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
         ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
-        request = put("/${modelNameLowerCamel}")
+        request = put("/${baseRequestMapping}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(${modelNameLowerCamel}));
         mvc.perform(request)

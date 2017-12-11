@@ -32,6 +32,13 @@ public class TbUserControllerTest extends BaseTest {
         TbUserVo tbUser = MockTestUtil.getJavaBean(TbUserVo.class);
         tbUser.setPkId(new BigInteger(pkId));
         RequestBuilder request;
+        //delete
+        request = delete("/user/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
         //add
         request = post("/user")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -59,7 +66,7 @@ public class TbUserControllerTest extends BaseTest {
         //update
         tbUser = MockTestUtil.getJavaBean(TbUserVo.class);
         tbUser.setPkId(new BigInteger(pkId));
-        request = put("/tbUser")
+        request = put("/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(tbUser));
         mvc.perform(request)

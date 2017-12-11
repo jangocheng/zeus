@@ -32,6 +32,13 @@ public class TbOrgControllerTest extends BaseTest {
         TbOrgVo tbOrg = MockTestUtil.getJavaBean(TbOrgVo.class);
         tbOrg.setPkId(new BigInteger(pkId));
         RequestBuilder request;
+        //delete
+        request = delete("/org/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
         //add
         request = post("/org")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -59,7 +66,7 @@ public class TbOrgControllerTest extends BaseTest {
         //update
         tbOrg = MockTestUtil.getJavaBean(TbOrgVo.class);
         tbOrg.setPkId(new BigInteger(pkId));
-        request = put("/tbOrg")
+        request = put("/org")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(tbOrg));
         mvc.perform(request)
