@@ -47,7 +47,7 @@ public class UserControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value("200"))
                 .andExpect(jsonPath("message").value("SUCCESS"))
-                .andExpect(jsonPath("data.pkId").value(1))
+                .andExpect(jsonPath("data.pkId").value(pkId))
                 .andReturn();
         request = get("/user");
         mvc.perform(request)
@@ -73,7 +73,7 @@ public class UserControllerTest extends BaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value("200"))
                 .andExpect(jsonPath("message").value("SUCCESS"))
-                .andExpect(jsonPath("data.pkId").value(1))
+                .andExpect(jsonPath("data.pkId").value(pkId))
                 .andReturn();
 
         //delete
