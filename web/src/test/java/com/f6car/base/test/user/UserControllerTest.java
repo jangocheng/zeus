@@ -8,27 +8,82 @@
 
 package com.f6car.base.test.user;
 
+import com.alibaba.fastjson.JSON;
 import com.f6car.base.test.base.BaseTest;
+import com.f6car.base.test.util.MockTestUtil;
+import com.f6car.base.vo.user.TbUserVo;
 import org.junit.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import java.math.BigInteger;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 public class UserControllerTest extends BaseTest {
+    private String pkId = "1";
 
     @Test
-    public void testUserController() throws Exception {
-
-        RequestBuilder request = null;
-
-
+    public void testCRUD() throws Exception {
+        TbUserVo user = MockTestUtil.getJavaBean(TbUserVo.class);
+        user.setPkId(new BigInteger(pkId));
+        RequestBuilder request;
+        //add
+        request = post("/user")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSON.toJSONString(user));
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+        //get
+        request = get("/user/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andExpect(jsonPath("data.pkId").value(1))
+                .andReturn();
         request = get("/user");
         mvc.perform(request)
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
 
+        //update
+        user = MockTestUtil.getJavaBean(TbUserVo.class);
+        user.setPkId(new BigInteger(pkId));
+        request = put("/user")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSON.toJSONString(user));
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+        //get
+        request = get("/user/" + pkId);
+        MvcResult mvcResult = mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andExpect(jsonPath("data.pkId").value(1))
+                .andReturn();
 
+        //delete
+        request = delete("/user/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
 
     }
+
 }

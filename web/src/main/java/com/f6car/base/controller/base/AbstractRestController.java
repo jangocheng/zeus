@@ -46,7 +46,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
     @CSRFTokenValidate
     public Result add(@RequestBody V vo) {
         service.saveSelective(vo);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(vo);
     }
 
     @DeleteMapping("/{id}")
@@ -63,7 +63,7 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
     @CSRFTokenValidate
     public Result update(@RequestBody V vo) {
         service.updateByPrimaryKeySelective(vo);
-        return ResultGenerator.genSuccessResult();
+        return ResultGenerator.genSuccessResult(vo);
     }
 
     @GetMapping
