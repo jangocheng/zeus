@@ -1,13 +1,27 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.po.org;
 
 import com.f6car.base.common.Po;
+import se.spagettikod.optimist.Identity;
+import se.spagettikod.optimist.OptimisticLocking;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+@OptimisticLocking("tb_org")
 @Table(name = "tb_org")
 public class TbOrg extends Po {
     /**
@@ -16,6 +30,7 @@ public class TbOrg extends Po {
     @Id
     @Column(name = "pk_id")
     @NotNull
+    @Identity("pk_id")
     private BigInteger pkId;
 
     /**
@@ -207,6 +222,13 @@ public class TbOrg extends Po {
      */
     @Column(name = "is_task_mode_enable")
     private Byte isTaskModeEnable;
+
+    /**
+     * 是否允许未完工先收款
+     */
+    @Column(name = "is_ahead_gathering_enable")
+    @NotNull
+    private Byte isAheadGatheringEnable;
 
     @Column(name = "position_x")
     private BigDecimal positionX;
@@ -856,6 +878,24 @@ public class TbOrg extends Po {
      */
     public void setIsTaskModeEnable(Byte isTaskModeEnable) {
         this.isTaskModeEnable = isTaskModeEnable;
+    }
+
+    /**
+     * 获取是否允许未完工先收款
+     *
+     * @return is_ahead_gathering_enable - 是否允许未完工先收款
+     */
+    public Byte getIsAheadGatheringEnable() {
+        return isAheadGatheringEnable;
+    }
+
+    /**
+     * 设置是否允许未完工先收款
+     *
+     * @param isAheadGatheringEnable 是否允许未完工先收款
+     */
+    public void setIsAheadGatheringEnable(Byte isAheadGatheringEnable) {
+        this.isAheadGatheringEnable = isAheadGatheringEnable;
     }
 
     /**

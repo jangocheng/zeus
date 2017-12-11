@@ -1,12 +1,26 @@
+/*
+ * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
 package com.f6car.base.po.user;
 
 import com.f6car.base.common.Po;
-import java.math.BigInteger;
-import java.util.Date;
-import javax.persistence.*;
+import se.spagettikod.optimist.Identity;
+import se.spagettikod.optimist.OptimisticLocking;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigInteger;
+import java.util.Date;
 
+@OptimisticLocking("tb_user")
 @Table(name = "tb_user")
 public class TbUser extends Po {
     /**
@@ -15,6 +29,7 @@ public class TbUser extends Po {
     @Id
     @Column(name = "pk_id")
     @NotNull
+    @Identity("pk_id")
     private BigInteger pkId;
 
     /**

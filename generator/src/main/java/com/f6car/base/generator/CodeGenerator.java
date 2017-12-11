@@ -43,12 +43,14 @@ public class CodeGenerator {
     private static final String PROJECT_PATH = System.getProperty("user.dir");
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/template";
     private static final String JAVA_PATH = "/src/main/java";
+    private static final String TEST_JAVA_PATH = "/src/test/java";
     private static final String RESOURCES_PATH = "/src/main/resources";
     private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);
     private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);
     private static final String PACKAGE_PATH_SO = packageConvertPath(SO_PACKAGE);
     private static final String PACKAGE_PATH_VO = packageConvertPath(VO_PACKAGE);
     private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);
+    private static final String PACKAGE_PATH_TEST = packageConvertPath(TEST_PACKAGE);
     private static final String AUTHOR = "qixiaobo";
     private static final Splitter TABLE_NAME_SPLITTER = Splitter.on(UNDER_LINE).trimResults().omitEmptyStrings();
     private static final String DATE = new DateTime().toString("yyyy-MM-dd");
@@ -68,7 +70,7 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        genCode("ts_maintain");
+        genCode("tb_user", "tb_menu", "tb_org");
     }
 
     /**
@@ -101,7 +103,7 @@ public class CodeGenerator {
 
         genModelAndMapper(tableName, modelName, subPackage);
         genService(tableName, modelName, subPackage);
-        genController(tableName, modelName, subPackage);
+        genControllerAndTest(tableName, modelName, subPackage);
     }
 
 
@@ -129,8 +131,8 @@ public class CodeGenerator {
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetProject(PROJECT_PATH + Module.model.moduleDir + JAVA_PATH);
         String javaPackage = MODEL_PACKAGE;
-        String mapperPackage = MAPPER_PACKAGE + "2";
-        String xmlPackage = "mapper" + "2";
+        String mapperPackage = MAPPER_PACKAGE;
+        String xmlPackage = "mapper";
         if (!Strings.isNullOrEmpty(subPackageName)) {
             javaPackage += ("." + subPackageName);
             mapperPackage += ("." + subPackageName);
@@ -194,7 +196,7 @@ public class CodeGenerator {
         data.put("modelNameUpperCamel", modelNameUpperCamel);
         data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
         data.put("basePackage", BASE_PACKAGE);
-        data.put("pk",PK_TYPE.get());
+        data.put("pk", PK_TYPE.get());
         String servicePackageDir = PROJECT_PATH + Module.service.moduleDir + JAVA_PATH + PACKAGE_PATH_SERVICE;
         String serviceImplPackageDir = PROJECT_PATH + Module.serviceimpl.moduleDir + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL;
         String soPackageDir = PROJECT_PATH + Module.dto.moduleDir + JAVA_PATH + PACKAGE_PATH_SO;
@@ -245,12 +247,12 @@ public class CodeGenerator {
         System.out.println(filename + "生成成功");
     }
 
-    public static void genController(String tableName, String modelName, String subPackage) throws IOException {
+    public static void genControllerAndTest(String tableName, String modelName, String subPackage) throws IOException {
 
         Map<String, Object> data = new HashMap<>();
         data.put("date", DATE);
         data.put("author", AUTHOR);
-        data.put("pk",PK_TYPE.get());
+        data.put("pk", PK_TYPE.get());
         String modelNameUpperCamel = StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName) : modelName;
         List<String> strings = TABLE_NAME_SPLITTER.splitToList(tableName.toLowerCase());
         if (strings.size() >= 2) {
@@ -267,12 +269,16 @@ public class CodeGenerator {
         data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
         data.put("basePackage", BASE_PACKAGE);
         String controllerPackageDir = PROJECT_PATH + Module.web.moduleDir + JAVA_PATH + PACKAGE_PATH_CONTROLLER;
+        String testPackageDir = PROJECT_PATH + Module.web.moduleDir + TEST_JAVA_PATH + PACKAGE_PATH_TEST;
         if (!Strings.isNullOrEmpty(subPackage)) {
             data.put("subPackage", "." + subPackage);
             controllerPackageDir += ("/" + subPackage + "/");
+            testPackageDir += ("/" + subPackage + "/");
         }
 
+
         generateByTemplate(gt, "/controller.beetl", controllerPackageDir + modelNameUpperCamel + "Controller.java", data);
+        generateByTemplate(gt, "/test.beetl", testPackageDir + modelNameUpperCamel + "ControllerTest.java", data);
         PO_FIELDS.remove();
     }
 

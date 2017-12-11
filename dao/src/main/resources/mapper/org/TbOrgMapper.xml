@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.f6car.base.dao.org.TbOrgMapper">
   <resultMap id="BaseResultMap" type="com.f6car.base.po.org.TbOrg">
@@ -39,6 +47,7 @@
     <result column="id_customer_carzone" jdbcType="VARCHAR" property="idCustomerCarzone" />
     <result column="id_department_carzone" jdbcType="VARCHAR" property="idDepartmentCarzone" />
     <result column="is_task_mode_enable" jdbcType="TINYINT" property="isTaskModeEnable" />
+      <result column="is_ahead_gathering_enable" jdbcType="TINYINT" property="isAheadGatheringEnable"/>
     <result column="position_x" jdbcType="DECIMAL" property="positionX" />
     <result column="position_y" jdbcType="DECIMAL" property="positionY" />
     <result column="open_time" jdbcType="TIME" property="openTime" />
@@ -59,9 +68,10 @@
     pk_id, code, name, contacts, contact_number, contact_mobile, fax, province, city, 
     area, street, address, detail_address, email, creationtime, modifiedtime, creator, 
     modifier, id_parent, is_del, entity_code, bussiness, logo, store_logo, application_logo, 
-    responsible, zip_code, end_date, qq, bank_account, account_number, id_customer_carzone, 
-    id_department_carzone, is_task_mode_enable, position_x, position_y, open_time, close_time, 
-    abbreviation, from_flag, enable_supplier_export, is_cloud_item_searchable, is_cloud_part_searchable, 
-    need_scan_login, need_check_uuid, uuid_count_limit
+    responsible, zip_code, end_date, qq, bank_account, account_number, id_customer_carzone,
+      id_department_carzone, is_task_mode_enable, is_ahead_gathering_enable, position_x,
+      position_y, open_time, close_time, abbreviation, from_flag, enable_supplier_export,
+      is_cloud_item_searchable, is_cloud_part_searchable, need_scan_login, need_check_uuid,
+      uuid_count_limit
   </sql>
 </mapper>

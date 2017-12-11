@@ -1,0 +1,81 @@
+package ${basePackage}.test${subPackage!};
+
+import com.alibaba.fastjson.JSON;
+import com.f6car.base.test.base.BaseTest;
+import com.f6car.base.test.util.MockTestUtil;
+import ${basePackage}.vo${subPackage!}.${modelNameUpperCamel}Vo;
+import org.junit.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+
+import java.math.BigInteger;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
+public class ${modelNameUpperCamel}ControllerTest extends BaseTest {
+    private String pkId = "1";
+
+    @Test
+    public void testCRUD() throws Exception {
+        ${modelNameUpperCamel}Vo ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
+        ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
+        RequestBuilder request;
+        //add
+        request = post("/${baseRequestMapping}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSON.toJSONString(${modelNameLowerCamel}));
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+        //get
+        request = get("/${baseRequestMapping}/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andExpect(jsonPath("data.pkId").value(pkId))
+                .andReturn();
+        request = get("/${baseRequestMapping}");
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+
+        //update
+        ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
+        ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
+        request = put("/${modelNameLowerCamel}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSON.toJSONString(${modelNameLowerCamel}));
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+        //get
+        request = get("/${baseRequestMapping}/" + pkId);
+        MvcResult mvcResult = mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andExpect(jsonPath("data.pkId").value(pkId))
+                .andReturn();
+
+        //delete
+        request = delete("/${baseRequestMapping}/" + pkId);
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("code").value("200"))
+                .andExpect(jsonPath("message").value("SUCCESS"))
+                .andReturn();
+
+    }
+
+}

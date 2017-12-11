@@ -21,7 +21,7 @@ import java.util.Date;
 
 
 /**
- * Created by qixiaobo on 2017-11-29.
+ * Created by qixiaobo on 2017-12-11.
  */
 public class TbOrgVo extends Vo {
 
@@ -234,79 +234,86 @@ public class TbOrgVo extends Vo {
     @Excel(name = "是否启用pad端，对工单等可以使用任务模式，0代表不启用，1代表启用",orderNum="300")
     private Byte   isTaskModeEnable;
 
+    /**
+     * 是否允许未完工先收款
+     */
+    @NotNull
+    @Excel(name = "是否允许未完工先收款", orderNum = "310")
+    private Byte isAheadGatheringEnable;
+
    /**
      * positionX
     */
-    @Excel(name = "positionX",orderNum="310")
+   @Excel(name = "positionX", orderNum = "320")
     private BigDecimal   positionX;
 
    /**
      * positionY
     */
-    @Excel(name = "positionY",orderNum="320")
+   @Excel(name = "positionY", orderNum = "330")
     private BigDecimal   positionY;
 
    /**
      * openTime
     */
-    @Excel(name = "openTime",orderNum="330")
+   @Excel(name = "openTime", orderNum = "340")
     private Date   openTime;
 
    /**
      * closeTime
     */
-    @Excel(name = "closeTime",orderNum="340")
+   @Excel(name = "closeTime", orderNum = "350")
     private Date   closeTime;
 
    /**
      * 门店缩写，用于连锁查询显示门店信息
     */
    @Size(min = 0, max = 10, message = "长度必须在{min}和{max}之间")
-   @Excel(name = "门店缩写，用于连锁查询显示门店信息", orderNum = "350")
+   @Excel(name = "门店缩写，用于连锁查询显示门店信息", orderNum = "360")
    private String abbreviation;
 
    /**
      * 开户来源，0表示从f6开户，1表示从康众开户，2表示从帮您车开户
     */
-    @Excel(name = "开户来源，0表示从f6开户，1表示从康众开户，2表示从帮您车开户",orderNum="360")
+   @Excel(name = "开户来源，0表示从f6开户，1表示从康众开户，2表示从帮您车开户", orderNum = "370")
     private Integer   fromFlag;
 
    /**
      * 是否允许供应商导出进销存数据
     */
-    @Excel(name = "是否允许供应商导出进销存数据",orderNum="370")
+   @Excel(name = "是否允许供应商导出进销存数据", orderNum = "380")
     private Byte   enableSupplierExport;
 
    /**
      * 快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）
     */
    @NotNull
-   @Excel(name = "快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）", orderNum = "380")
+   @Excel(name = "快捷搜索项目时是否能够搜索平台项目（0：不可，1：可）", orderNum = "390")
    private Byte isCloudItemSearchable;
 
    /**
      * 快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）
     */
    @NotNull
-   @Excel(name = "快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）", orderNum = "390")
+   @Excel(name = "快捷搜索材料时是否能够搜索平台材料（0：不可，1：可）", orderNum = "400")
    private Byte isCloudPartSearchable;
 
    /**
      * pc端是否需要扫码登录。0:不需要；1:需要扫码
     */
-    @Excel(name = "pc端是否需要扫码登录。0:不需要；1:需要扫码",orderNum="400")
+   @Excel(name = "pc端是否需要扫码登录。0:不需要；1:需要扫码", orderNum = "410")
     private Byte   needScanLogin;
 
    /**
      * 移动端登录是否需要检查设备uuid。0：不需要；1:需要检查uuid
     */
-    @Excel(name = "移动端登录是否需要检查设备uuid。0：不需要；1:需要检查uuid",orderNum="410")
+   @Excel(name = "移动端登录是否需要检查设备uuid。0：不需要；1:需要检查uuid", orderNum = "420")
     private Byte   needCheckUuid;
 
    /**
      * 该门店可以登录的移动设备uuid的上限数
     */
-    @Excel(name = "该门店可以登录的移动设备uuid的上限数",orderNum="420")
+   @Excel(name = "该门店可以登录的移动设备uuid的上限数", orderNum = "430")
     private Integer   uuidCountLimit;
 
 
@@ -577,6 +584,14 @@ public class TbOrgVo extends Vo {
 
     public Byte getIsTaskModeEnable() {
        return isTaskModeEnable;
+    }
+
+    public Byte getIsAheadGatheringEnable() {
+        return isAheadGatheringEnable;
+    }
+
+    public void setIsAheadGatheringEnable(Byte isAheadGatheringEnable) {
+        this.isAheadGatheringEnable = isAheadGatheringEnable;
     }
 
 

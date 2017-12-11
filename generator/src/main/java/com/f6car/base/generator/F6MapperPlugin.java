@@ -87,7 +87,6 @@ public class F6MapperPlugin extends MapperPlugin {
             topLevelClass.addImportedType("javax.validation.constraints.NotNull");
             field.addAnnotation("@NotNull");
         }
-
         if (introspectedColumn.isStringColumn()) {
             topLevelClass.addImportedType("javax.validation.constraints.Size");
             field.addAnnotation("@Size(min = 0, max = " + introspectedColumn.getLength() + " , message = \"长度必须在{min}和{max}之间\")");
@@ -95,6 +94,10 @@ public class F6MapperPlugin extends MapperPlugin {
         if ("version".equalsIgnoreCase(field.getName())) {
             field.addAnnotation("@Version(\"" + introspectedColumn.getActualColumnName() + "\")");
             topLevelClass.addImportedType("se.spagettikod.optimist.Version");
+        }
+        if (introspectedTable.getPrimaryKeyColumns().contains(introspectedColumn)) {
+            topLevelClass.addImportedType("se.spagettikod.optimist.Identity");
+            field.addAnnotation("@Identity(\"" + introspectedColumn.getActualColumnName() + "\")");
         }
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
                 introspectedTable, modelClassType);

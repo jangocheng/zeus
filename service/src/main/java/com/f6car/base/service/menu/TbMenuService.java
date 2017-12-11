@@ -16,7 +16,7 @@ import java.math.BigInteger;
 
 
 /**
- * Created by qixiaobo on 2017-11-29.
+ * Created by qixiaobo on 2017-12-11.
  */
 public interface TbMenuService extends Service<TbMenuVo,TbMenuSo,BigInteger> {
 

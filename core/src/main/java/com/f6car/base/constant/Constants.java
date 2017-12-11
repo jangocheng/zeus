@@ -29,6 +29,8 @@ public final class Constants {
     //Controller所在包
     public static final String CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";
 
+    public static final String TEST_PACKAGE = BASE_PACKAGE + ".test";
+
     //vo所在包
     public static final String VO_PACKAGE = BASE_PACKAGE + ".vo";
 
