@@ -43,6 +43,7 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
+            HttpSession session = request.getSession();
             if (method.isAnnotationPresent(CSRFTokenValidate.class)) {
                 CSRFTokenValidate csrfTokenValidate = method.getAnnotation(CSRFTokenValidate.class);
                 if (csrfTokenValidate.value()) {
@@ -50,7 +51,7 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
                     if (Strings.isNullOrEmpty(headerCsrf) || headerCsrf.length() != length) {
                         throw new InvalidCSRFTokenException();
                     }
-                    HttpSession session = request.getSession();
+
                     String sessionCsrf = (String) session.getAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN);
                     if (!headerCsrf.equals(sessionCsrf)) {
                         throw new InvalidCSRFTokenException();
@@ -60,26 +61,18 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
                 }
 
             }
-        }
-        return super.preHandle(request, response, handler);
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if (ex == null && handler instanceof HandlerMethod) {
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
-            Method method = handlerMethod.getMethod();
             if (method.isAnnotationPresent(CSRFTokenRefresh.class)) {
                 CSRFTokenRefresh csrfTokenRefresh = method.getAnnotation(CSRFTokenRefresh.class);
                 if (csrfTokenRefresh.value()) {
                     String token = generateToken();
-                    request.getSession().setAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN, token);
+                    session.setAttribute(SESSION_ATTRIBUTE_NAME_CSRF_TOKEN, token);
                     response.setHeader(HTTP_HEADER_NAME_CSRF_TOKEN, token);
                 }
             }
         }
-        super.afterCompletion(request, response, handler, ex);
+        return super.preHandle(request, response, handler);
     }
+
 
     private String generateToken() {
         return RandomStringUtils.random(length, true, true);
