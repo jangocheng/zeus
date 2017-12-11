@@ -9,6 +9,7 @@
 package com.f6car.base.core;
 
 
+import com.f6car.base.annotation.SecurityLog;
 import com.f6car.base.common.Po;
 import com.f6car.base.common.Service;
 import com.f6car.base.common.So;
@@ -49,6 +50,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 1, rollbackFor = Exception.class)
+    @SecurityLog
     public int saveSelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
@@ -57,6 +59,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 2, rollbackFor = Exception.class)
+    @SecurityLog(showArgs = false)
     public int save(List<V> models) {
         Preconditions.checkArgument(models != null && !models.isEmpty());
         List<T> ts = orikaMapper.convertList(models, poClazz);
@@ -65,6 +68,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 1, rollbackFor = Exception.class)
+    @SecurityLog
     public int deleteById(PK id) {
         Preconditions.checkArgument(id != null);
         return mapper.deleteByPrimaryKey(id);
@@ -72,6 +76,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 2, rollbackFor = Exception.class)
+    @SecurityLog
     public int deleteByIds(String ids) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(ids));
         return mapper.deleteByIds(ids);
@@ -79,6 +84,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 2, rollbackFor = Exception.class)
+    @SecurityLog
     public int updateByPrimaryKeySelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
@@ -87,6 +93,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
 
     @Override
     @Transactional(timeout = 1, rollbackFor = Exception.class)
+    @SecurityLog
     public int updateByPrimaryKey(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);

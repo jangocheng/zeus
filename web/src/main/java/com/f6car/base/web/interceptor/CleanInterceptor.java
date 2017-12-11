@@ -65,6 +65,8 @@ public class CleanInterceptor extends HandlerInterceptorAdapter {
             F6Static.setOrg(user.getIdOwnOrg());
             F6Static.setUser(user.getPkId());
         }
+        F6Static.setType(F6Static.ActionType.WEB);
+        F6Static.setAction(request.getRequestURI());
         F6Static.setIp(getIpAddress(request));
         return super.preHandle(request, response, handler);
     }
