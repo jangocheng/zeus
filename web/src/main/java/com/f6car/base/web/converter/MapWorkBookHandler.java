@@ -59,6 +59,6 @@ public class MapWorkBookHandler extends AbstractWorkBookHandler {
 
     @Override
     public boolean canProcess(ExcelExport type) {
-        return type == ExcelExport.NormalExcel;
+        return type == ExcelExport.MapExcel;
     }
 }
