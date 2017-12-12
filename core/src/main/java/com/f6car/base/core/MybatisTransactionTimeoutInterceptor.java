@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.Properties;
 
 /**
- *
  * @author qixiaobo
  * @date 2016/12/1
  */
@@ -54,7 +53,11 @@ public class MybatisTransactionTimeoutInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
+        if (target instanceof StatementHandler) {
+            return Plugin.wrap(target, this);
+        } else {
+            return target;
+        }
     }
 
     @Override

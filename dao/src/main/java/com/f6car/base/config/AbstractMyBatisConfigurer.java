@@ -8,6 +8,7 @@
 
 package com.f6car.base.config;
 
+import com.f6car.base.core.F6PageHelper;
 import com.f6car.base.core.MybatisTransactionTimeoutInterceptor;
 import com.f6car.base.core.SoInterceptor;
 import com.github.pagehelper.PageHelper;
@@ -15,6 +16,8 @@ import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.ExecutorType;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import se.spagettikod.optimist.impl.OptimisticLockingInterceptor;
+import se.spagettikod.optimist.impl.mapper.MySqlMapper;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
@@ -37,7 +40,7 @@ public class AbstractMyBatisConfigurer {
         factory.setTypeAliasesPackage(MODEL_PACKAGE);
 
         //配置分页插件，详情请查阅官方文档
-        PageHelper pageHelper = new PageHelper();
+        PageHelper pageHelper = new F6PageHelper();
         Properties properties = new Properties();
         properties.setProperty("pageSizeZero", "true");
         //分页尺寸为0时查询所有纪录不再执行分页
@@ -46,9 +49,12 @@ public class AbstractMyBatisConfigurer {
         properties.setProperty("supportMethodsArguments", "false");
         //支持通过 Mapper 接口参数来传递分页参数
         pageHelper.setProperties(properties);
-
+        OptimisticLockingInterceptor optimisticLockingInterceptor = new OptimisticLockingInterceptor();
+        Properties optimisticProperties = new Properties();
+        optimisticProperties.setProperty("mapper", MySqlMapper.class.getName());
+        optimisticLockingInterceptor.setProperties(optimisticProperties);
         //添加插件
-        factory.setPlugins(new Interceptor[]{pageHelper, new SoInterceptor(), new MybatisTransactionTimeoutInterceptor()/*, new OptimisticLockingInterceptor()*/});
+        factory.setPlugins(new Interceptor[]{pageHelper, new SoInterceptor(), new MybatisTransactionTimeoutInterceptor(), optimisticLockingInterceptor});
 
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
         config.setDefaultStatementTimeout(5);

@@ -17,6 +17,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigInteger;
 
+/**
+ * @author qixiaobo
+ */
 @OptimisticLocking("tb_menu")
 @Table(name = "tb_menu")
 public class TbMenu extends Po {

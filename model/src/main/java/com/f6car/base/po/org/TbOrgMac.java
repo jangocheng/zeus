@@ -9,6 +9,8 @@
 package com.f6car.base.po.org;
 
 import com.f6car.base.common.Po;
+import se.spagettikod.optimist.Identity;
+import se.spagettikod.optimist.OptimisticLocking;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ import javax.validation.constraints.Size;
 import java.math.BigInteger;
 import java.util.Date;
 
+@OptimisticLocking("tb_org_mac")
 @Table(name = "tb_org_mac")
 public class TbOrgMac extends Po {
     /**
@@ -25,6 +28,7 @@ public class TbOrgMac extends Po {
      */
     @Id
     @Column(name = "pk_id")
+    @Identity("pk_id")
     private BigInteger pkId;
 
     /**
