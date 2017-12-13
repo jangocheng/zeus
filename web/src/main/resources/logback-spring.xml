@@ -111,7 +111,7 @@
     </appender>
     <appender name="security" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--for further documentation-->
-        <File>${LOG_PATH}/logs/security.log</File>
+        <File>${LOG_PATH}/security.log</File>
         <encoder>
             <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
         </encoder>
@@ -119,7 +119,7 @@
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/logs/security.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/security.log.%d{yyyy-MM-dd}</fileNamePattern>
             <maxHistory>60</maxHistory>
         </rollingPolicy>
     </appender>
