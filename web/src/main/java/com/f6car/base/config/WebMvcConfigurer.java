@@ -19,7 +19,6 @@ import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
-import com.f6car.base.web.converter.WorkBookHandler;
 import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
@@ -60,8 +59,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
     @Autowired
     private List<HandlerInterceptor> interceptorList = Collections.emptyList();
-    @Autowired
-    private List<WorkBookHandler> handlerList = Collections.emptyList();
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -187,9 +184,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     private HttpMessageConverter<Object> createExcelHttpMessageConverter() {
-        ExcelHttpMessageConverter excelHttpMessageConverter = new ExcelHttpMessageConverter();
-        excelHttpMessageConverter.setHandlerList(handlerList);
-        return excelHttpMessageConverter;
+        return excelHttpMessageConverter();
+    }
+
+    @Bean
+    public ExcelHttpMessageConverter excelHttpMessageConverter() {
+        return new ExcelHttpMessageConverter();
     }
 
 

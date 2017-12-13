@@ -23,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -52,6 +53,7 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
     private static final String LOGGER_PATTERN = "Excel export user:%s cost:%sms";
 
     private static final int MAX_SIZE = 1000;
+    @Autowired
     private List<WorkBookHandler> handlerList = Collections.emptyList();
 
     public ExcelHttpMessageConverter() {
