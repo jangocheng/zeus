@@ -12,6 +12,8 @@ import com.air.tqb.realm.CustomRpcRealm;
 import com.air.tqb.realm.LoginCallback;
 import com.air.tqb.shiro.api.RpcRealm;
 import com.baomidou.kisso.SSOConfig;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -21,9 +23,8 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -63,11 +64,19 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(CustomRpcRealm realm) {
+    public SecurityManager securityManager(CustomRpcRealm realm, CacheManager cacheManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(realm);
-        securityManager.setCacheManager(j2cacheManager());
+        securityManager.setCacheManager(cacheManager);
         return securityManager;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "false")
+    public EhCacheManager shiroEhCacheManager(net.sf.ehcache.CacheManager ehCachemanager) {
+        EhCacheManager manager = new EhCacheManager();
+        manager.setCacheManager(ehCachemanager);
+        return manager;
     }
 
     @Bean
@@ -77,6 +86,7 @@ public class ShiroConfig {
 
 
     @Bean
+    @Profile("!unit-test")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
         creator.setProxyTargetClass(true);
@@ -91,7 +101,9 @@ public class ShiroConfig {
     }
 
     @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
     @DependsOn({"ehCacheManager", "j2CacheIniter"})
+    @Primary
     public J2CacheManager j2cacheManager() {
         return new J2CacheManager();
     }

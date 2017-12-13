@@ -12,12 +12,11 @@ import net.oschina.j2cache.autoconfigure.J2CacheConfig;
 import net.oschina.j2cache.autoconfigure.J2CacheIniter;
 import org.nutz.j2cache.spring.SpringJ2CacheManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerUtils;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 
 @Configuration
 @PropertySource("classpath:j2cache/j2cache-${spring.profiles.active}.properties")
@@ -31,12 +30,24 @@ public class CacheConfig {
     }
 
     @DependsOn({"ehCacheManager", "j2CacheIniter"})
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
     @Bean
+    @Primary
     public CacheManager springJ2CacheManager() {
         return new SpringJ2CacheManager();
     }
 
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "false")
+    public CacheManager springEhCacheManager(net.sf.ehcache.CacheManager cacheManager) {
+        EhCacheCacheManager manager = new EhCacheCacheManager();
+        manager.setCacheManager(cacheManager);
+        return manager;
+    }
+
     @Bean("j2CacheIniter")
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
     public J2CacheIniter j2CacheIniter(J2CacheConfig j2cacheConfig) {
         return new J2CacheIniter(j2cacheConfig);
     }
