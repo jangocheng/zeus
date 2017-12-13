@@ -11,7 +11,7 @@ package com.f6car.base.so.user;
 import com.f6car.base.common.So;
 
 /**
- * Created by qixiaobo on 2017-12-11.
+ * Created by qixiaobo on 2017-12-13.
  */
 public class TbUserSo extends So {
 

@@ -19,7 +19,7 @@ import java.math.BigInteger;
 
 
 /**
- * Created by qixiaobo on 2017-12-11.
+ * Created by qixiaobo on 2017-12-13.
  */
 public class TbUserVo extends Vo {
 

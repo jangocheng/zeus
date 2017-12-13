@@ -22,11 +22,14 @@ import java.math.BigInteger;
 
 
 /**
- * Created by qixiaobo on 2017-12-11.
+ * Created by qixiaobo on 2017-12-13.
  */
  @Service
  @Transactional(rollbackFor = Exception.class,timeout=1)
 public class TbOrgServiceImpl extends AbstractService<TbOrg,TbOrgVo,TbOrgSo,BigInteger> implements TbOrgService {
     @Resource
     private TbOrgMapper tbOrgMapper;
+
+    @Resource
+    private TbOrgService self;
 }

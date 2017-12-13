@@ -16,7 +16,7 @@ import java.math.BigInteger;
 
 
 /**
- * Created by qixiaobo on 2017-12-11.
+ * Created by qixiaobo on 2017-12-13.
  */
 public interface TbOrgService extends Service<TbOrgVo,TbOrgSo,BigInteger> {
 

@@ -66,8 +66,8 @@
       WARNING - @mbg.generated
     -->
     pk_id, code, name, contacts, contact_number, contact_mobile, fax, province, city, 
-    area, street, address, detail_address, email, creationtime, modifiedtime, creator, 
-    modifier, id_parent, is_del, entity_code, bussiness, logo, store_logo, application_logo,
+    area, street, address, detail_address, email, creationtime, modifiedtime, creator,
+      modifier, id_parent, is_del, entity_code, bussiness, logo, store_logo, application_logo,
       responsible, zip_code, end_date, qq, bank_account, account_number, id_customer_carzone,
       id_department_carzone, is_task_mode_enable, is_ahead_gathering_enable, position_x,
       position_y, open_time, close_time, abbreviation, from_flag, enable_supplier_export,

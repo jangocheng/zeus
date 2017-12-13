@@ -31,7 +31,7 @@ import static com.f6car.base.generator.CodeGenerator.PO_FIELDS;
  * @author qixiaobo
  */
 public class F6MapperPlugin extends MapperPlugin {
-    private Set<String> mappers = new HashSet<String>();
+    private Set<String> mappers = new HashSet<>();
     private boolean validate = true;
 
 

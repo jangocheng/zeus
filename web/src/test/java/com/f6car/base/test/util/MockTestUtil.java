@@ -40,8 +40,8 @@ public class MockTestUtil {
     public static <T> T getJavaBean(Class<T> c) {
 
         T object = null;
-        List<Method> allMethods = new ArrayList<Method>();
-        List<Field> allFields = new ArrayList<Field>();
+        List<Method> allMethods = new ArrayList<>();
+        List<Field> allFields = new ArrayList<>();
         try {
             object = c.newInstance();
             Method[] methods = c.getDeclaredMethods();

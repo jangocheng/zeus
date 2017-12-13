@@ -21,7 +21,7 @@ import java.util.Date;
 
 
 /**
- * Created by qixiaobo on 2017-12-11.
+ * Created by qixiaobo on 2017-12-13.
  */
 public class TbOrgVo extends Vo {
 
