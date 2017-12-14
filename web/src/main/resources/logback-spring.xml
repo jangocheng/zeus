@@ -24,6 +24,10 @@
                     defaultValue="ZEUS-NOTICE-DEV-%m{30}"/>
     <springProperty scope="context" name="email.smtp.host" source="logging.email.smtp.host"
                     defaultValue="smtp.exmail.qq.com"/>
+    <springProperty scope="context" name="email.smtp.port" source="logging.email.smtp.port"
+                    defaultValue="25"/>
+    <springProperty scope="context" name="email.ssl" source="logging.email.ssl"
+                    defaultValue="false"/>
     <springProperty scope="context" name="email.pattern" source="logging.email.pattern"
                     defaultValue="%d [%level] [%thread] %logger{15}:%line %msg%n"/>
     <springProperty scope="context" name="email.filter" source="logging.email.ThresholdFilter"
@@ -36,6 +40,8 @@
         <Name>${email.smtp.host}</Name>
         <password>${email.password}</password>
         <SMTPHost>${email.smtp.host}</SMTPHost>
+        <SMTPPort>${email.smtp.port}</SMTPPort>
+        <ssl>${email.ssl}</ssl>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${email.pattern}</pattern>
         </layout>
