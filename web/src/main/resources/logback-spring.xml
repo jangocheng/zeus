@@ -41,7 +41,7 @@
         <password>${email.password}</password>
         <SMTPHost>${email.smtp.host}</SMTPHost>
         <SMTPPort>${email.smtp.port}</SMTPPort>
-        <ssl>${email.ssl}</ssl>
+        <SSL>${email.ssl}</SSL>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>${email.pattern}</pattern>
         </layout>
