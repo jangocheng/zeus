@@ -9,6 +9,7 @@
 package com.f6car.base.po.maintain;
 
 import com.f6car.base.common.Po;
+import se.spagettikod.optimist.Identity;
 import se.spagettikod.optimist.OptimisticLocking;
 import se.spagettikod.optimist.Version;
 
@@ -30,6 +31,7 @@ public class TsMaintain extends Po {
     @Id
     @Column(name = "pk_id")
     @NotNull
+    @Identity("pk_id")
     private BigInteger pkId;
 
     /**

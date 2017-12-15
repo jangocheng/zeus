@@ -31,6 +31,7 @@ import java.util.Map;
  * @author qixiaobo
  */
 @Configuration
+@Lazy
 public class ShiroConfig {
 
     @Bean(name = "shiroFilter")

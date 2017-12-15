@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import javax.sql.DataSource;
 
@@ -22,6 +23,7 @@ import static com.f6car.base.config.MyBatisConfigurer2.SECOND_DATA_SOURCE_NAME;
  */
 @Configuration
 @ConfigurationProperties("spring.datasource2")
+@Lazy
 @ConditionalOnProperty(name = "spring.datasource2.url", matchIfMissing = false)
 
 public class DataSourceConfig2 extends AbstractDataSourceConfig {

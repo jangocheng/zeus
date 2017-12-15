@@ -16,12 +16,14 @@ import com.alibaba.dubbo.config.spring.ReferenceBean;
 import com.alibaba.dubbo.config.spring.ServiceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 
 /**
  * @author qixiaobo
  */
 @Configuration
+@Lazy
 public class DubboConfigurer {
 
     @Bean

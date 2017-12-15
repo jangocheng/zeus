@@ -6,18 +6,12 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.service.maintain;
+package com.f6car.base.dao.maintain;
 
-import com.f6car.base.common.Service;
-import com.f6car.base.so.maintain.TsMaintainSo;
-import com.f6car.base.vo.maintain.TsMaintainVo;
+import com.f6car.base.core.Mapper;
+import com.f6car.base.po.maintain.TsMaintain;
 
 import java.math.BigInteger;
 
-
-/**
- * Created by qixiaobo on 2017-12-13.
- */
-public interface TsMaintainService extends Service<TsMaintainVo, TsMaintainSo, BigInteger> {
-
+public interface TsMaintainMapper extends Mapper<TsMaintain, BigInteger> {
 }

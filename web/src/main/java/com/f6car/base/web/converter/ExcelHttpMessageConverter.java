@@ -10,6 +10,7 @@ package com.f6car.base.web.converter;
 
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import com.f6car.base.common.Result;
+import com.f6car.base.common.ResultGenerator;
 import com.f6car.base.core.ExcelExport;
 import com.f6car.base.core.ExcelExportParam;
 import com.f6car.base.core.F6Static;
@@ -32,13 +33,20 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.GenericHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.async.WebAsyncTask;
+import org.springframework.web.context.request.async.WebAsyncUtils;
+import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import static com.f6car.base.core.F6Static.getExcelExportParam;
@@ -112,7 +120,12 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
             String codedFileName = URLEncoder.encode(excelExportParam.getFileName(), "UTF8");
             headers.setContentDispositionFormData("attachment", codedFileName);
         }
-        workbook.write(outputMessage.getBody());
+        Callable<Result> callable = new StreamingWorkBookTask(outputMessage.getBody(), workbook);
+        try {
+            WebAsyncUtils.getAsyncManager(((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()).startCallableProcessing(new WebAsyncTask<>(callable), new ModelAndViewContainer());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
         logger.info(String.format(LOGGER_PATTERN, F6Static.getUser(), stopwatch.elapsed(TimeUnit.MILLISECONDS)));
     }
 
@@ -180,6 +193,26 @@ public class ExcelHttpMessageConverter extends AbstractHttpMessageConverter<Obje
             } else {
                 return new XSSFWorkbook();
             }
+        }
+    }
+
+    private static class StreamingWorkBookTask implements Callable<Result> {
+
+        private final OutputStream outputStream;
+
+        private final Workbook workbook;
+
+
+        public StreamingWorkBookTask(OutputStream outputStream, Workbook workbook) {
+            this.outputStream = outputStream;
+            this.workbook = workbook;
+
+        }
+
+        @Override
+        public Result call() throws Exception {
+            this.workbook.write(this.outputStream);
+            return ResultGenerator.genSuccessResult();
         }
     }
 }

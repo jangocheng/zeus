@@ -11,11 +11,13 @@ package com.f6car.base.config;
 import com.f6car.base.core.OrikaMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * @author qixiaobo
  */
 @Configuration
+@Lazy
 public class OrikaConfigurer {
     @Bean
     public OrikaMapper orikaMapperBean() {

@@ -10,11 +10,13 @@ package com.f6car.base.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * @author qixiaobo
  */
 @Configuration
+@Lazy
 public class SSOConfig {
     @Bean
     public SSO sso() {
