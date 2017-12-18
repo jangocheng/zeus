@@ -20,9 +20,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.reflect.TypeToken;
 import io.swagger.annotations.ApiOperation;
+import main.java.com.UpYun;
+import main.java.com.upyun.UpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -34,6 +38,9 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
     protected Class<V> voClazz;
     @Autowired
     protected Service<V, S, PK> service;
+
+    @Resource
+    private UpYun upYun;
 
     public AbstractRestController() {
         TypeToken<V> voType = new TypeToken<V>(getClass()) {
@@ -128,5 +135,9 @@ public abstract class AbstractRestController<V extends Vo, S extends So, PK exte
         return ResultGenerator.genSuccessResult(count);
     }
 
-
+    @GetMapping("/bucket")
+    @ApiOperation(value = "获取bucket size", notes = "")
+    public Result bucketUserAge() throws IOException, UpException {
+        return ResultGenerator.genSuccessResult(upYun.getBucketUsage());
+    }
 }

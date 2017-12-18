@@ -21,7 +21,7 @@ import java.math.BigInteger;
 
 /**
  * Created by qixiaobo on 2017-12-13.
-*/
+ */
 @RestController
 @RequestMapping("user")
 public class TbUserController extends AbstractRestController<TbUserVo, TbUserSo, BigInteger> {
