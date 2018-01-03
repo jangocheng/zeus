@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -34,6 +34,7 @@ public class SoInterceptor implements Interceptor {
         if (paramter instanceof So) {
             So so = (So) paramter;
             Page<Object> page = PageHelper.startPage(so.getCurrentPage(), so.getPageSize(), so.isEnableCount());
+            page.setOrderByOnly(so.isOrderByOnly());
             if (so.getSorts() != null && !so.getSorts().isEmpty()) {
                 page.setOrderBy(SORT_JOINER.join(so.getSorts()));
             }
