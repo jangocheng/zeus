@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -33,7 +33,7 @@ import static com.f6car.base.constant.Constants.*;
  * @author qixiaobo
  */
 public class CodeGenerator {
-    private static final String JDBC_URL = "jdbc:mysql://192.168.1.7:3306/f6dms_20160522";
+    private static final String JDBC_URL = "jdbc:mysql://local-test.db.f6car:3306/f6dms_20160522";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -98,6 +98,9 @@ public class F6MapperPlugin extends MapperPlugin {
         if (introspectedTable.getPrimaryKeyColumns().contains(introspectedColumn)) {
             topLevelClass.addImportedType("se.spagettikod.optimist.Identity");
             field.addAnnotation("@Identity(\"" + introspectedColumn.getActualColumnName() + "\")");
+            if (introspectedColumn.isAutoIncrement() && !"id".equals(field.getName())) {
+                field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
+            }
         }
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
                 introspectedTable, modelClassType);
