@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -7,6 +7,11 @@
  */
 
 package com.f6car.base.constant;
+
+import com.google.common.base.CharMatcher;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * @author qixiaobo
@@ -62,4 +67,25 @@ public final class Constants {
     public static final String DEFAULT_CHARSET_NAME = "UTF-8";
 
 
+    /**
+     * 过滤掉31以下的ascii码以及双引号和反斜扛
+     */
+    public static final CharMatcher CARZONE_API_DANGER_CHAR_MATCHER = CharMatcher.inRange('\0', '\u001F')
+            .or(CharMatcher.is('\\'))
+            .or(CharMatcher.BREAKING_WHITESPACE);
+    /**
+     * HTTP HEADER
+     */
+    public static final String AUTHENTICATION = "Authentication";
+
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String AUTH_HEADER_START_STR = "Bearer ";
+
+    public static final List<String> WHITE_LIST_SUBJECT = Lists.newArrayList("f6car", "repairWeb", "carOwner", "weixin");
+
+
+    public static final int ERROR_TOKEN = -1;
+    public static final int ERROR_OTHER = -2;
+
+    public static final String AGENT_JSON_KEY = "data";
 }

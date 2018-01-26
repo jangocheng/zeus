@@ -8,20 +8,19 @@
 
 package com.f6car.base.exception;
 
-/**
- * 服务（业务）异常如“ 账号或密码错误 ”，该异常只做INFO级别的日志记录 @see WebMvcConfigurer
- * @author qixiaobo
- */
-public class ServiceException extends BaseException {
-    public ServiceException() {
-        super();
-    }
 
-    public ServiceException(String message) {
+/**
+ * Created by qixiaobo on 2018/1/18.
+ */
+public class AuthenticationFailedException extends TokenException {
+
+    private static final long serialVersionUID = 8189626855440751808L;
+
+    public AuthenticationFailedException(String message) {
         super(message);
     }
 
-    public ServiceException(String message, Throwable cause) {
+    public AuthenticationFailedException(String message, Throwable cause) {
         super(message, cause);
     }
 }

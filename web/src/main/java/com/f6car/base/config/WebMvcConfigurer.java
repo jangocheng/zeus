@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -17,6 +17,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
+import com.f6car.base.exception.IllegalAccessException;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
 import com.f6car.base.web.json.BigIntegerValueFilter;
@@ -98,7 +99,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
                 } else if (e instanceof AuthorizationException) {
                     result.setCode(ResultCode.FORBIDDEN).setMessage(e.getMessage());
-                } else if (e instanceof AuthenticationException) {
+                } else if (e instanceof AuthenticationException || e instanceof IllegalAccessException) {
                     result.setCode(ResultCode.UNAUTHORIZED).setMessage(e.getMessage());
                 } else {
                     result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
