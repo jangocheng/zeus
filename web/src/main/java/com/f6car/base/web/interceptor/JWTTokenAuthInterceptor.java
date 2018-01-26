@@ -8,6 +8,7 @@
 
 package com.f6car.base.web.interceptor;
 
+import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.AuthenticationFailedException;
 import com.f6car.base.exception.AuthenticationVerifyFailedException;
 import com.f6car.base.jwt.JwtConfig;
@@ -19,8 +20,10 @@ import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -36,8 +39,9 @@ import static com.f6car.base.constant.Constants.AUTHORIZATION;
  * @author qixiaobo
  * @date 2018/1/18
  */
-//@Component
+@Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_JWT)
 public class JWTTokenAuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(JWTTokenAuthInterceptor.class);
     @Autowired

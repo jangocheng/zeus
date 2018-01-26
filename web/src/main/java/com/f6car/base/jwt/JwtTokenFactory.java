@@ -9,12 +9,13 @@
 package com.f6car.base.jwt;
 
 
+import com.f6car.base.constant.Constants;
 import com.google.common.base.Strings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -26,7 +27,7 @@ import java.util.UUID;
  * @author qixiaobo
  */
 @Component
-@ConditionalOnBean(name = "jwtConfig")
+@ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_JWT)
 public class JwtTokenFactory {
     private final List<String> DEFAULT_REFRESH_AUTHORITY = Collections.singletonList(Scopes.REFRESH_TOKEN.authority());
     @Autowired

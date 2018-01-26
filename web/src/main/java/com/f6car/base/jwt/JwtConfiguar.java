@@ -8,7 +8,8 @@
 
 package com.f6car.base.jwt;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import com.f6car.base.constant.Constants;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,9 +17,9 @@ import org.springframework.context.annotation.Configuration;
  * @author qixiaobo
  */
 @Configuration
-@ConditionalOnBean(name = "jWTTokenAuthInterceptor")
 public class JwtConfiguar {
     @Bean
+    @ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_JWT)
     public JwtConfig jwtConfig() {
         return new JwtConfig();
     }

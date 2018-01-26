@@ -88,4 +88,9 @@ public final class Constants {
     public static final int ERROR_OTHER = -2;
 
     public static final String AGENT_JSON_KEY = "data";
+
+    public static final String PROPERTY_WEB_SECURE = "web_secure";
+    public static final String WEB_SECURE_JWT = "jwt";
+    public static final String WEB_SECURE_KISSO = "kisso";
+
 }

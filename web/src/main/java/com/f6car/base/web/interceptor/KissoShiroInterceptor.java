@@ -12,9 +12,11 @@ import com.air.tqb.realm.LoginCallback;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.SSOToken;
 import com.baomidou.kisso.common.shiro.SSOAuthToken;
+import com.f6car.base.constant.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -34,6 +36,7 @@ import java.util.logging.Logger;
 @Order(Ordered.HIGHEST_PRECEDENCE + 1)
 @Component
 @Profile("!unit-test")
+@ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_KISSO)
 public class KissoShiroInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = Logger.getLogger("KissoShiroInterceptor");
     @Autowired
