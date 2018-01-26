@@ -14,6 +14,7 @@ import com.f6car.base.exception.AuthenticationVerifyFailedException;
 import com.f6car.base.jwt.JwtConfig;
 import com.f6car.base.jwt.TokenExtractor;
 import com.f6car.base.jwt.TokenVerifier;
+import com.google.common.collect.Lists;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -25,7 +26,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +42,7 @@ import static com.f6car.base.constant.Constants.AUTHORIZATION;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_JWT)
-public class JWTTokenAuthInterceptor extends HandlerInterceptorAdapter {
+public class JWTTokenAuthInterceptor extends AbstractExcludeInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(JWTTokenAuthInterceptor.class);
     @Autowired
     private List<TokenVerifier> verifiers = Collections.emptyList();
@@ -96,4 +96,8 @@ public class JWTTokenAuthInterceptor extends HandlerInterceptorAdapter {
         return super.preHandle(request, response, handler);
     }
 
+    @Override
+    public List<String> getExcludePath() {
+        return Lists.newArrayList("/api/auth/**");
+    }
 }

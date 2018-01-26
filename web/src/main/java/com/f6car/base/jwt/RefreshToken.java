@@ -9,6 +9,7 @@
 package com.f6car.base.jwt;
 
 
+import com.f6car.base.rlt.JwtToken;
 import com.google.common.base.Optional;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

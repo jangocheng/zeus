@@ -6,14 +6,14 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.jwt;
+package com.f6car.base.web.interceptor;
 
-
-import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by qixiaobo on 2017/2/23.
+ * @author qixiaobo
  */
-public interface JwtToken extends Serializable {
-    String getToken();
+public interface ExcludePathable {
+
+    List<String> getExcludePath();
 }

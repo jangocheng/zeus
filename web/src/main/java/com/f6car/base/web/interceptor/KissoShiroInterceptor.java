@@ -22,7 +22,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ import java.util.logging.Logger;
 @Component
 @Profile("!unit-test")
 @ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_KISSO)
-public class KissoShiroInterceptor extends HandlerInterceptorAdapter {
+public class KissoShiroInterceptor extends AbstractExcludeInterceptor {
     private static final Logger logger = Logger.getLogger("KissoShiroInterceptor");
     @Autowired
     private List<LoginCallback> loginCallbackList = Collections.emptyList();

@@ -20,6 +20,7 @@ import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.IllegalAccessException;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
+import com.f6car.base.web.interceptor.ExcludePathable;
 import com.f6car.base.web.json.BigIntegerValueFilter;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
@@ -134,8 +135,14 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         for (HandlerInterceptor handlerInterceptor : interceptorList) {
             logger.info("add interceptor " + handlerInterceptor.getClass());
-            InterceptorRegistration ssoInterceptor = registry.addInterceptor(handlerInterceptor);
-            interceptorRegistrationExcluedStaticCallback(ssoInterceptor);
+            InterceptorRegistration interceptorRegistration = registry.addInterceptor(handlerInterceptor);
+            if (handlerInterceptor instanceof ExcludePathable) {
+                List<String> excludePath = ((ExcludePathable) handlerInterceptor).getExcludePath();
+                if (!excludePath.isEmpty()) {
+                    interceptorRegistration.excludePathPatterns(excludePath.toArray(new String[excludePath.size()]));
+                }
+            }
+            interceptorRegistrationExcluedStaticCallback(interceptorRegistration);
         }
     }
 
@@ -145,7 +152,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         for (ResourceHandler resourceHandler : resourceHandlerList) {
             interceptorRegistration.excludePathPatterns(resourceHandler.getPattern());
         }
-        interceptorRegistration.excludePathPatterns("/webjars/**", "/swagger-ui.html", "/error");
+        interceptorRegistration.excludePathPatterns("/webjars/**", "/swagger-ui.html", "/error", "/v2/**");
     }
 
     private void responseResult(HttpServletResponse response, Result result) {

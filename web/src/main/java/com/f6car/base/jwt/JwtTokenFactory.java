@@ -10,6 +10,7 @@ package com.f6car.base.jwt;
 
 
 import com.f6car.base.constant.Constants;
+import com.f6car.base.rlt.JwtToken;
 import com.google.common.base.Strings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

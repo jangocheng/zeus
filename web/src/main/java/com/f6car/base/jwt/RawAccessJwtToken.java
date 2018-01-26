@@ -9,6 +9,7 @@
 package com.f6car.base.jwt;
 
 import com.f6car.base.exception.AuthenticationFailedException;
+import com.f6car.base.rlt.JwtToken;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

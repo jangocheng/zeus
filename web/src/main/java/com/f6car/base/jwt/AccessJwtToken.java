@@ -8,6 +8,7 @@
 
 package com.f6car.base.jwt;
 
+import com.f6car.base.rlt.JwtToken;
 import io.jsonwebtoken.Claims;
 
 /**
