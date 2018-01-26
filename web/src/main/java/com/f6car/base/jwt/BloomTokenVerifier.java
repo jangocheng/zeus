@@ -10,6 +10,7 @@ package com.f6car.base.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.validation.constraints.NotNull;
 
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
  * @date 2018/1/19
  */
 //@Component
+@ConditionalOnBean(name = "jwtConfig")
 public class BloomTokenVerifier implements TokenVerifier {
     @Override
     public boolean verifierToken(@NotNull Jws<Claims> claimsJws) {

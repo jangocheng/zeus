@@ -14,6 +14,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -25,6 +26,7 @@ import java.util.UUID;
  * @author qixiaobo
  */
 @Component
+@ConditionalOnBean(name = "jwtConfig")
 public class JwtTokenFactory {
     private final List<String> DEFAULT_REFRESH_AUTHORITY = Collections.singletonList(Scopes.REFRESH_TOKEN.authority());
     @Autowired

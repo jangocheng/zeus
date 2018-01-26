@@ -13,6 +13,9 @@ import com.google.common.base.Strings;
 
 import java.util.List;
 
+/**
+ * @author qixiaobo
+ */
 public class UserContext {
     private final String username;
     private final List<String> authorities;

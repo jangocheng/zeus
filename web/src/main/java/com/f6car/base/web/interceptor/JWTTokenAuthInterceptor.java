@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -37,7 +36,7 @@ import static com.f6car.base.constant.Constants.AUTHORIZATION;
  * @author qixiaobo
  * @date 2018/1/18
  */
-@Component
+//@Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class JWTTokenAuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(JWTTokenAuthInterceptor.class);

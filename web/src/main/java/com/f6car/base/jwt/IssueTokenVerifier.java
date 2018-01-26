@@ -11,6 +11,7 @@ package com.f6car.base.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
  * Created by qixiaobo on 2018/1/19.
  */
 @Component
+@ConditionalOnBean(name = "jwtConfig")
 public class IssueTokenVerifier implements TokenVerifier {
     @Autowired
     private JwtConfig config;

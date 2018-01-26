@@ -11,6 +11,7 @@ package com.f6car.base.jwt;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.AuthCredentialsMissingException;
 import com.google.common.base.Strings;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -19,6 +20,7 @@ import org.springframework.util.StringUtils;
  * @date 2017/2/24
  */
 @Component
+@ConditionalOnBean(name = "jwtConfig")
 public class DefaultTokenExtractor implements TokenExtractor {
     @Override
     public String extract(String authHeader) {
