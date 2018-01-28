@@ -24,7 +24,6 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,16 +47,16 @@ public class AuthController {
     @Autowired
     private JwtTokenFactory tokenFactory;
     @Autowired
-    private List<TokenVerifier> verifiers = new ArrayList<>();
-    @Value("${jwt.tokenSigningKey}")
-    private String jwtKey;
+    private List<TokenVerifier> verifiers = Collections.emptyList();
+    @Autowired
+    private JwtConfig jwtConfig;
 
     @PostMapping(value = "refresh", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "刷新授权", notes = "")
     public Result refreshToken(@RequestHeader(Constants.AUTHENTICATION) String authenticationHeader) {
         logger.debug("auth header:{}", authenticationHeader);
         RawAccessJwtToken rawToken = new RawAccessJwtToken(tokenExtractor.extract(authenticationHeader));
-        Optional<RefreshToken> refreshTokenOptional = RefreshToken.create(rawToken, jwtKey);
+        Optional<RefreshToken> refreshTokenOptional = RefreshToken.create(rawToken, jwtConfig.getTokenSigningKey());
         if (!refreshTokenOptional.isPresent()) {
             throw new AuthenticationFailedException("parse failed!\r\nheader:" + authenticationHeader);
         }
