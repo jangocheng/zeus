@@ -52,7 +52,7 @@
         <zkclient.version>0.1</zkclient.version>
         <swagger.version>2.2.2</swagger.version>
         <j2cache.version>1.4.0-alpha3</j2cache.version>
-        <sonar.host.url>http://192.168.1.246:9000</sonar.host.url>
+        <sonar.host.url>http://sonar.f6car:9000</sonar.host.url>
     </properties>
 
     <dependencyManagement>
