@@ -152,7 +152,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         for (ResourceHandler resourceHandler : resourceHandlerList) {
             interceptorRegistration.excludePathPatterns(resourceHandler.getPattern());
         }
-        interceptorRegistration.excludePathPatterns("/webjars/**", "/swagger-ui.html", "/error", "/v2/**");
+        interceptorRegistration.excludePathPatterns("/webjars/**", "/swagger-ui.html", "/error", "/v2/**", "/swagger*/**");
     }
 
     private void responseResult(HttpServletResponse response, Result result) {
