@@ -72,7 +72,7 @@ public class AuthController {
 
         String subject = refreshToken.getSubject();
         logger.debug("auth subject:{}", subject);
-        AccessJwtToken token = tokenFactory.createAccessJwtToken(UserContext.create(subject, Collections.singletonList(Scopes.ACCESS_TOKEN.authority())));
+        AccessJwtToken token = tokenFactory.createAccessJwtToken(UserContext.create(subject, Collections.singletonList(Scopes.ACCESS_TOKEN.authority()), null));
         return ResultGenerator.genSuccessResult(new AuthResponse(token, null));
 
     }
@@ -82,7 +82,7 @@ public class AuthController {
     public Result authToken(String userName, String password) {
         logger.debug("username:{},password:{}", userName, password);
         //TODO
-        UserContext userContext = UserContext.create(null, Collections.<String>emptyList());
+        UserContext userContext = UserContext.create(userName, Collections.singletonList("access"), null);
         JwtToken accessToken = tokenFactory.createAccessJwtToken(userContext);
         JwtToken refreshToken = tokenFactory.createRefreshToken(userContext);
         return ResultGenerator.genSuccessResult(new AuthResponse(accessToken, refreshToken));

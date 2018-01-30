@@ -91,7 +91,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
-                if (e instanceof ServiceException) {
+                if (e instanceof ServiceException || e instanceof IllegalArgumentException) {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
                     logger.info(e.getMessage());
                 } else if (e instanceof NoHandlerFoundException) {

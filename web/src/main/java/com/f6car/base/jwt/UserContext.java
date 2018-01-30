@@ -18,18 +18,20 @@ import java.util.List;
  */
 public class UserContext {
     private final String username;
+    private final String idOwnOrg;
     private final List<String> authorities;
 
-    private UserContext(String username, List<String> authorities) {
+    private UserContext(String username, List<String> authorities, String idOwnOrg) {
         this.username = username;
         this.authorities = authorities;
+        this.idOwnOrg = idOwnOrg;
     }
 
-    public static UserContext create(String username, List<String> authorities) {
+    public static UserContext create(String username, List<String> authorities, String idOwnOrg) {
         if (Strings.isNullOrEmpty(username)) {
             throw new IllegalArgumentException("Username is blank: " + username);
         }
-        return new UserContext(username, authorities);
+        return new UserContext(username, authorities, idOwnOrg);
     }
 
     public String getUsername() {
@@ -38,5 +40,9 @@ public class UserContext {
 
     public List<String> getAuthorities() {
         return authorities;
+    }
+
+    public String getIdOwnOrg() {
+        return idOwnOrg;
     }
 }

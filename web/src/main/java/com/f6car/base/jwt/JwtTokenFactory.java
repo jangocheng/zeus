@@ -45,7 +45,7 @@ public class JwtTokenFactory {
 
         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
         claims.put("scopes", userContext.getAuthorities());
-
+        claims.put("org", userContext.getIdOwnOrg());
         DateTime currentTime = new DateTime();
 
         String token = Jwts.builder()
