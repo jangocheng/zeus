@@ -9,6 +9,7 @@
 package com.f6car.base.web.interceptor;
 
 import com.f6car.base.constant.Constants;
+import com.f6car.base.core.F6Static;
 import com.f6car.base.exception.AuthenticationFailedException;
 import com.f6car.base.exception.AuthenticationVerifyFailedException;
 import com.f6car.base.jwt.JwtConfig;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import static com.f6car.base.constant.Constants.AUTHENTICATION;
 import static com.f6car.base.constant.Constants.AUTHORIZATION;
+import static com.f6car.base.jwt.JwtTokenFactory.ORG_CLAIM_NAME;
 
 /**
  * @author qixiaobo
@@ -86,8 +88,10 @@ public class JWTTokenAuthInterceptor extends AbstractExcludeInterceptor {
                     }
                 }
             }
-            request.setAttribute("claims", claimsJws.getBody());
-
+            Claims body = claimsJws.getBody();
+            request.setAttribute("claims", body);
+            F6Static.setUser(body.getSubject());
+            F6Static.setOrg(body.get(ORG_CLAIM_NAME, String.class));
             // Now since the authentication process if finished
             // move the request forward
         } catch (final Exception e) {

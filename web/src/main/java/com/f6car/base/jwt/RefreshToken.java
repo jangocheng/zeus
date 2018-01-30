@@ -16,6 +16,8 @@ import io.jsonwebtoken.Jws;
 
 import java.util.List;
 
+import static com.f6car.base.jwt.JwtTokenFactory.AUTHORITIES_CLAIM_NAME;
+
 /**
  * Created by qixiaobo on 2018/1/23.
  */
@@ -31,7 +33,7 @@ public class RefreshToken implements JwtToken {
 
     public static Optional<RefreshToken> create(RawAccessJwtToken token, String signingKey) {
         Jws<Claims> claims = token.parseClaims(signingKey);
-        List scopes = claims.getBody().get("scopes", List.class);
+        List scopes = claims.getBody().get(AUTHORITIES_CLAIM_NAME, List.class);
         if (scopes == null || scopes.isEmpty()
                 || !scopes.contains(Scopes.REFRESH_TOKEN.authority())) {
             return Optional.absent();
