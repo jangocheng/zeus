@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -32,8 +32,8 @@ public class DefaultRemoteCallback implements RemoteInvocationCallback {
             //用户尚未登录
             ClientInfo clientInfo = new ClientInfo();
             clientInfo.setFrom(from);
-            clientInfo.setIdOwnOrg(F6Static.getOrg());
-            clientInfo.setUser(F6Static.getUser());
+            clientInfo.setIdOwnOrg(String.valueOf(F6Static.getOrg()));
+            clientInfo.setUser(String.valueOf(F6Static.getUser()));
             clientInfoRemoteInvocationFilter.setClientInfo(clientInfo);
         }
     }

@@ -30,6 +30,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 
@@ -90,8 +91,8 @@ public class JWTTokenAuthInterceptor extends AbstractExcludeInterceptor {
             }
             Claims body = claimsJws.getBody();
             request.setAttribute("claims", body);
-            F6Static.setUser(body.getSubject());
-            F6Static.setOrg(body.get(ORG_CLAIM_NAME, String.class));
+            F6Static.setUser(new BigInteger(body.getSubject()));
+            F6Static.setOrg(new BigInteger(body.get(ORG_CLAIM_NAME, String.class)));
             // Now since the authentication process if finished
             // move the request forward
         } catch (final Exception e) {

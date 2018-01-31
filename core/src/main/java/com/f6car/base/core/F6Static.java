@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -8,6 +8,7 @@
 
 package com.f6car.base.core;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public final class F6Static {
     }
 
     private static final ThreadLocal<ExcelExportParam> EXCEL_EXPORT_PARAM_TL = new ThreadLocal<>();
-    private static final ThreadLocal<String> USER_TL = new ThreadLocal<>();
-    private static final ThreadLocal<String> ORG_TL = new ThreadLocal<>();
+    private static final ThreadLocal<BigInteger> USER_TL = new ThreadLocal<>();
+    private static final ThreadLocal<BigInteger> ORG_TL = new ThreadLocal<>();
     private static final ThreadLocal<String> IP_TL = new ThreadLocal<>();
     private static final ThreadLocal<List<String>> SQL_LIST_TL = new ThreadLocal<>();
     private static final ThreadLocal<String> ACTION_TL = new ThreadLocal<>();
@@ -46,19 +47,19 @@ public final class F6Static {
         EXCEL_EXPORT_PARAM_TL.set(excelExportParam);
     }
 
-    public static String getUser() {
+    public static BigInteger getUser() {
         return USER_TL.get();
     }
 
-    public static void setUser(String user) {
+    public static void setUser(BigInteger user) {
         USER_TL.set(user);
     }
 
-    public static String getOrg() {
+    public static BigInteger getOrg() {
         return ORG_TL.get();
     }
 
-    public static void setOrg(String org) {
+    public static void setOrg(BigInteger org) {
         ORG_TL.set(org);
     }
 

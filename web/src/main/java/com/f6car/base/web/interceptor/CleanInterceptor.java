@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
 import java.util.List;
 
 import static com.f6car.base.constant.Constants.SESSION_ATTRIBUTE_NAME_USER;
@@ -64,8 +65,8 @@ public class CleanInterceptor extends AbstractExcludeInterceptor {
         if (session != null) {
             TbUserVo user = (TbUserVo) session.getAttribute(SESSION_ATTRIBUTE_NAME_USER);
             if (user != null) {
-                F6Static.setOrg(user.getIdOwnOrg());
-                F6Static.setUser(user.getPkId());
+                F6Static.setOrg(new BigInteger(user.getIdOwnOrg()));
+                F6Static.setUser(new BigInteger(user.getPkId()));
             }
         }
         F6Static.setType(F6Static.ActionType.WEB);

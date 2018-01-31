@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,6 +55,10 @@ public abstract class AbstractService<T extends Po<PK>, V extends Vo, S extends 
     public int saveSelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
+        po.setCreationtime(new Date());
+        if (F6Static.getUser() != null) {
+            po.setCreator(F6Static.getUser());
+        }
         return mapper.insertSelective(po);
     }
 
@@ -73,6 +78,14 @@ public abstract class AbstractService<T extends Po<PK>, V extends Vo, S extends 
     public int save(List<V> models) {
         Preconditions.checkArgument(models != null && !models.isEmpty());
         List<T> ts = orikaMapper.convertList(models, poClazz);
+        Date now = new Date();
+        for (T t : ts) {
+            t.setCreationtime(now);
+            if (F6Static.getUser() != null) {
+                t.setCreator(F6Static.getUser());
+            }
+        }
+
         return mapper.insertList(ts);
     }
 
@@ -99,7 +112,12 @@ public abstract class AbstractService<T extends Po<PK>, V extends Vo, S extends 
     public int updateByPrimaryKeySelective(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
+        if (F6Static.getUser() != null) {
+            po.setModifier(F6Static.getUser());
+            po.setModifiedtime(new Date());
+        }
         return mapper.updateByPrimaryKeySelective(po);
+
     }
 
     @Override
@@ -108,6 +126,10 @@ public abstract class AbstractService<T extends Po<PK>, V extends Vo, S extends 
     public int updateByPrimaryKey(V model) {
         Preconditions.checkArgument(model != null);
         T po = orikaMapper.convert(model, poClazz);
+        if (F6Static.getUser() != null) {
+            po.setModifier(F6Static.getUser());
+            po.setModifiedtime(new Date());
+        }
         return mapper.updateByPrimaryKey(po);
     }
 
