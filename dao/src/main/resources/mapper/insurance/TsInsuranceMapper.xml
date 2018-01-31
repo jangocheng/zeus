@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.f6car.base.dao.insurance.TsInsuranceMapper">
+    <resultMap id="BaseResultMap" type="com.f6car.base.po.insurance.TsInsurance">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="bill_no" jdbcType="CHAR" property="billNo"/>
+        <result column="id_customer" jdbcType="BIGINT" property="idCustomer"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="cell_phone" jdbcType="VARCHAR" property="cellPhone"/>
+        <result column="id_car" jdbcType="BIGINT" property="idCar"/>
+        <result column="car_no" jdbcType="VARCHAR" property="carNo"/>
+        <result column="vin" jdbcType="VARCHAR" property="vin"/>
+        <result column="car_model" jdbcType="VARCHAR" property="carModel"/>
+        <result column="insure_date" jdbcType="TIMESTAMP" property="insureDate"/>
+        <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="end_date" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="id_insurance_company" jdbcType="BIGINT" property="idInsuranceCompany"/>
+        <result column="insurance_company_name" jdbcType="VARCHAR" property="insuranceCompanyName"/>
+        <result column="contacts" jdbcType="VARCHAR" property="contacts"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="renewal" jdbcType="INTEGER" property="renewal"/>
+        <result column="bill_status" jdbcType="CHAR" property="billStatus"/>
+        <result column="v_tax" jdbcType="DECIMAL" property="vTax"/>
+        <result column="compulsory_amount" jdbcType="DECIMAL" property="compulsoryAmount"/>
+        <result column="commercial_amount" jdbcType="DECIMAL" property="commercialAmount"/>
+        <result column="preferential_amount" jdbcType="DECIMAL" property="preferentialAmount"/>
+        <result column="receive_amount" jdbcType="DECIMAL" property="receiveAmount"/>
+        <result column="id_employee" jdbcType="BIGINT" property="idEmployee"/>
+        <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+        <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime"/>
+        <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime"/>
+        <result column="creator" jdbcType="BIGINT" property="creator"/>
+        <result column="modifier" jdbcType="BIGINT" property="modifier"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="id_own_org" jdbcType="BIGINT" property="idOwnOrg"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="id_source_bill" jdbcType="INTEGER" property="idSourceBill"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        id, bill_no, id_customer, customer_name, cell_phone, id_car, car_no, vin, car_model,
+        insure_date, start_date, end_date, id_insurance_company, insurance_company_name,
+        contacts, contact_mobile, renewal, bill_status, v_tax, compulsory_amount, commercial_amount,
+        preferential_amount, receive_amount, id_employee, employee_name, memo, creationtime,
+        modifiedtime, creator, modifier, del_flag, id_own_org, version, id_source_bill
+    </sql>
+</mapper>
