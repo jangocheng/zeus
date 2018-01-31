@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -8,7 +8,6 @@
 
 package com.f6car.base.test.base;
 
-import com.f6car.base.po.user.TbUser;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
@@ -18,8 +17,8 @@ import java.util.List;
 public class CollectionsTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testEmptyCollections() {
-        List<TbUser> userList = Collections.emptyList();
-        userList.add(new TbUser());
+        List<Integer> userList = Collections.emptyList();
+        userList.add(1);
     }
 
     @Test

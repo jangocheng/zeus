@@ -9,6 +9,7 @@
 package com.f6car.base.generator;
 
 import com.f6car.base.common.Po;
+import com.google.common.base.CaseFormat;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -34,13 +35,30 @@ public class F6MapperPlugin extends MapperPlugin {
     private Set<String> mappers = new HashSet<>();
     private boolean validate = true;
 
+    private static final List<String> PO_EXCLUED_FIELD_NAMES = Lists.newArrayList("creator", "modifier", "modifiedtime", "creationtime", "id");
+    private static final List<String> PO_EXCLUED_METHOD_NAMES = Lists.newArrayListWithExpectedSize(PO_EXCLUED_FIELD_NAMES.size() * 3);
+
+    static {
+        for (String poExcluedFieldName : PO_EXCLUED_FIELD_NAMES) {
+            PO_EXCLUED_METHOD_NAMES.add(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "set_" + poExcluedFieldName));
+            PO_EXCLUED_METHOD_NAMES.add(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "get_" + poExcluedFieldName));
+            PO_EXCLUED_METHOD_NAMES.add(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "is_" + poExcluedFieldName));
+        }
+
+    }
 
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         //PK
         topLevelClass.addImportedType(Po.class.getName());
-        topLevelClass.setSuperClass("Po");
-        List<IntrospectedColumn> columns = Lists.newArrayList(introspectedTable.getPrimaryKeyColumns());
+
+        List<IntrospectedColumn> primaryKeyColumns = introspectedTable.getPrimaryKeyColumns();
+        if (primaryKeyColumns.size() != 1) {
+            throw new MapperException("不支持无主键或者多主键!");
+        }
+        topLevelClass.setSuperClass("Po<" + primaryKeyColumns.get(0).getFullyQualifiedJavaType() + ">");
+
+        List<IntrospectedColumn> columns = Lists.newArrayList(primaryKeyColumns);
         columns.addAll(introspectedTable.getBaseColumns());
         PO_FIELDS.set(columns);
         processOptimisticLock(topLevelClass, introspectedTable);
@@ -102,10 +120,29 @@ public class F6MapperPlugin extends MapperPlugin {
                 field.addAnnotation("@GeneratedValue(strategy = GenerationType.IDENTITY)");
             }
         }
+        if (PO_EXCLUED_FIELD_NAMES.contains(field.getName())) {
+            return false;
+        }
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn,
                 introspectedTable, modelClassType);
 
 
+    }
+
+    @Override
+    public boolean modelGetterMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+        if (PO_EXCLUED_METHOD_NAMES.contains(method.getName())) {
+            return false;
+        }
+        return super.modelGetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+    }
+
+    @Override
+    public boolean modelSetterMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+        if (PO_EXCLUED_METHOD_NAMES.contains(method.getName())) {
+            return false;
+        }
+        return super.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
     }
 
     /**

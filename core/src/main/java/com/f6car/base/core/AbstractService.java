@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -30,10 +30,10 @@ import java.util.List;
  * @author qixiaobo
  */
 @Transactional(timeout = 1, rollbackFor = Exception.class)
-public abstract class AbstractService<T extends Po, V extends Vo, S extends So,PK extends Serializable> implements Service<V, S,PK> {
+public abstract class AbstractService<T extends Po<PK>, V extends Vo, S extends So, PK extends Serializable> implements Service<V, S, PK> {
 
     @Autowired
-    protected Mapper<T,PK> mapper;
+    protected Mapper<T, PK> mapper;
     @Resource
     protected OrikaMapper orikaMapper;
     protected Class<V> voClazz;
@@ -58,6 +58,16 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
     }
 
     @Override
+    @Transactional(timeout = 1, rollbackFor = Exception.class)
+    @SecurityLog
+    public PK saveSelectiveReturnPk(V model) {
+        Preconditions.checkArgument(model != null);
+        T po = orikaMapper.convert(model, poClazz);
+        mapper.insertSelective(po);
+        return po.getId();
+    }
+
+    @Override
     @Transactional(timeout = 2, rollbackFor = Exception.class)
     @SecurityLog(showArgs = false)
     public int save(List<V> models) {
@@ -65,6 +75,7 @@ public abstract class AbstractService<T extends Po, V extends Vo, S extends So,P
         List<T> ts = orikaMapper.convertList(models, poClazz);
         return mapper.insertList(ts);
     }
+
 
     @Override
     @Transactional(timeout = 1, rollbackFor = Exception.class)

@@ -17,12 +17,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 public class ${modelNameUpperCamel}ControllerTest extends BaseTest {
-    private String pkId = "1";
+    private Integer pkId = 1;
 
     @Test
     public void testCRUD() throws Exception {
         ${modelNameUpperCamel}Vo ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
-        ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
+        ${modelNameLowerCamel}.setId(pkId);
         RequestBuilder request;
          //delete
         request = delete("/${baseRequestMapping}/" + pkId);
@@ -57,7 +57,7 @@ public class ${modelNameUpperCamel}ControllerTest extends BaseTest {
 
         //update
         ${modelNameLowerCamel} = MockTestUtil.getJavaBean(${modelNameUpperCamel}Vo.class);
-        ${modelNameLowerCamel}.setPkId(new BigInteger(pkId));
+        ${modelNameLowerCamel}.setId(pkId);
         request = put("/${baseRequestMapping}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONString(${modelNameLowerCamel}));

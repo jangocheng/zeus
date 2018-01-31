@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -18,11 +18,14 @@ import java.util.List;
 public interface Service<V extends Vo, S extends So,PK extends Serializable> {
     int saveSelective(V model);//持久化
 
+    PK saveSelectiveReturnPk(V model);//持久化
+
     int save(List<V> models);//批量持久化
 
     int deleteById(PK id);//通过主鍵刪除
 
     int deleteByIds(String ids);//批量刪除 eg：ids -> “1,2,3,4”
+
 
     int updateByPrimaryKeySelective(V model);//更新
 

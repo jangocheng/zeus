@@ -33,7 +33,7 @@ import static com.f6car.base.constant.Constants.*;
  * @author qixiaobo
  */
 public class CodeGenerator {
-    private static final String JDBC_URL = "jdbc:mysql://local-test.db.f6car:3306/f6dms_20160522";
+    private static final String JDBC_URL = "jdbc:mysql://local-test.db.f6car:3306/f6insurance_test";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
@@ -70,7 +70,7 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        genCode("tb_user", "tb_org_mac", "ts_maintain");
+        genCode("ts_insurance", "ts_insurance_detail", "ts_insurance_attachment");
     }
 
     /**
