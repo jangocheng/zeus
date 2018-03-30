@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @author qixiaobo
  */
 @Configuration
+@ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_KISSO)
 public class SSOConfig {
     @Bean
     public SSO sso() {
