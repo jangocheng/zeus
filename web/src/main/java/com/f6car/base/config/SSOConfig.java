@@ -8,6 +8,8 @@
 
 package com.f6car.base.config;
 
+import com.f6car.base.constant.Constants;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
