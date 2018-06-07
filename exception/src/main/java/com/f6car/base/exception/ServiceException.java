@@ -13,6 +13,9 @@ package com.f6car.base.exception;
  * @author qixiaobo
  */
 public class ServiceException extends BaseException {
+
+    private static final long serialVersionUID = -8864107137272127000L;
+
     public ServiceException() {
         super();
     }
