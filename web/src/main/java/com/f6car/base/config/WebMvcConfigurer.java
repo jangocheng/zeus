@@ -18,6 +18,7 @@ import com.f6car.base.common.Result;
 import com.f6car.base.common.ResultCode;
 import com.f6car.base.constant.Constants;
 import com.f6car.base.exception.IllegalAccessException;
+import com.f6car.base.exception.RateLimitExceedException;
 import com.f6car.base.exception.ServiceException;
 import com.f6car.base.web.converter.ExcelHttpMessageConverter;
 import com.f6car.base.web.interceptor.ExcludePathable;
@@ -91,9 +92,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
-                if (e instanceof ServiceException || e instanceof IllegalArgumentException) {
+                if (e instanceof RateLimitExceedException) {
+                    result.setCode(ResultCode.TOO_MANY_REQUESTS);
+                } else if (e instanceof ServiceException || e instanceof IllegalArgumentException) {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
-                    logger.info(e.getMessage());
+                    logger.info(e.getMessage(), e);
                 } else if (e instanceof NoHandlerFoundException) {
                     result.setCode(ResultCode.NOT_FOUND).setMessage("接口 [" + request.getRequestURI() + "] 不存在");
                 } else if (e instanceof ServletException) {

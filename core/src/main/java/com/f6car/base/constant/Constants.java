@@ -93,4 +93,6 @@ public final class Constants {
     public static final String WEB_SECURE_JWT = "jwt";
     public static final String WEB_SECURE_KISSO = "kisso";
 
+    public static final String PROPERTY_WEB_RATE = "web_rate";
+
 }

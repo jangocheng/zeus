@@ -6,28 +6,24 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.f6car.base.common;
+package com.f6car.base.exception;
 
 /**
- * 响应码枚举，参考HTTP状态码的语义
  * @author qixiaobo
  */
-public enum ResultCode {
-    SUCCESS(200),
-    FAIL(400),
-    UNAUTHORIZED(401),
-    FORBIDDEN(403),
-    NOT_FOUND(404),
-    TOO_MANY_REQUESTS(429),
-    INTERNAL_SERVER_ERROR(500);
+public class RateLimitExceedException extends ServiceException {
 
-    private final int code;
+    private static final long serialVersionUID = -7451321838356599381L;
 
-    ResultCode(int code) {
-        this.code = code;
+    public RateLimitExceedException() {
+        super("rate limit execced!");
     }
 
-    public int getCode() {
-        return code;
+    public RateLimitExceedException(String message) {
+        super(message);
+    }
+
+    public RateLimitExceedException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

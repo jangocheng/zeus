@@ -43,7 +43,7 @@ import static com.f6car.base.jwt.JwtTokenFactory.ORG_CLAIM_NAME;
  * @date 2018/1/18
  */
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE + 10)
 @ConditionalOnProperty(name = Constants.PROPERTY_WEB_SECURE, havingValue = Constants.WEB_SECURE_JWT)
 public class JWTTokenAuthInterceptor extends AbstractExcludeInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(JWTTokenAuthInterceptor.class);
@@ -93,6 +93,9 @@ public class JWTTokenAuthInterceptor extends AbstractExcludeInterceptor {
             request.setAttribute("claims", body);
             F6Static.setUser(new BigInteger(body.getSubject()));
             F6Static.setOrg(new BigInteger(body.get(ORG_CLAIM_NAME, String.class)));
+            if (F6Static.getOrg() == null) {
+                F6Static.setOrg(BigInteger.ZERO);
+            }
             // Now since the authentication process if finished
             // move the request forward
         } catch (final Exception e) {
