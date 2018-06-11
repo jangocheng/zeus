@@ -23,7 +23,7 @@ import static com.f6car.base.constant.Constants.PROPERTY_WEB_RATE;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE + 9)
-@ConditionalOnProperty(name = PROPERTY_WEB_RATE)
+@ConditionalOnProperty(name = PROPERTY_WEB_RATE, havingValue = "true")
 public class RateLimitInterceptor extends AbstractExcludeInterceptor {
     @Autowired
     private RateLimiter rateLimiter;

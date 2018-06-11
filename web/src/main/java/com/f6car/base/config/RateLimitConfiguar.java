@@ -22,7 +22,7 @@ import static com.f6car.base.constant.Constants.PROPERTY_WEB_RATE;
  * @author qixiaobo
  */
 @Configuration
-@ConditionalOnProperty(name = PROPERTY_WEB_RATE)
+@ConditionalOnProperty(name = PROPERTY_WEB_RATE, havingValue = "true")
 public class RateLimitConfiguar {
 
     @Bean
