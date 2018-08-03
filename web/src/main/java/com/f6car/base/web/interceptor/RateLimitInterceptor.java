@@ -11,6 +11,7 @@ package com.f6car.base.web.interceptor;
 import com.f6car.base.exception.RateLimitExceedException;
 import com.google.common.util.concurrent.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,21 +19,24 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 import static com.f6car.base.constant.Constants.PROPERTY_WEB_RATE;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE + 9)
-@ConditionalOnProperty(name = PROPERTY_WEB_RATE, havingValue = "true")
+@ConditionalOnProperty(name = PROPERTY_WEB_RATE,
+        havingValue = "true")
 public class RateLimitInterceptor extends AbstractExcludeInterceptor {
     @Autowired
     private RateLimiter rateLimiter;
+    @Value("${web.rate.maxium-timeout-in-micro-seconds:1000}")
+    private long maximumTimeoutInMicroSeconds;
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (rateLimiter.tryAcquire()) {
-            rateLimiter.acquire();
+        if (rateLimiter.tryAcquire(1, maximumTimeoutInMicroSeconds, TimeUnit.MICROSECONDS)) {
             return super.preHandle(request, response, handler);
         } else {
             throw new RateLimitExceedException();
