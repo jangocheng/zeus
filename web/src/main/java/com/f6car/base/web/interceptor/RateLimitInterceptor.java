@@ -30,7 +30,7 @@ import static com.f6car.base.constant.Constants.PROPERTY_WEB_RATE;
 public class RateLimitInterceptor extends AbstractExcludeInterceptor {
     @Autowired
     private RateLimiter rateLimiter;
-    @Value("${web.rate.maxium-timeout-in-micro-seconds:1000}")
+    @Value("${web.rate.maxium-timeout-in-micro-seconds:1000000}")
     private long maximumTimeoutInMicroSeconds;
 
 
