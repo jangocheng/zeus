@@ -93,7 +93,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
                 if (e instanceof RateLimitExceedException) {
-                    result.setCode(ResultCode.TOO_MANY_REQUESTS);
+                    result.setCode(ResultCode.TOO_MANY_REQUESTS).setMessage(e.getMessage());
                 } else if (e instanceof ServiceException || e instanceof IllegalArgumentException) {
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage());
                     logger.info(e.getMessage(), e);

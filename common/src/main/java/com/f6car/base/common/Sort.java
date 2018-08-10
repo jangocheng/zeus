@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -22,7 +22,7 @@ public class Sort implements Serializable {
     private OrderType orderType = OrderType.ASC;
     private boolean enablePrefix = true;
 
-    private Sort() {
+    public Sort() {
     }
 
     private Sort(String orderField, OrderType orderType, boolean enablePrefix) {
