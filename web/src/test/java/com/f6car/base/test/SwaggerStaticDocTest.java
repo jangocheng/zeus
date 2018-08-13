@@ -8,8 +8,9 @@
 
 package com.f6car.base.test;
 
-import io.github.robwin.markup.builder.MarkupLanguage;
-import io.github.robwin.swagger2markup.Swagger2MarkupConverter;
+import io.github.swagger2markup.Swagger2MarkupConverter;
+import io.github.swagger2markup.builder.Swagger2MarkupConfigBuilder;
+import io.github.swagger2markup.markup.builder.MarkupLanguage;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import springfox.documentation.staticdocs.SwaggerResultHandler;
+
+import java.io.FileReader;
+import java.io.Reader;
+import java.nio.file.Paths;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,14 +56,12 @@ public class SwaggerStaticDocTest {
                 .andDo(SwaggerResultHandler.outputDirectory(outputDir).build())
                 .andExpect(status().isOk())
                 .andReturn();
-
+        Reader swaggerReader = new FileReader(outputDir + "/swagger.json");
         // 读取上一步生成的swagger.json转成asciiDoc,写入到outputDir
         // 这个outputDir必须和插件里面<generated></generated>标签配置一致
-        Swagger2MarkupConverter.from(outputDir + "/swagger.json")
-                .withMarkupLanguage(MarkupLanguage.ASCIIDOC)// 格式
-                .withExamples(snippetDir)
+        Swagger2MarkupConverter.from(swaggerReader).withConfig(new Swagger2MarkupConfigBuilder().withGeneratedExamples().withMarkupLanguage(MarkupLanguage.ASCIIDOC).build())
                 .build()
-                .intoFolder(outputDir);// 输出
+                .toFolder(Paths.get(outputDir));
     }
 
 

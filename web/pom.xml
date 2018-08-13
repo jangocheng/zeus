@@ -124,7 +124,27 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-staticdocs</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!-- https://mvnrepository.com/artifact/io.github.robwin/swagger2markup -->
+                    <groupId>io.github.robwin</groupId>
+                    <artifactId>swagger2markup</artifactId>
+
+                </exclusion>
+            </exclusions>
             <version>2.6.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.swagger2markup/swagger2markup -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.swagger2markup</groupId>
+            <artifactId>swagger2markup</artifactId>
+            <version>1.3.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

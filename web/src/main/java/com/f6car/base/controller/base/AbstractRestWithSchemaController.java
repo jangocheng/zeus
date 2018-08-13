@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -29,7 +29,6 @@ import io.swagger.annotations.ApiOperation;
 import org.reflections.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -61,7 +60,7 @@ public abstract class AbstractRestWithSchemaController<T extends Vo, V extends V
         Collections.sort(entities);
         List<TitleCell> transform = Lists.transform(entities, new Function<ExcelExportEntity, TitleCell>() {
             @Override
-            public TitleCell apply(@Nullable ExcelExportEntity input) {
+            public TitleCell apply(ExcelExportEntity input) {
                 String fieldName = (String) input.getKey();
                 TitleCell titleCell = new TitleCell(fieldName, input.getName());
                 return titleCell;
