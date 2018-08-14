@@ -75,7 +75,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         List<ResourceHandler> resourceHandlerList = resourceHandlerConfig().getResourceHandlerList();
         for (ResourceHandler resourceHandler : resourceHandlerList) {
             registry.addResourceHandler(resourceHandler.getPattern())
-                    .addResourceLocations(resourceHandler.getLocation());
+                    .addResourceLocations(resourceHandler.getLocation()).setCacheControl(resourceHandler.getCacheControl()).setCachePeriod(resourceHandler.getCachePeriod());
         }
 
     }
