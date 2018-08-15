@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
   ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
   ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -62,6 +62,23 @@
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
+    <appender name="druid-sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/${myAppName}-druid-sql.log</File>
+        <encoder>
+            <pattern>%d [%level] [%thread] %logger{15}:%line %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${myAppName}-slow-sql.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <appender name="druid-sql-queue" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="druid-sql"/>
+    </appender>
     <springProfile name="!prod">
         <appender name="sql" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <File>${LOG_PATH}/${myAppName}-sql.log</File>
@@ -80,6 +97,7 @@
             <queueSize>512</queueSize>
             <appender-ref ref="sql"/>
         </appender>
+
         <appender name="druid" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <File>${LOG_PATH}/${myAppName}-druid.log</File>
             <encoder>
@@ -101,15 +119,10 @@
         <logger name="dao" level="DEBUG" additivity="false">
             <appender-ref ref="sql-queue"/>
         </logger>
-        <logger name="druid.sql.DataSource" level="DEBUG" additivity="false">
-            <appender-ref ref="druid-queue"/>
-        </logger>
-        <logger name="druid.sql.Connection" level="DEBUG" additivity="false">
-            <appender-ref ref="druid-queue"/>
-        </logger>
         <logger name="druid.sql.Statement" level="DEBUG" additivity="false">
             <appender-ref ref="druid-queue"/>
         </logger>
+
     </springProfile>
     <appender name="error-queue" class="ch.qos.logback.classic.AsyncAppender">
         <queueSize>512</queueSize>
@@ -139,11 +152,13 @@
     <logger name="com.f6car.base.aop.SecurityAspect" additivity="false" level="INFO">
         <appender-ref ref="security-queue"/>
     </logger>
+    <logger name="com.alibaba.druid" level="INFO" additivity="false">
+        <appender-ref ref="druid-sql-queue"/>
+    </logger>
     <logger name="com.f6car" level="INFO">
         <appender-ref ref="MAIL"/>
         <appender-ref ref="error-queue"/>
     </logger>
     <!--开发环境. 多个使用逗号隔开. -->
-
 
 </configuration>
