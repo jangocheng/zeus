@@ -8,6 +8,8 @@
 
 package com.f6car.base.core;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +22,13 @@ public final class F6Static {
 
     }
 
-    private static final ThreadLocal<ExcelExportParam> EXCEL_EXPORT_PARAM_TL = new ThreadLocal<>();
-    private static final ThreadLocal<BigInteger> USER_TL = new ThreadLocal<>();
-    private static final ThreadLocal<BigInteger> ORG_TL = new ThreadLocal<>();
-    private static final ThreadLocal<String> IP_TL = new ThreadLocal<>();
-    private static final ThreadLocal<List<String>> SQL_LIST_TL = new ThreadLocal<>();
-    private static final ThreadLocal<String> ACTION_TL = new ThreadLocal<>();
-    private static final ThreadLocal<ActionType> TYPE_TL = new ThreadLocal<>();
+    private static final ThreadLocal<ExcelExportParam> EXCEL_EXPORT_PARAM_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<BigInteger> USER_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<BigInteger> ORG_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<String> IP_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<List<String>> SQL_LIST_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<String> ACTION_TL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<ActionType> TYPE_TL = new TransmittableThreadLocal<>();
     private static final List<ThreadLocal> THREAD_LOCAL_LIST = new ArrayList<>();
 
     static {

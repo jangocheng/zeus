@@ -8,6 +8,7 @@
 
 package com.f6car.base.core.executor;
 
+import com.alibaba.ttl.TtlRunnable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,6 +48,7 @@ public class AfterCommitExecutorImpl extends TransactionSynchronizationAdapter i
             RUNNABLES.set(threadRunnables);
             TransactionSynchronizationManager.registerSynchronization(this);
         }
+        runnable = TtlRunnable.get(runnable);
         threadRunnables.add(runnable);
     }
 
