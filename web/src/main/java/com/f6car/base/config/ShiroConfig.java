@@ -28,7 +28,6 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.*;
 
@@ -41,8 +40,6 @@ import java.util.Map;
 @Configuration
 @Lazy
 public class ShiroConfig {
-    @Value("${shiro.session.id.cookie.name}")
-    private String sessionIdCookieName;
 
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ResourceHandlerConfig resourceHandlerConfig) {
