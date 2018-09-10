@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -35,7 +35,7 @@ public class SecurityAspect {
     private static final String SECURITY_LOG_PREFIX = "SECURITY_LOG:";
     private static final String SEP_COMMA = ",";
     private static Logger logger = LoggerFactory.getLogger(SecurityAspect.class);
-    @Value("${spring.application.name")
+    @Value("${spring.application.name}")
     private String source;
 
     @Around("@annotation(com.f6car.base.annotation.SecurityLog) && @annotation(securityLog)")

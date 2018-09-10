@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
@@ -14,13 +14,21 @@ import com.baomidou.kisso.SSOConfig;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.DefaultSessionManager;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.*;
 
@@ -33,9 +41,11 @@ import java.util.Map;
 @Configuration
 @Lazy
 public class ShiroConfig {
+    @Value("${shiro.session.id.cookie.name}")
+    private String sessionIdCookieName;
 
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager, ResourceHandlerConfig resourceHandlerConfig) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ResourceHandlerConfig resourceHandlerConfig) {
 
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -59,8 +69,9 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(CustomRpcRealm realm, CacheManager cacheManager) {
+    public SecurityManager securityManager(CustomRpcRealm realm, CacheManager cacheManager, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setSessionManager(sessionManager);
         securityManager.setRealm(realm);
         securityManager.setCacheManager(cacheManager);
         return securityManager;
@@ -102,5 +113,47 @@ public class ShiroConfig {
     public J2CacheManager j2cacheManager() {
         return new J2CacheManager();
     }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
+    public SessionManager sessionManager(SessionDAO sessionDAO, Cookie sessionIdCookie) {
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setSessionDAO(sessionDAO);
+        defaultWebSessionManager.setSessionIdCookie(sessionIdCookie);
+        return defaultWebSessionManager;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
+    public Cookie sessionIdCookie(CookieConfig cookieConfig) {
+        Cookie cookie = new SimpleCookie();
+        cookie.setName(cookieConfig.getName());
+        cookie.setHttpOnly(cookieConfig.isHttpOnly());
+        cookie.setSecure(cookieConfig.isSecure());
+        cookie.setDomain(cookieConfig.getDomain());
+        cookie.setPath(cookieConfig.getPath());
+        return cookie;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
+    public CookieConfig cookieConfig() {
+        return new CookieConfig();
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "false")
+    public SessionManager defaultSessionManager() {
+        return new DefaultSessionManager();
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
+    public SessionDAO sessionDAO(CacheManager cacheManager) {
+        EnterpriseCacheSessionDAO enterpriseCacheSessionDAO = new EnterpriseCacheSessionDAO();
+        enterpriseCacheSessionDAO.setCacheManager(cacheManager);
+        return enterpriseCacheSessionDAO;
+    }
+
 
 }
