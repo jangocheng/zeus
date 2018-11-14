@@ -14,7 +14,6 @@ import com.baomidou.kisso.SSOConfig;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -29,7 +28,11 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.nutz.j2cache.shiro.J2CacheManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,6 +43,22 @@ import java.util.Map;
 @Configuration
 @Lazy
 public class ShiroConfig {
+
+    @Bean
+    public FilterRegistrationBean corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addExposedHeader("X-Authorization");
+        config.addExposedHeader("X-Authenticate");
+        source.registerCorsConfiguration("/**", config);
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(0);
+        return bean;
+    }
 
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ResourceHandlerConfig resourceHandlerConfig) {
@@ -121,7 +140,6 @@ public class ShiroConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
     public Cookie sessionIdCookie(CookieConfig cookieConfig) {
         Cookie cookie = new SimpleCookie();
         cookie.setName(cookieConfig.getName());
@@ -133,15 +151,16 @@ public class ShiroConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "spring.cluster", havingValue = "true")
     public CookieConfig cookieConfig() {
         return new CookieConfig();
     }
 
     @Bean
     @ConditionalOnProperty(name = "spring.cluster", havingValue = "false")
-    public SessionManager defaultSessionManager() {
-        return new DefaultSessionManager();
+    public SessionManager defaultSessionManager(Cookie sessionIdCookie) {
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setSessionIdCookie(sessionIdCookie);
+        return defaultWebSessionManager;
     }
 
     @Bean
@@ -151,6 +170,5 @@ public class ShiroConfig {
         enterpriseCacheSessionDAO.setCacheManager(cacheManager);
         return enterpriseCacheSessionDAO;
     }
-
 
 }
